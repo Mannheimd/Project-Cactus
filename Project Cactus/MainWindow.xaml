@@ -5,9 +5,130 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Cactus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="630" Width="757">
+    <Window.CommandBindings>
+    </Window.CommandBindings>
     <Grid>
-        <Button Content="Copy to Clipboard" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="Button_Click" VerticalAlignment="Bottom"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="42"/>
+        </Grid.RowDefinitions>
 
+        <Grid x:Name="environmentalInfoGrid" Margin="0,10,10,0" HorizontalAlignment="Stretch" Height="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="114"/>
+                <ColumnDefinition Width="88*"/>
+                <ColumnDefinition Width="87*"/>
+                <ColumnDefinition Width="91"/>
+                <ColumnDefinition Width="92*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Environmental Information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Grid.ColumnSpan="5" Width="729" FontWeight="Bold"/>
+
+            <Label x:Name="actVersion_Label" Grid.Column="0" Content="Act! Version:" HorizontalAlignment="Stretch" Margin="10,27,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="actVersionNumber_ComboBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,29,0,0" VerticalAlignment="Top" Width="auto" SelectedItem="{Binding actVersionNumber_Selected}" Height="22">
+                <ComboBoxItem Content="v19.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v19.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v18.2" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v18.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v18.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v17.2" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v17.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v17.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v16.3" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v16.2" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v16.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v16.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v15.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v15.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v14.2" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v14.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v14.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v13.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v13.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v12.2" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v12.1" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="v12.0" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="N/A" Selected="actVersionNumber_NotOtherSelected"/>
+                <ComboBoxItem Content="Other" Selected="actVersionNumber_OtherSelected"/>
+            </ComboBox>
+            <TextBox x:Name="actVersion_TextBox" Grid.Column="2" HorizontalAlignment="Stretch" Height="23" Margin="10,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" IsEnabled="False"/>
+            <Label x:Name="actVersionProductArea_Label" Grid.Column="3" Content="Product Area:" HorizontalAlignment="Stretch" Margin="10,27,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="actVersionType_ComboBox" Grid.Column="4" HorizontalAlignment="Stretch" Margin="10,29,0,0" VerticalAlignment="Top" Width="auto" Height="22">
+                <ComboBoxItem Content="Pro"/>
+                <ComboBoxItem Content="Premium"/>
+                <ComboBoxItem Content="Premium for Web"/>
+                <ComboBoxItem Content="Premium Cloud"/>
+                <ComboBoxItem Content="Act! Emarketing"/>
+                <ComboBoxItem Content="Swiftpage Emarketing"/>
+                <ComboBoxItem Content="N/A"/>
+            </ComboBox>
+
+            <Label x:Name="officeVersion_Label" Grid.Column="0" Content="Office Version:" HorizontalAlignment="Stretch" Margin="10,54,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="officeVersion_ComboBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,56,0,0" VerticalAlignment="Top" Width="auto" Height="22">
+                <ComboBoxItem Content="Office 2016" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Office 2016 (Click to Run)" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Office 2013" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Office 2013 (Click to Run)" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Office 2010" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Office 2007" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Office 2003" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="N/A" Selected="officeVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Other" Selected="officeVersion_OtherSelected"/>
+            </ComboBox>
+            <TextBox x:Name="officeVersion_TextBox" Grid.Column="2" HorizontalAlignment="Stretch" Height="23" Margin="10,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" IsEnabled="False"/>
+            <Label x:Name="officeVersionArchitecture_Label" Grid.Column="3" Content="Architecture:" HorizontalAlignment="Stretch" Margin="10,54,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="officeVersionArchitecture_ComboBox" Grid.Column="4" HorizontalAlignment="Stretch" Margin="10,56,0,0" VerticalAlignment="Top" Width="auto" Height="22">
+                <ComboBoxItem Content="32-bit"/>
+                <ComboBoxItem Content="64-bit"/>
+                <ComboBoxItem Content="N/A"/>
+            </ComboBox>
+
+            <Label x:Name="windowsVersion_Label" Grid.Column="0" Content="Windows Version:" HorizontalAlignment="Stretch" Margin="10,81,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="windowsVersion_ComboBox" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,83,0,0" VerticalAlignment="Top" Width="auto" Height="22">
+                <ComboBoxItem Content="Windows 10" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows 8.1" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows 8" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows 7" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Vista" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows XP" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Server 2012" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Server 2008 R2" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Server 2008" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Server 2003" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Home Server" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Windows Home Server 2011" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="N/A" Selected="windowsVersion_NotOtherSelected"/>
+                <ComboBoxItem Content="Other" Selected="windowsVersion_OtherSelected"/>
+            </ComboBox>
+            <TextBox x:Name="windowsVersion_TextBox" Grid.Column="2" HorizontalAlignment="Stretch" Height="23" Margin="10,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" IsEnabled="False"/>
+            <Label x:Name="windowsVersionArchitecture_Label" Grid.Column="3" Content="Architecture:" HorizontalAlignment="Stretch" Margin="10,81,0,0" VerticalAlignment="Top" Height="26"/>
+            <ComboBox x:Name="windowsVersionArchitecture_ComboBox" Grid.Column="4" HorizontalAlignment="Stretch" Margin="10,83,0,0" VerticalAlignment="Top" Width="auto" Height="22">
+                <ComboBoxItem Content="32-bit"/>
+                <ComboBoxItem Content="64-bit"/>
+                <ComboBoxItem Content="N/A"/>
+            </ComboBox>
+        </Grid>
+
+        <Grid x:Name="issueInformationGrid" Grid.Row="1" Margin="0,0,10,0" HorizontalAlignment="Stretch" Height="auto">
+            <Label x:Name="issueInformation_Label" Content="Issue Information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="729" FontWeight="Bold" Grid.Row="1"/>
+
+            <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="reasonForCallInformation_Image" HorizontalAlignment="Left" Height="16" Margin="105,31,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="reasonForCallInformation_Image_MouseCheck" MouseLeave="reasonForCallInformation_Image_MouseCheck"/>
+            <Border x:Name="reasonForCallInformation_Text" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="126,31,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="213" Width="325" Panel.ZIndex="99">
+                <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White"><Run Text="This should "/><Run Text="provide "/><Run Text="a detailed explanation of the call reason."/><LineBreak/><Run/><LineBreak/><Run Text="If the customer has multiple queries, include information on each one."/><LineBreak/><Run/><LineBreak/><Run Text="For questions and how-to queries, include:"/><LineBreak/><Run Text="- What the question is"/><LineBreak/><Run Text="- Why the customer needs this information, or what the customer's goal is"/><LineBreak/><Run/><LineBreak/><Run Text="For technical issues, include:"/><LineBreak/><Run Text="- Details of symptoms"/><LineBreak/><Run Text="- Steps to replicate the problem"/></TextBlock>
+            </Border>
+            <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="69" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+            <Label x:Name="errorMessages_Label" Content="Error messages:" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="errorMessagesInformation_Image" HorizontalAlignment="Left" Height="16" Margin="108,131,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="errorMessagesInformation_Image_MouseCheck" MouseLeave="errorMessagesInformation_Image_MouseCheck"/>
+            <Border x:Name="errorMessagesInformation_Text" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="129,126,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="301" Panel.ZIndex="99">
+                <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White" Text="Provide an exact copy of any errors you encounter here"/>
+            </Border>
+            <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="69" Margin="10,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+
+        <Button Content="Copy to Clipboard" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="Button_Click" VerticalAlignment="Bottom" Height="22"/>
     </Grid>
 </Window>
