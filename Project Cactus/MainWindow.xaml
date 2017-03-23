@@ -5,17 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Cactus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="630" Width="757">
+        Title="MainWindow" Height="800" Width="750" MinWidth="400" MinHeight="400">
     <Window.CommandBindings>
     </Window.CommandBindings>
-    <Grid>
+    <Grid x:Name="ticketLoggingWindowGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition x:Name="smallScreenTroubleshootingDetailsRow" Height="*"/>
             <RowDefinition Height="42"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="environmentalInfoGrid" Margin="0,10,10,0" HorizontalAlignment="Stretch" Height="auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="bigScreenSecondPageColumn" Width="0"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="environmentalInfoGrid" Grid.Row="0" Grid.Column="0" Margin="0,10,10,0" HorizontalAlignment="Stretch" Height="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="114"/>
                 <ColumnDefinition Width="88*"/>
@@ -111,24 +117,57 @@
             </ComboBox>
         </Grid>
 
-        <Grid x:Name="issueInformationGrid" Grid.Row="1" Margin="0,0,10,0" HorizontalAlignment="Stretch" Height="auto">
-            <Label x:Name="issueInformation_Label" Content="Issue Information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="729" FontWeight="Bold" Grid.Row="1"/>
+        <Grid x:Name="issueInformationGrid" Grid.Row="1" Grid.Column="0" Margin="0,10,10,0" HorizontalAlignment="Stretch" Height="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-            <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
-            <Image x:Name="reasonForCallInformation_Image" HorizontalAlignment="Left" Height="16" Margin="105,31,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="reasonForCallInformation_Image_MouseCheck" MouseLeave="reasonForCallInformation_Image_MouseCheck"/>
-            <Border x:Name="reasonForCallInformation_Text" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="126,31,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="213" Width="325" Panel.ZIndex="99">
-                <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White"><Run Text="This should "/><Run Text="provide "/><Run Text="a detailed explanation of the call reason."/><LineBreak/><Run/><LineBreak/><Run Text="If the customer has multiple queries, include information on each one."/><LineBreak/><Run/><LineBreak/><Run Text="For questions and how-to queries, include:"/><LineBreak/><Run Text="- What the question is"/><LineBreak/><Run Text="- Why the customer needs this information, or what the customer's goal is"/><LineBreak/><Run/><LineBreak/><Run Text="For technical issues, include:"/><LineBreak/><Run Text="- Details of symptoms"/><LineBreak/><Run Text="- Steps to replicate the problem"/></TextBlock>
+            <Label x:Name="issueInformation_Label" Grid.Row="0" Content="Issue Information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="729" FontWeight="Bold"/>
+
+            <Label x:Name="reasonForCall_Label" Grid.Row="0" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="reasonForCallInformation_Image" Grid.Row="0" HorizontalAlignment="Left" Height="16" Margin="105,31,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="reasonForCallInformation_Image_MouseCheck" MouseLeave="reasonForCallInformation_Image_MouseCheck"/>
+            <Border x:Name="reasonForCallInformation_Text" Grid.Row="0" Grid.RowSpan="2" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="126,31,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="140" Width="325" Panel.ZIndex="99">
+                <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White"><Run Text="For questions and how-to queries, include:"/><LineBreak/><Run Text="- What the question is"/><LineBreak/><Run Text="- Why the customer needs this information, or what the customer's goal is"/><LineBreak/><Run/><LineBreak/><Run Text="For technical issues, include:"/><LineBreak/><Run Text="- Details of symptoms"/><LineBreak/><Run Text="- Steps to replicate the problem"/></TextBlock>
             </Border>
-            <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="69" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="reasonForCall_TextBox" Grid.Row="0" HorizontalAlignment="stretch" Height="Auto" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
 
-            <Label x:Name="errorMessages_Label" Content="Error messages:" HorizontalAlignment="Left" Margin="10,126,0,0" VerticalAlignment="Top"/>
-            <Image x:Name="errorMessagesInformation_Image" HorizontalAlignment="Left" Height="16" Margin="108,131,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="errorMessagesInformation_Image_MouseCheck" MouseLeave="errorMessagesInformation_Image_MouseCheck"/>
-            <Border x:Name="errorMessagesInformation_Text" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="129,126,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="301" Panel.ZIndex="99">
+            <Label x:Name="errorMessages_Label" Grid.Row="1" Content="Error messages:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="errorMessagesInformation_Image" Grid.Row="1" HorizontalAlignment="Left" Height="16" Margin="108,15,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="errorMessagesInformation_Image_MouseCheck" MouseLeave="errorMessagesInformation_Image_MouseCheck"/>
+            <Border x:Name="errorMessagesInformation_Text" Grid.Row="1" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="129,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="21" Width="301" Panel.ZIndex="99">
                 <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White" Text="Provide an exact copy of any errors you encounter here"/>
             </Border>
-            <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="69" Margin="10,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <TextBox x:Name="errorMessages_TextBox" Grid.Row="1" HorizontalAlignment="stretch" Height="Auto" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         </Grid>
 
-        <Button Content="Copy to Clipboard" Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="Button_Click" VerticalAlignment="Bottom" Height="22"/>
+        <Grid x:Name="troubleshootingInformationGrid" Grid.Row="2" Grid.Column="0" Grid.RowSpan="1" Margin="0,10,10,0" HorizontalAlignment="Stretch" Height="auto">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="troubleshootingInformation_Label" Grid.Row="0" Content="Troubleshooting Information" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="729" FontWeight="Bold"/>
+
+            <Label x:Name="stepsTaken_Label" Grid.Row="0" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="stepsTakenInformation_Image" Grid.Row="0" HorizontalAlignment="Left" Height="16" Margin="89,31,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="stepsTakenInformation_Image_MouseCheck" MouseLeave="stepsTakenInformation_Image_MouseCheck"/>
+            <Border x:Name="stepsTakenInformation_Text" Grid.Row="0" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="110,31,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="55" Width="325" Panel.ZIndex="99">
+                <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White" Text="Detail, in order of completion, the steps you took to troubleshoot the issue and what the outcome was after each step."/>
+            </Border>
+            <TextBox x:Name="stepsTaken_TextBox" Grid.Row="0" HorizontalAlignment="stretch" Height="Auto" Margin="10,52,0,0" TextWrapping="Wrap" VerticalAlignment="Stretch" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+            <Label x:Name="resolution_Label" Grid.Row="1" Content="Resolution:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <Image x:Name="resolutionInformation_Image" Grid.Row="1" HorizontalAlignment="Left" Height="16" Margin="84,15,0,0" VerticalAlignment="Top" Width="16" Source="Information.png" MouseEnter="resolutionInformation_Image_MouseCheck" MouseLeave="resolutionInformation_Image_MouseCheck"/>
+            <Border x:Name="resolutionInformation_Text" Grid.Row="1" Visibility="Hidden" BorderThickness="1" BorderBrush="Black" Margin="105,15,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="38" Width="325" Panel.ZIndex="99">
+                <TextBlock Margin="0,0,0,0" TextWrapping="Wrap" Background="White" Text="Explain what steps resolved the issue and what testing was performed to confirm the issue is resolved"/>
+            </Border>
+            <TextBox x:Name="resolution_TextBox" Grid.Row="1" HorizontalAlignment="stretch" Height="79" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" AcceptsTab="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+
+        <ComboBox x:Name="windowViewStyleSelector_ComboBox" Grid.Row="3" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="72" SelectionChanged="windowViewStyleSelector_ComboBox_SelectionChanged">
+            <ComboBoxItem IsSelected="True" Content="Narrow"/>
+            <ComboBoxItem Content="Wide"/>
+        </ComboBox>
+
+        <Button Content="Copy to Clipboard" Grid.Row="3" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="Button_Click" VerticalAlignment="Bottom" Height="22"/>
     </Grid>
 </Window>

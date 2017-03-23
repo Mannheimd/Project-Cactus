@@ -85,5 +85,49 @@ namespace Project_Cactus
                 errorMessagesInformation_Text.Visibility = Visibility.Hidden;
             }
         }
+
+        private void stepsTakenInformation_Image_MouseCheck(object sender, MouseEventArgs e)
+        {
+            if (stepsTakenInformation_Image.IsMouseOver)
+            {
+                stepsTakenInformation_Text.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                stepsTakenInformation_Text.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void resolutionInformation_Image_MouseCheck(object sender, MouseEventArgs e)
+        {
+            if (resolutionInformation_Image.IsMouseOver)
+            {
+                resolutionInformation_Text.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                resolutionInformation_Text.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void windowViewStyleSelector_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((e.AddedItems[0] as ComboBoxItem).Content as string == "Wide")
+            {
+                smallScreenTroubleshootingDetailsRow.Height = new GridLength(0);
+                bigScreenSecondPageColumn.Width = new GridLength(1, GridUnitType.Star);
+                troubleshootingInformationGrid.SetValue(Grid.RowProperty, 0);
+                troubleshootingInformationGrid.SetValue(Grid.ColumnProperty, 1);
+                troubleshootingInformationGrid.SetValue(Grid.RowSpanProperty, 2);
+            }
+            else if ((e.AddedItems[0] as ComboBoxItem).Content as string == "Narrow")
+            {
+                smallScreenTroubleshootingDetailsRow.Height = new GridLength(1, GridUnitType.Star);
+                bigScreenSecondPageColumn.Width = new GridLength(0);
+                troubleshootingInformationGrid.SetValue(Grid.RowProperty, 2);
+                troubleshootingInformationGrid.SetValue(Grid.ColumnProperty, 0);
+                troubleshootingInformationGrid.SetValue(Grid.RowSpanProperty, 1);
+            }
+        }
     }
 }
