@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,117 +18,179 @@ using System.Windows.Shapes;
 
 namespace Project_Cactus
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        // Values used for logging KCS things
+        public string productFamily;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void copyToClipboard_Button_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText("Hello!");
         }
 
-        private void actVersionNumber_OtherSelected(object sender, RoutedEventArgs e)
+        private void productComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            actVersion_TextBox.IsEnabled = true;
-        }
-
-        private void actVersionNumber_NotOtherSelected(object sender, RoutedEventArgs e)
-        {
-            actVersion_TextBox.IsEnabled = false;
-        }
-
-        private void officeVersion_OtherSelected(object sender, RoutedEventArgs e)
-        {
-            officeVersion_TextBox.IsEnabled = true;
-        }
-
-        private void officeVersion_NotOtherSelected(object sender, RoutedEventArgs e)
-        {
-            officeVersion_TextBox.IsEnabled = false;
-        }
-
-        private void windowsVersion_OtherSelected(object sender, RoutedEventArgs e)
-        {
-            windowsVersion_TextBox.IsEnabled = true;
-        }
-
-        private void windowsVersion_NotOtherSelected(object sender, RoutedEventArgs e)
-        {
-            windowsVersion_TextBox.IsEnabled = false;
-        }
-
-        private void reasonForCallInformation_Image_MouseCheck(object sender, MouseEventArgs e)
-        {
-            if (reasonForCallInformation_Image.IsMouseOver)
+            // Populates the Version drop-down with items depending on what product was selected, and makes the Version drop-down visible. Some products don't require the Version drop-down to appear.
+            // Also sets the "Product Family" and "Integration" strings to fill in the KCS stuff.
+            string selectedItem = (e.AddedItems[0] as ComboBoxItem).Content as string;
+            switch (selectedItem)
             {
-                reasonForCallInformation_Text.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                reasonForCallInformation_Text.Visibility = Visibility.Hidden;
-            }
-        }
+                case "Act! Pro":
+                    setVersionDropDown(true, false, "actVersions");
+                    productFamily = "Act!";
+                    break;
 
-        private void errorMessagesInformation_Image_MouseCheck(object sender, MouseEventArgs e)
-        {
-            if (errorMessagesInformation_Image.IsMouseOver)
-            {
-                errorMessagesInformation_Text.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                errorMessagesInformation_Text.Visibility = Visibility.Hidden;
-            }
-        }
+                case "Act! Premium":
+                    setVersionDropDown(true, false, "actVersions");
+                    productFamily = "Act!";
+                    break;
 
-        private void stepsTakenInformation_Image_MouseCheck(object sender, MouseEventArgs e)
-        {
-            if (stepsTakenInformation_Image.IsMouseOver)
-            {
-                stepsTakenInformation_Text.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                stepsTakenInformation_Text.Visibility = Visibility.Hidden;
+                case "Act! Premium for Web":
+                    setVersionDropDown(true, false, "actVersions");
+                    productFamily = "Act!";
+                    break;
+
+                case "Act! Premium Cloud":
+                    setVersionDropDown(false, false, "blankList");
+                    productFamily = "Act!";
+                    break;
+
+                case "Act! Emarketing":
+                    setVersionDropDown(true, false, "actVersions");
+                    productFamily = "Act!";
+                    break;
+
+                case "Swiftpage Emarketing":
+                    setVersionDropDown(false, false, "blankList");
+                    productFamily = "Emarketing";
+                    break;
+
+                case "Other":
+                    setVersionDropDown(false, false, "blankList");
+                    productFamily = "Other";
+                    break;
+
+                case "N/A":
+                    setVersionDropDown(false, false, "blankList");
+                    productFamily = "N/A";
+                    break;
+
+                default:
+                    setVersionDropDown(false, false, "blankList");
+                    productFamily = null;
+                    break;
             }
         }
 
-        private void resolutionInformation_Image_MouseCheck(object sender, MouseEventArgs e)
+        private void setVersionDropDown(bool dropdownEnable, bool textEnable, string versionList)
         {
-            if (resolutionInformation_Image.IsMouseOver)
+            // Sets the Version dropdown and label to active or inactive and chooses a list to apply to it's item source
+            // 'textEnable' bool is to allow for future addition of a text box when "other" is selected
+
+            if (dropdownEnable) // Make visible, apply selected list
             {
-                resolutionInformation_Text.Visibility = Visibility.Visible;
+                productVersion_Label.Visibility = Visibility.Visible;
+                productVersion_ComboBox.Visibility = Visibility.Visible;
+                productVersion_ComboBox.ItemsSource = VersionLists.listSelector(versionList);
             }
-            else
+            else // Make invisible, apply blank list
             {
-                resolutionInformation_Text.Visibility = Visibility.Hidden;
+                productVersion_Label.Visibility = Visibility.Collapsed;
+                productVersion_ComboBox.Visibility = Visibility.Collapsed;
+                productVersion_ComboBox.ItemsSource = VersionLists.listSelector("blankList");
             }
         }
+    }
 
-        private void windowViewStyleSelector_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    public class VersionLists
+    {
+        //Defines different lists for things
+        static string[] blankList = {""};
+
+        static string[] actVersions = {
+            "v19.1",
+            "v19.0",
+            "v18.2",
+            "v18.1",
+            "v18.0",
+            "v17.2",
+            "v17.1",
+            "v17.0",
+            "v16.3",
+            "v16.2",
+            "v16.1",
+            "v16.0",
+            "v15.1",
+            "v15.0",
+            "v14.2",
+            "v14.1",
+            "v14.0",
+            "v13.1",
+            "v13.0",
+            "v12.2",
+            "v12.1",
+            "v12.0",
+            "v7-v11",
+            "v6 or below",
+            "Other",
+            "N/A"
+        };
+
+        static string[] officeVersions = {
+            "Office 2016",
+            "Office 2016 (Click to Run)",
+            "Office 2013",
+            "Office 2013 (Click to Run)",
+            "Office 2010",
+            "Office 2007",
+            "Office 2003",
+            "N/A",
+            "Unsupported Version"
+        };
+
+        static string[] windowsVersions =
         {
-            if ((e.AddedItems[0] as ComboBoxItem).Content as string == "Wide")
+            "Windows 10",
+            "Windows 8.1",
+            "Windows 8",
+            "Windows 7",
+            "Windows Vista",
+            "Windows XP",
+            "Windows Server 2012",
+            "Windows Server 2008 R2",
+            "Windows Server 2008",
+            "Windows Server 2003",
+            "Windows Home Server",
+            "Windows Home Server 2011",
+            "N/A",
+            "Other"
+        };
+
+        //Returns the selected list
+        public static string[] listSelector(string list)
+        {
+            switch (list)
             {
-                smallScreenTroubleshootingDetailsRow.Height = new GridLength(0);
-                bigScreenSecondPageColumn.Width = new GridLength(1, GridUnitType.Star);
-                troubleshootingInformationGrid.SetValue(Grid.RowProperty, 0);
-                troubleshootingInformationGrid.SetValue(Grid.ColumnProperty, 1);
-                troubleshootingInformationGrid.SetValue(Grid.RowSpanProperty, 2);
-            }
-            else if ((e.AddedItems[0] as ComboBoxItem).Content as string == "Narrow")
-            {
-                smallScreenTroubleshootingDetailsRow.Height = new GridLength(1, GridUnitType.Star);
-                bigScreenSecondPageColumn.Width = new GridLength(0);
-                troubleshootingInformationGrid.SetValue(Grid.RowProperty, 2);
-                troubleshootingInformationGrid.SetValue(Grid.ColumnProperty, 0);
-                troubleshootingInformationGrid.SetValue(Grid.RowSpanProperty, 1);
-            }
+                case "blankList":
+                    return blankList;
+
+                case "actVersions":
+                    return actVersions;
+
+                case "officeVersions":
+                    return officeVersions;
+
+                case "windowsVersions":
+                    return windowsVersions;
+
+                default:
+                    return blankList;
+            };
         }
     }
 }
