@@ -23,6 +23,10 @@ namespace Project_Cactus
         // Values used for logging KCS things
         public string productFamily;
 
+        // Timestamp for working out call duration
+        public DateTime startTime;
+        public TimeSpan callDuration;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -104,6 +108,22 @@ namespace Project_Cactus
                 productVersion_ComboBox.Visibility = Visibility.Collapsed;
                 productVersion_ComboBox.ItemsSource = VersionLists.listSelector("blankList");
             }
+        }
+
+        private void startTimerButton_Click(object sender, RoutedEventArgs e)
+        {
+            endTimerButton_Button.IsEnabled = true;
+            startTimerButton_Button.IsEnabled = false;
+            startTime = DateTime.Now;
+        }
+
+        private void endTimerButton_Click(object sender, RoutedEventArgs e)
+        {
+            endTimerButton_Button.IsEnabled = false;
+            startTimerButton_Button.IsEnabled = true;
+            callDuration = callDuration + (DateTime.Now - startTime);
+
+            MessageBox.Show(callDuration.Minutes.ToString());
         }
     }
 

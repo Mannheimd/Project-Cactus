@@ -11,9 +11,8 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid x:Name="ticketLoggingWindowGrid">
             <Grid.RowDefinitions>
-                <RowDefinition Height="42"/>
                 <!-- Header -->
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="42"/>
                 <!-- Reason for call -->
                 <RowDefinition Height="Auto"/>
                 <!-- Product info -->
@@ -27,11 +26,16 @@
                 <!-- Troubleshooting steps taken -->
                 <RowDefinition Height="Auto"/>
                 <!-- Resolution -->
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <!-- Void filler -->
-                <RowDefinition Height="42"/>
+                <RowDefinition Height="*"/>
                 <!-- Reason for call -->
+                <RowDefinition Height="42"/>
             </Grid.RowDefinitions>
+
+            <Grid x:Name="topButtonGrid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                <Button x:Name="startTimerButton_Button" Content="Start Timer" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
+            </Grid>
 
             <Grid x:Name="reasonForCallGrid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                 <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,5,10,0" VerticalAlignment="Top"/>
@@ -130,7 +134,8 @@
                 <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
             </Grid>
 
-            <Grid x:Name="Footer" Grid.Row="9" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Bottom">
+            <Grid x:Name="Footer" Grid.Row="9" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Bottom">
+                <Button x:Name="endTimerButton_Button" Content="End Timer" IsEnabled="False" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="70" Click="endTimerButton_Click"/>
                 <Button x:Name="copyToClibboard_Button" Content="Copy to Clipboard" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="copyToClipboard_Button_Click" VerticalAlignment="Bottom" Height="22"/>
             </Grid>
         </Grid>
