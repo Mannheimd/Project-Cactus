@@ -5,139 +5,148 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Cactus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="574" Width="387" MinWidth="250" MinHeight="250">
+        Title="MainWindow" Height="585" Width="387" MinWidth="290" MinHeight="250">
     <Window.CommandBindings>
     </Window.CommandBindings>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid x:Name="ticketLoggingWindowGrid">
-            <Grid.RowDefinitions>
-                <!-- Header -->
-                <RowDefinition Height="42"/>
-                <!-- Reason for call -->
-                <RowDefinition Height="Auto"/>
-                <!-- Product info -->
-                <RowDefinition Height="Auto"/>
-                <!-- Environment info -->
-                <RowDefinition Height="Auto"/>
-                <!-- Error Information -->
-                <RowDefinition Height="Auto"/>
-                <!-- Additional query information -->
-                <RowDefinition Height="Auto"/>
-                <!-- Troubleshooting steps taken -->
-                <RowDefinition Height="Auto"/>
-                <!-- Resolution -->
-                <RowDefinition Height="Auto"/>
-                <!-- Void filler -->
-                <RowDefinition Height="*"/>
-                <!-- Reason for call -->
-                <RowDefinition Height="42"/>
-            </Grid.RowDefinitions>
-
-            <Grid x:Name="topButtonGrid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                <Button x:Name="startTimerButton_Button" Content="Start Timer" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
-            </Grid>
-
-            <Grid x:Name="reasonForCallGrid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,5,10,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,0" TextWrapping="Wrap" AcceptsReturn="True"/>
-            </Grid>
-
-            <Grid x:Name="productInfoGrid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="43"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="ticketLoggingButtonsTop" VerticalAlignment="Top" Height="43">
+            <Button x:Name="startTimer_Button" Content="Start Timer" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
+            <Button x:Name="resetForm_Button" Content="Reset Form" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="resetFormButton_Click"/>
+            <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Height="auto">
+            <Grid x:Name="ticketLoggingFields">
                 <Grid.RowDefinitions>
+                    <!-- Header, currently unused -->
                     <RowDefinition Height="Auto"/>
+                    <!-- Reason for call -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Product info -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Environment info -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Error Information -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Additional query information -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Troubleshooting steps taken -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Resolution -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Void filler -->
+                    <RowDefinition Height="*"/>
+                    <!-- Footer, currently unused -->
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label x:Name="actProduct_Label" Grid.Row="0" Content="Product:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="26"/>
-                <ComboBox x:Name="actProduct_ComboBox" Grid.Row="0" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Act! Pro"/>
-                    <ComboBoxItem Content="Act! Premium"/>
-                    <ComboBoxItem Content="Act! Premium for Web"/>
-                    <ComboBoxItem Content="Act! Premium Cloud"/>
-                    <ComboBoxItem Content="Act! Emarketing"/>
-                    <ComboBoxItem Content="Swiftpage Emarketing"/>
-                    <ComboBoxItem Content="Other"/>
-                    <ComboBoxItem Content="N/A"/>
-                </ComboBox>
+                <Grid x:Name="reasonForCallGrid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,5,10,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,0" TextWrapping="Wrap" AcceptsReturn="True"/>
+                </Grid>
 
-                <Label x:Name="productVersion_Label" Grid.Row="1" Visibility="Collapsed" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                <ComboBox x:Name="productVersion_ComboBox" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                <Grid x:Name="productInfoGrid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label x:Name="actProduct_Label" Grid.Row="0" Content="Product:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="26"/>
+                    <ComboBox x:Name="product_ComboBox" Grid.Row="0" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Act! Pro"/>
+                        <ComboBoxItem Content="Act! Premium"/>
+                        <ComboBoxItem Content="Act! Premium for Web"/>
+                        <ComboBoxItem Content="Act! Premium Cloud"/>
+                        <ComboBoxItem Content="Act! Emarketing"/>
+                        <ComboBoxItem Content="Swiftpage Emarketing"/>
+                        <ComboBoxItem Content="Other"/>
+                        <ComboBoxItem Content="N/A"/>
+                    </ComboBox>
+
+                    <Label x:Name="productVersion_Label" Grid.Row="1" Visibility="Collapsed" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                    <ComboBox x:Name="productVersion_ComboBox" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                </Grid>
+
+                <Grid x:Name="environmentInfoGrid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="environmentOs_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="environmentOs_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ComboBoxItem Content="Windows 10"/>
+                        <ComboBoxItem Content="Windows 8.1"/>
+                        <ComboBoxItem Content="Windows 8"/>
+                        <ComboBoxItem Content="Windows 7"/>
+                        <ComboBoxItem Content="Windows Vista"/>
+                        <ComboBoxItem Content="Windows XP"/>
+                        <ComboBoxItem Content="Windows Server 2012"/>
+                        <ComboBoxItem Content="Windows Server 2008 R2"/>
+                        <ComboBoxItem Content="Windows Server 2008"/>
+                        <ComboBoxItem Content="Windows Server 2003"/>
+                        <ComboBoxItem Content="Windows Home Server"/>
+                        <ComboBoxItem Content="Windows Home Server 2011"/>
+                        <ComboBoxItem Content="N/A"/>
+                        <ComboBoxItem Content="Other"/>
+                    </ComboBox>
+
+                    <Label x:Name="environmentBrowser_Label" Content="Browser:" Margin="10,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="environmentBrowser_ComboBox" Margin="69,28,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ComboBoxItem Content="Internet Explorer"/>
+                        <ComboBoxItem Content="Google Chrome"/>
+                        <ComboBoxItem Content="Unsupported Browser"/>
+                        <ComboBoxItem Content="N/A"/>
+                    </ComboBox>
+
+                    <Label x:Name="environmentSql_Label" Content="SQL:" Margin="10,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="environmentSql_ComboBox" Margin="69,54,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ComboBoxItem IsSelected="True" Content="Populate me!"/>
+                    </ComboBox>
+
+                    <Label x:Name="environmentOffice_Label" Content="Office:" Margin="10,78,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="environmentOffice_ComboBox" Margin="69,80,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <ComboBoxItem Content="Office 2016"/>
+                        <ComboBoxItem Content="Office 2016 (Click to Run)"/>
+                        <ComboBoxItem Content="Office 2013"/>
+                        <ComboBoxItem Content="Office 2013 (Click to Run)"/>
+                        <ComboBoxItem Content="Office 2010"/>
+                        <ComboBoxItem Content="Office 2007"/>
+                        <ComboBoxItem Content="Office 2003"/>
+                        <ComboBoxItem Content="Unsupported Version"/>
+                        <ComboBoxItem Content="N/A"/>
+                    </ComboBox>
+
+                    <Label x:Name="environmentOther_Label" Content="Other:" Margin="10,104,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBox x:Name="environmentOther_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,106,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+
+                </Grid>
+
+                <Grid x:Name="errorMessagesGrid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="errorMessages_Label" Content="Error Messages:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </Grid>
+
+                <Grid x:Name="additionalInformationGrid" Grid.Row="5" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="additionalInformation_Label" Content="Additional issue/query information:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </Grid>
+
+                <Grid x:Name="stepsTakenGrid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </Grid>
+                
+                <Grid x:Name="resolutionGrid" Grid.Row="7" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                </Grid>
             </Grid>
-
-            <Grid x:Name="environmentInfoGrid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                <Label x:Name="environmentOs_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <ComboBox x:Name="environmentOs_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <ComboBoxItem Content="Windows 10"/>
-                    <ComboBoxItem Content="Windows 8.1"/>
-                    <ComboBoxItem Content="Windows 8"/>
-                    <ComboBoxItem Content="Windows 7"/>
-                    <ComboBoxItem Content="Windows Vista"/>
-                    <ComboBoxItem Content="Windows XP"/>
-                    <ComboBoxItem Content="Windows Server 2012"/>
-                    <ComboBoxItem Content="Windows Server 2008 R2"/>
-                    <ComboBoxItem Content="Windows Server 2008"/>
-                    <ComboBoxItem Content="Windows Server 2003"/>
-                    <ComboBoxItem Content="Windows Home Server"/>
-                    <ComboBoxItem Content="Windows Home Server 2011"/>
-                    <ComboBoxItem Content="N/A"/>
-                    <ComboBoxItem Content="Other"/>
-                </ComboBox>
-
-                <Label x:Name="environmentBrowser_Label" Content="Browser:" Margin="10,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <ComboBox x:Name="environmentBrowser_ComboBox" Margin="69,28,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <ComboBoxItem Content="Internet Explorer"/>
-                    <ComboBoxItem Content="Google Chrome"/>
-                    <ComboBoxItem Content="Unsupported Browser"/>
-                    <ComboBoxItem Content="N/A"/>
-                </ComboBox>
-
-                <Label x:Name="environmentSql_Label" Content="SQL:" Margin="10,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <ComboBox x:Name="environmentSql_ComboBox" Margin="69,54,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <ComboBoxItem IsSelected="True" Content="Populate me!"/>
-                </ComboBox>
-
-                <Label x:Name="environmentOffice_Label" Content="Office:" Margin="10,78,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <ComboBox x:Name="environmentOffice_ComboBox" Margin="69,80,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                    <ComboBoxItem Content="Office 2016"/>
-                    <ComboBoxItem Content="Office 2016 (Click to Run)"/>
-                    <ComboBoxItem Content="Office 2013"/>
-                    <ComboBoxItem Content="Office 2013 (Click to Run)"/>
-                    <ComboBoxItem Content="Office 2010"/>
-                    <ComboBoxItem Content="Office 2007"/>
-                    <ComboBoxItem Content="Office 2003"/>
-                    <ComboBoxItem Content="Unsupported Version"/>
-                    <ComboBoxItem Content="N/A"/>
-                </ComboBox>
-
-                <Label x:Name="environmentOther_Label" Content="Other:" Margin="10,104,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox x:Name="environmentOther_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,106,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-
-            </Grid>
-
-            <Grid x:Name="errorMessagesGrid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                <Label x:Name="errorMessages_Label" Content="Error Messages:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            </Grid>
-
-            <Grid x:Name="stepsTakenGrid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            </Grid>
-
-            <Grid x:Name="additionalInformationGrid" Grid.Row="6" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
-                <Label x:Name="additionalInformation_Label" Content="Additional issue/query information:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            </Grid>
-
-            <Grid x:Name="resolutionGrid" Grid.Row="7" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
-                <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-            </Grid>
-
-            <Grid x:Name="Footer" Grid.Row="9" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="32" VerticalAlignment="Bottom">
-                <Button x:Name="endTimerButton_Button" Content="End Timer" IsEnabled="False" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="70" Click="endTimerButton_Click"/>
-                <Button x:Name="copyToClibboard_Button" Content="Copy to Clipboard" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="copyToClipboard_Button_Click" VerticalAlignment="Bottom" Height="22"/>
-            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="2" x:Name="ticketLoggingButtonsBottom" VerticalAlignment="Bottom" Height="43">
+            <Rectangle VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
+            <Button x:Name="endTimer_Button" Content="End Timer" IsEnabled="False" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="70" Click="endTimerButton_Click"/>
+            <Label x:Name="callDuration_Label" Content="00:00:00" Margin="85,0,0,8" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Button x:Name="copyToClipboard_Button" Content="Copy to Clipboard" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="copyToClipboard_Button_Click" VerticalAlignment="Bottom" Height="22"/>
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </Window>
