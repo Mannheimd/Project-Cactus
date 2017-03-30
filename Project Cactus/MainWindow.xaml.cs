@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
 
 namespace Project_Cactus
 {
@@ -34,9 +35,93 @@ namespace Project_Cactus
         // Timer for on-screen display of call duration
         DispatcherTimer durationCounter = new DispatcherTimer();
 
+        // XML document to contain configuration data
+        XmlDocument configurationXml = new XmlDocument();
+
+        // Values for what is required when copying to clipboard
+        bool productListRequired = false;
+
         public MainWindow()
         {
-            InitializeComponent();
+            if (loadConfigurationXml())
+            {
+                InitializeComponent();
+            }
+            else
+            {
+                MessageBox.Show("Unable to load configuration file. Application will terminate.");
+                Application.Current.Shutdown();
+            }
+
+            loadProductList();
+        }
+
+        private bool loadConfigurationXml()
+        {
+            // Loads the configuration XML from embedded resources. Later update will also store this locally and check a server for an updated version.
+            try
+            {
+                string tempXml;
+
+                using (Stream stream = this.GetType().Assembly.GetManifestResourceStream("Project_Cactus.Configuration.xml"))
+                {
+                    using (StreamReader sr = new StreamReader(stream))
+                    {
+                        tempXml = sr.ReadToEnd();
+                    }
+                }
+                
+                configurationXml.LoadXml(tempXml);
+
+                return true;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+
+                return false;
+            }
+        }
+
+        private void loadProductList()
+        {
+            try
+            {
+                // Empty the current product list
+                DropDownLists.productList = null;
+
+                // Create a temp list to store strings
+                List<string> tempList = new List<string>();
+                
+                // Get the 'productlist' XML node
+                XmlNode productListNode = configurationXml.SelectSingleNode("configuration/dropdowns/productlist");
+
+                // Check if Product List is a required field
+                if (productListNode.Attributes["required"].Value == "true")
+                {
+                    productListRequired = true;
+                }
+                else
+                {
+                    productListRequired = false;
+                }
+                
+                // Get the list of products
+                foreach (XmlNode product in configurationXml.SelectNodes("configuration/dropdowns/productlist/product"))
+                {
+                    tempList.Add(product.Attributes["text"].Value);
+                }
+                
+                //Update the global product list
+                DropDownLists.productList = tempList.ToArray();
+
+                // Throw the list at the UI
+                product_ComboBox.ItemsSource = DropDownLists.productList;
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Unable to load product list. \n\n" + error.Message);
+            }
         }
 
         private void productComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +130,7 @@ namespace Project_Cactus
             // Also sets the "Product Family" and "Integration" strings to fill in the KCS stuff.
             if (e.AddedItems.Count > 0)
             {
-                string selectedItem = (e.AddedItems[0] as ComboBoxItem).Content as string;
+                string selectedItem = (sender as ComboBox).SelectedItem.ToString();
                 switch (selectedItem)
                 {
                     case "Act! Pro":
@@ -334,5 +419,10 @@ Duration: {12}",
                     return blankList;
             };
         }
+    }
+
+    public class DropDownLists
+    {
+        public static string[] productList { get; set; }
     }
 }

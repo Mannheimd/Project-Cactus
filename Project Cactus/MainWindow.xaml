@@ -56,16 +56,7 @@
                     </Grid.RowDefinitions>
 
                     <Label x:Name="actProduct_Label" Grid.Row="0" Content="Product:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="26"/>
-                    <ComboBox x:Name="product_ComboBox" Grid.Row="0" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged">
-                        <ComboBoxItem Content="Act! Pro"/>
-                        <ComboBoxItem Content="Act! Premium"/>
-                        <ComboBoxItem Content="Act! Premium for Web"/>
-                        <ComboBoxItem Content="Act! Premium Cloud"/>
-                        <ComboBoxItem Content="Act! Emarketing"/>
-                        <ComboBoxItem Content="Swiftpage Emarketing"/>
-                        <ComboBoxItem Content="Other"/>
-                        <ComboBoxItem Content="N/A"/>
-                    </ComboBox>
+                    <ComboBox x:Name="product_ComboBox" Grid.Row="0" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
 
                     <Label x:Name="productVersion_Label" Grid.Row="1" Visibility="Collapsed" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
                     <ComboBox x:Name="productVersion_ComboBox" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>

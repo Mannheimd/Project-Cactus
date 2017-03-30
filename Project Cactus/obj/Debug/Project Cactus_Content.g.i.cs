@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("swiftpage_logo.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("configuration.xml")]
 
 
