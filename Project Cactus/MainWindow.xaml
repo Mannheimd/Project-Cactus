@@ -53,63 +53,62 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label x:Name="actProduct_Label" Grid.Row="0" Content="Product:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="26"/>
-                    <ComboBox x:Name="product_ComboBox" Grid.Row="0" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
+                    <Grid x:Name="product_Row" Grid.Row="0" >
+                        <Label x:Name="product_Label" Content="Product:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="26"/>
+                        <ComboBox x:Name="product_ComboBox" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
+                    </Grid>
 
-                    <Label x:Name="productVersion_Label" Grid.Row="1" Visibility="Collapsed" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                    <ComboBox x:Name="productVersion_ComboBox" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    <Grid x:Name="productVersion_Row" Grid.Row="1" Visibility="Collapsed">
+                        <Label x:Name="productVersion_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <ComboBox x:Name="productVersion_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+                    
+                    <Grid x:Name="productUpdate_Row" Grid.Row="2" Visibility="Collapsed">
+                        <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
+
+                    <Grid x:Name="os_Row" Grid.Row="3" Visibility="Collapsed">
+                        <Label x:Name="os_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="os_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="browser_Row" Grid.Row="4" Visibility="Collapsed">
+                        <Label x:Name="browser_Label" Content="Browser:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="browser_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="browserVersion_Row" Grid.Row="5" Visibility="Collapsed">
+                        <Label x:Name="browserVersion_Label" Content="Version:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
+
+                    <Grid x:Name="sql_Row" Grid.Row="6" Visibility="Collapsed">
+                        <Label x:Name="sql_Label" Content="SQL:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="sql_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="office_Row" Grid.Row="7" Visibility="Collapsed">
+                        <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="other_Row" Grid.Row="8" Visibility="Collapsed">
+                        <Label x:Name="other_Label" Content="Other:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="other_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
                 </Grid>
 
-                <Grid x:Name="environmentInfoGrid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="environmentOs_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="environmentOs_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <ComboBoxItem Content="Windows 10"/>
-                        <ComboBoxItem Content="Windows 8.1"/>
-                        <ComboBoxItem Content="Windows 8"/>
-                        <ComboBoxItem Content="Windows 7"/>
-                        <ComboBoxItem Content="Windows Vista"/>
-                        <ComboBoxItem Content="Windows XP"/>
-                        <ComboBoxItem Content="Windows Server 2012"/>
-                        <ComboBoxItem Content="Windows Server 2008 R2"/>
-                        <ComboBoxItem Content="Windows Server 2008"/>
-                        <ComboBoxItem Content="Windows Server 2003"/>
-                        <ComboBoxItem Content="Windows Home Server"/>
-                        <ComboBoxItem Content="Windows Home Server 2011"/>
-                        <ComboBoxItem Content="N/A"/>
-                        <ComboBoxItem Content="Other"/>
-                    </ComboBox>
-
-                    <Label x:Name="environmentBrowser_Label" Content="Browser:" Margin="10,26,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="environmentBrowser_ComboBox" Margin="69,28,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <ComboBoxItem Content="Internet Explorer"/>
-                        <ComboBoxItem Content="Google Chrome"/>
-                        <ComboBoxItem Content="Unsupported Browser"/>
-                        <ComboBoxItem Content="N/A"/>
-                    </ComboBox>
-
-                    <Label x:Name="environmentSql_Label" Content="SQL:" Margin="10,52,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="environmentSql_ComboBox" Margin="69,54,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <ComboBoxItem IsSelected="True" Content="Populate me!"/>
-                    </ComboBox>
-
-                    <Label x:Name="environmentOffice_Label" Content="Office:" Margin="10,78,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <ComboBox x:Name="environmentOffice_ComboBox" Margin="69,80,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <ComboBoxItem Content="Office 2016"/>
-                        <ComboBoxItem Content="Office 2016 (Click to Run)"/>
-                        <ComboBoxItem Content="Office 2013"/>
-                        <ComboBoxItem Content="Office 2013 (Click to Run)"/>
-                        <ComboBoxItem Content="Office 2010"/>
-                        <ComboBoxItem Content="Office 2007"/>
-                        <ComboBoxItem Content="Office 2003"/>
-                        <ComboBoxItem Content="Unsupported Version"/>
-                        <ComboBoxItem Content="N/A"/>
-                    </ComboBox>
-
-                    <Label x:Name="environmentOther_Label" Content="Other:" Margin="10,104,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox x:Name="environmentOther_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,106,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-
+                <Grid x:Name="apcInfoGrid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                 </Grid>
 
                 <Grid x:Name="errorMessagesGrid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">

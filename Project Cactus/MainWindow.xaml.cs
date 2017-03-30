@@ -39,7 +39,15 @@ namespace Project_Cactus
         XmlDocument configurationXml = new XmlDocument();
 
         // Values for what is required when copying to clipboard
-        bool productListRequired = false;
+        bool productRequired = false;
+        bool productVersionRequired = false;
+        bool productUpdateRequired = false;
+        bool osRequired = false;
+        bool browserRequired = false;
+        bool browserVersionRequired = false;
+        bool sqlRequired = false;
+        bool officeRequired = false;
+        bool otherRequired = false;
 
         public MainWindow()
         {
@@ -99,11 +107,11 @@ namespace Project_Cactus
                 // Check if Product List is a required field
                 if (productListNode.Attributes["required"].Value == "true")
                 {
-                    productListRequired = true;
+                    productRequired = true;
                 }
                 else
                 {
-                    productListRequired = false;
+                    productRequired = false;
                 }
                 
                 // Get the list of products
@@ -131,61 +139,15 @@ namespace Project_Cactus
             if (e.AddedItems.Count > 0)
             {
                 string selectedItem = (sender as ComboBox).SelectedItem.ToString();
-                switch (selectedItem)
-                {
-                    case "Act! Pro":
-                        setVersionDropDown(true, false, "actVersions");
-                        productFamily = "Act!";
-                        break;
-
-                    case "Act! Premium":
-                        setVersionDropDown(true, false, "actVersions");
-                        productFamily = "Act!";
-                        break;
-
-                    case "Act! Premium for Web":
-                        setVersionDropDown(true, false, "actVersions");
-                        productFamily = "Act!";
-                        break;
-
-                    case "Act! Premium Cloud":
-                        setVersionDropDown(false, false, "blankList");
-                        productFamily = "Act!";
-                        break;
-
-                    case "Act! Emarketing":
-                        setVersionDropDown(true, false, "actVersions");
-                        productFamily = "Act!";
-                        break;
-
-                    case "Swiftpage Emarketing":
-                        setVersionDropDown(false, false, "blankList");
-                        productFamily = "Emarketing";
-                        break;
-
-                    case "Other":
-                        setVersionDropDown(false, false, "blankList");
-                        productFamily = "Other";
-                        break;
-
-                    case "N/A":
-                        setVersionDropDown(false, false, "blankList");
-                        productFamily = "N/A";
-                        break;
-
-                    default:
-                        setVersionDropDown(false, false, "blankList");
-                        productFamily = null;
-                        break;
-                }
+                setRequiredRows(selectedItem);
             }
             else
             {
-                setVersionDropDown(false, false, "blankList");
-                productFamily = null;
+                
             }
         }
 
+        // Method setVersionDropDown is being deprecated, replaced by setRequiredRows
         private void setVersionDropDown(bool dropdownEnable, bool textEnable, string versionList)
         {
             // Sets the Version dropdown and label to active or inactive and chooses a list to apply to it's item source
@@ -202,6 +164,255 @@ namespace Project_Cactus
                 productVersion_Label.Visibility = Visibility.Collapsed;
                 productVersion_ComboBox.Visibility = Visibility.Collapsed;
                 productVersion_ComboBox.ItemsSource = VersionLists.listSelector("blankList");
+            }
+        }
+
+        private void setRequiredRows(string selectedProduct)
+        {
+            try
+            {
+                // Set the XML path of the selected product from configuration
+                string productPath = @"configuration/dropdowns/productlist/product[@text='" + selectedProduct + "']";
+                
+                // Work on versionlist in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/versionlist") != null)
+                {
+                    // Enable ProductVersion and ProductUpdate rows
+                    productVersion_Row.Visibility = Visibility.Visible;
+                    productUpdate_Row.Visibility = Visibility.Visible;
+
+                    // Check if version drop-down is mandatory
+                    XmlNode versionListNode = configurationXml.SelectSingleNode(productPath + "/versionlist");
+                    if (versionListNode.Attributes["required"].Value == "true")
+                    {
+                        productVersionRequired = true;
+                    }
+                    else
+                    {
+                        productVersionRequired = false;
+                    }
+
+                    // Select all version nodes
+                    XmlNodeList versionNodes = configurationXml.SelectNodes(productPath + "/versionlist/version");
+
+                    // For each version node, add to the version list
+                    DropDownLists.productVersionList = null;
+                    List<string> tempVersionList = new List<string>();
+                    foreach (XmlNode version in versionNodes)
+                    {
+                        tempVersionList.Add(version.Attributes["text"].Value);
+                    }
+                    DropDownLists.productVersionList = tempVersionList.ToArray();
+
+                    // Set the items source on the UI
+                    productVersion_ComboBox.ItemsSource = DropDownLists.productVersionList;
+                }
+                else
+                {
+                    // Collapse ProductVersion and ProductUpdate rows
+                    productVersion_Row.Visibility = Visibility.Collapsed;
+                    productUpdate_Row.Visibility = Visibility.Collapsed;
+
+                    // Set the version drop-down to empty
+                    productVersion_ComboBox.ItemsSource = DropDownLists.emptyList;
+
+                    // Change productVersion and productUpdate to not mandatory
+                    productVersionRequired = false;
+                    productUpdateRequired = false;
+                }
+
+                // Work on oslist in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/oslist") != null)
+                {
+                    // Enable OS row
+                    os_Row.Visibility = Visibility.Visible;
+
+                    // Check if version drop-down is mandatory
+                    XmlNode osListNode = configurationXml.SelectSingleNode(productPath + "/oslist");
+                    if (osListNode.Attributes["required"].Value == "true")
+                    {
+                        osRequired = true;
+                    }
+                    else
+                    {
+                        osRequired = false;
+                    }
+
+                    // Select all version nodes
+                    XmlNodeList osNodes = configurationXml.SelectNodes(productPath + "/oslist/os");
+
+                    // For each version node, add to the version list
+                    DropDownLists.osList = null;
+                    List<string> tempOsList = new List<string>();
+                    foreach (XmlNode os in osNodes)
+                    {
+                        tempOsList.Add(os.Attributes["text"].Value);
+                    }
+                    DropDownLists.osList = tempOsList.ToArray();
+
+                    // Set the items source on the UI
+                    os_ComboBox.ItemsSource = DropDownLists.osList;
+                }
+                else
+                {
+                    // Collapse OS row
+                    os_Row.Visibility = Visibility.Collapsed;
+
+                    // Set the OS drop-down to empty
+                    os_ComboBox.ItemsSource = DropDownLists.emptyList;
+
+                    // Change OS to not mandatory
+                    osRequired = false;
+                }
+
+                // Work on browserlist in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/browserlist") != null)
+                {
+                    // Enable the Browser and BrowserVersion rows
+                    browser_Row.Visibility = Visibility.Visible;
+                    browserVersion_Row.Visibility = Visibility.Visible;
+
+                    // Check if browser drop-down is mandatory
+                    XmlNode browserListNode = configurationXml.SelectSingleNode(productPath + "/browserlist");
+                    if (browserListNode.Attributes["required"].Value == "true")
+                    {
+                        browserRequired = true;
+                    }
+                    else
+                    {
+                        browserRequired = false;
+                    }
+
+                    // Select all browser nodes
+                    XmlNodeList browserNodes = configurationXml.SelectNodes(productPath + "/browserlist/browser");
+
+                    // For each browser node, add to the browser list
+                    DropDownLists.browserList = null;
+                    List<string> tempBrowserList = new List<string>();
+                    foreach (XmlNode browser in browserNodes)
+                    {
+                        tempBrowserList.Add(browser.Attributes["text"].Value);
+                    }
+                    DropDownLists.browserList = tempBrowserList.ToArray();
+
+                    // Set the items source on the UI
+                    browser_ComboBox.ItemsSource = DropDownLists.browserList;
+                }
+                else
+                {
+                    // Collapse the Browser and BrowserVersion rows
+                    browser_Row.Visibility = Visibility.Collapsed;
+                    browserVersion_Row.Visibility = Visibility.Collapsed;
+
+                    // Set the Browser drop-down to empty
+                    browser_ComboBox.ItemsSource = DropDownLists.emptyList;
+
+                    // Change Browser to not mandatory
+                    browserRequired = false;
+                }
+
+                // Work on sqllist in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/sqllist") != null)
+                {
+                    // Enable the SQL row
+                    sql_Row.Visibility = Visibility.Visible;
+
+                    // Check if sql drop-down is mandatory
+                    XmlNode sqlListNode = configurationXml.SelectSingleNode(productPath + "/sqllist");
+                    if (sqlListNode.Attributes["required"].Value == "true")
+                    {
+                        sqlRequired = true;
+                    }
+                    else
+                    {
+                        sqlRequired = false;
+                    }
+
+                    // Select all sql nodes
+                    XmlNodeList sqlNodes = configurationXml.SelectNodes(productPath + "/sqllist/sql");
+
+                    // For each sql node, add to the sql list
+                    DropDownLists.sqlList = null;
+                    List<string> tempSqlList = new List<string>();
+                    foreach (XmlNode sql in sqlNodes)
+                    {
+                        tempSqlList.Add(sql.Attributes["text"].Value);
+                    }
+                    DropDownLists.sqlList = tempSqlList.ToArray();
+
+                    // Set the items source on the UI
+                    sql_ComboBox.ItemsSource = DropDownLists.sqlList;
+                }
+                else
+                {
+                    // Collapse the SQL row
+                    sql_Row.Visibility = Visibility.Collapsed;
+
+                    // Set the SQL drop-down to empty
+                    sql_ComboBox.ItemsSource = DropDownLists.emptyList;
+
+                    // Change SQL to not mandatory
+                    sqlRequired = false;
+                }
+
+                // Work on officelist in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/officelist") != null)
+                {
+                    // Enable the office row
+                    office_Row.Visibility = Visibility.Visible;
+
+                    // Check if office drop-down is mandatory
+                    XmlNode officeListNode = configurationXml.SelectSingleNode(productPath + "/officelist");
+                    if (officeListNode.Attributes["required"].Value == "true")
+                    {
+                        officeRequired = true;
+                    }
+                    else
+                    {
+                        officeRequired = false;
+                    }
+
+                    // Select all office nodes
+                    XmlNodeList officeNodes = configurationXml.SelectNodes(productPath + "/officelist/office");
+
+                    // For each sql node, add to the sql list
+                    DropDownLists.officeList = null;
+                    List<string> tempOfficeList = new List<string>();
+                    foreach (XmlNode office in officeNodes)
+                    {
+                        tempOfficeList.Add(office.Attributes["text"].Value);
+                    }
+                    DropDownLists.officeList = tempOfficeList.ToArray();
+
+                    // Set the items source on the UI
+                    office_ComboBox.ItemsSource = DropDownLists.officeList;
+                }
+                else
+                {
+                    // Collapse the office row
+                    office_Row.Visibility = Visibility.Collapsed;
+
+                    // Set the office drop-down to empty
+                    office_ComboBox.ItemsSource = DropDownLists.emptyList;
+
+                    // Change office to not mandatory
+                    officeRequired = false;
+                }
+
+                // If selected product isn't blank, enable Other row
+                if (selectedProduct != null)
+                {
+                    other_Row.Visibility = Visibility.Visible;
+                }
+                // Otherwise, hide Other
+                else
+                {
+                    other_Row.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch(Exception error)
+            {
+                MessageBox.Show("Unable to update context-based options: \n\n" + error.Message);
             }
         }
 
@@ -245,6 +456,8 @@ namespace Project_Cactus
         private void resetFormButton_Click(object sender, RoutedEventArgs e)
         {
             // Reset timer
+            startTime = new DateTime();
+            endTime = new DateTime();
             callDuration = new TimeSpan();
             finalCallDuration = new TimeSpan();
             callDuration_Label.Content = "00:00:00";
@@ -252,15 +465,20 @@ namespace Project_Cactus
             // Reset all fields and drop-downs
             reasonForCall_TextBox.Text = null;
             product_ComboBox.SelectedIndex = -1;
-            environmentOs_ComboBox.SelectedIndex = -1;
-            environmentBrowser_ComboBox.SelectedIndex = -1;
-            environmentSql_ComboBox.SelectedIndex = -1;
-            environmentOffice_ComboBox.SelectedIndex = -1;
-            environmentOther_TextBox.Text = null;
+            productUpdate_TextBox.Text = null;
+            os_ComboBox.SelectedIndex = -1;
+            browser_ComboBox.SelectedIndex = -1;
+            browserVersion_TextBox.Text = null;
+            sql_ComboBox.SelectedIndex = -1;
+            office_ComboBox.SelectedIndex = -1;
+            other_TextBox.Text = null;
             errorMessages_TextBox.Text = null;
             stepsTaken_TextBox.Text = null;
             additionalInformation_TextBox.Text = null;
             resolution_TextBox.Text = null;
+
+            // Trigger SetRequired Rows with "nothing" selected, to get rid of all rows
+            setRequiredRows(null);
         }
 
         private void copyToClipboard_Button_Click(object sender, RoutedEventArgs e)
@@ -297,11 +515,11 @@ Solution:
 Duration: {12}",
             product_ComboBox.Text,
             productVersion_ComboBox.Text,
-            environmentOs_ComboBox.Text,
-            environmentOffice_ComboBox.Text,
-            environmentBrowser_ComboBox.Text,
-            environmentSql_ComboBox.Text,
-            environmentOther_TextBox.Text,
+            os_ComboBox.Text,
+            office_ComboBox.Text,
+            browser_ComboBox.Text,
+            sql_ComboBox.Text,
+            other_TextBox.Text,
             reasonForCall_TextBox.Text,
             errorMessages_TextBox.Text,
             additionalInformation_TextBox.Text,
@@ -334,7 +552,7 @@ Duration: {12}",
         }
     }
 
-    public class VersionLists
+    public class VersionLists // Being deprecated due to using XML for data, replacing with DropDownLists class
     {
         //Defines different lists for things
         static string[] blankList = {""};
@@ -423,6 +641,12 @@ Duration: {12}",
 
     public class DropDownLists
     {
+        public static string[] emptyList { get; set; }
         public static string[] productList { get; set; }
+        public static string[] productVersionList { get; set; }
+        public static string[] osList { get; set; }
+        public static string[] browserList { get; set; }
+        public static string[] sqlList { get; set; }
+        public static string[] officeList { get; set; }
     }
 }

@@ -178,7 +178,7 @@
         </oslist>
         <browserlist required="true">
           <browser text="Internet Explorer"></browser>
-          <browser text="Google" Chrome=""></browser>
+          <browser text="Google Chrome"></browser>
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
@@ -220,7 +220,7 @@
         </oslist>
         <browserlist required="true">
           <browser text="Internet Explorer"></browser>
-          <browser text="Google" Chrome=""></browser>
+          <browser text="Google Chrome"></browser>
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
@@ -283,7 +283,7 @@
         </oslist>
         <browserlist required="true">
           <browser text="Internet Explorer"></browser>
-          <browser text="Google" Chrome=""></browser>
+          <browser text="Google Chrome"></browser>
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
@@ -307,7 +307,7 @@
         </oslist>
         <browserlist required="true">
           <browser text="Internet Explorer"></browser>
-          <browser text="Google" Chrome=""></browser>
+          <browser text="Google Chrome"></browser>
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
@@ -331,7 +331,7 @@
         </oslist>
         <browserlist required="true">
           <browser text="Internet Explorer"></browser>
-          <browser text="Google" Chrome=""></browser>
+          <browser text="Google Chrome"></browser>
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
@@ -373,7 +373,7 @@
         </oslist>
         <browserlist required="true">
           <browser text="Internet Explorer"></browser>
-          <browser text="Google" Chrome=""></browser>
+          <browser text="Google Chrome"></browser>
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
@@ -395,6 +395,8 @@
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
+      </product>
+      <product text="testBlank">
       </product>
     </productlist>
   </dropdowns>
