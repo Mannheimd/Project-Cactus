@@ -39,7 +39,11 @@ namespace Project_Cactus
         XmlDocument configurationXml = new XmlDocument();
 
         // Values for what is required when copying to clipboard
+        // These are altered in setRequiredRows()
+        bool reasonForCallRequired = true;
         bool productRequired = false;
+        bool productNameRequired = false;
+        bool versionTextRequired = false;
         bool productVersionRequired = false;
         bool productUpdateRequired = false;
         bool osRequired = false;
@@ -48,6 +52,29 @@ namespace Project_Cactus
         bool sqlRequired = false;
         bool officeRequired = false;
         bool otherRequired = false;
+        bool errorMessagesRequired = true;
+        bool additionalInformationRequired = true;
+        bool stepsTakenRequired = true;
+        bool resolutionRequired = true;
+
+        // Values for what is mandatory when copying to clipboard
+        // These are altered in setRequiredRows()
+        bool reasonForCallMandatory = true;
+        bool productMandatory = true;
+        bool productNameMandatory = false;
+        bool versionTextMandatory = false;
+        bool productVersionMandatory = false;
+        bool productUpdateMandatory = false;
+        bool osMandatory = false;
+        bool browserMandatory = false;
+        bool browserVersionMandatory = false;
+        bool sqlMandatory = false;
+        bool officeMandatory = false;
+        bool otherMandatory = false;
+        bool errorMessagesMandatory = false;
+        bool additionalInformationMandatory = false;
+        bool stepsTakenMandatory = true;
+        bool resolutionMandatory = true;
 
         public MainWindow()
         {
@@ -185,12 +212,16 @@ namespace Project_Cactus
                     XmlNode versionListNode = configurationXml.SelectSingleNode(productPath + "/versionlist");
                     if (versionListNode.Attributes["required"].Value == "true")
                     {
-                        productVersionRequired = true;
+                        productVersionMandatory = true;
                     }
                     else
                     {
-                        productVersionRequired = false;
+                        productVersionMandatory = false;
                     }
+
+                    // Flag productVersion and productUpdate for output
+                    productVersionRequired = true;
+                    productUpdateRequired = true;
 
                     // Select all version nodes
                     XmlNodeList versionNodes = configurationXml.SelectNodes(productPath + "/versionlist/version");
@@ -217,6 +248,10 @@ namespace Project_Cactus
                     productVersion_ComboBox.ItemsSource = DropDownLists.emptyList;
 
                     // Change productVersion and productUpdate to not mandatory
+                    productVersionMandatory = false;
+                    productUpdateMandatory = false;
+
+                    // Flag productVersion and productUpdate to not be included in output
                     productVersionRequired = false;
                     productUpdateRequired = false;
                 }
@@ -231,12 +266,15 @@ namespace Project_Cactus
                     XmlNode osListNode = configurationXml.SelectSingleNode(productPath + "/oslist");
                     if (osListNode.Attributes["required"].Value == "true")
                     {
-                        osRequired = true;
+                        osMandatory = true;
                     }
                     else
                     {
-                        osRequired = false;
+                        osMandatory = false;
                     }
+
+                    // Flag OS for inclusion in output
+                    osRequired = true;
 
                     // Select all version nodes
                     XmlNodeList osNodes = configurationXml.SelectNodes(productPath + "/oslist/os");
@@ -262,6 +300,9 @@ namespace Project_Cactus
                     os_ComboBox.ItemsSource = DropDownLists.emptyList;
 
                     // Change OS to not mandatory
+                    osMandatory = false;
+
+                    // Flag OS as not required in output
                     osRequired = false;
                 }
 
@@ -276,12 +317,16 @@ namespace Project_Cactus
                     XmlNode browserListNode = configurationXml.SelectSingleNode(productPath + "/browserlist");
                     if (browserListNode.Attributes["required"].Value == "true")
                     {
-                        browserRequired = true;
+                        browserMandatory = true;
                     }
                     else
                     {
-                        browserRequired = false;
+                        browserMandatory = false;
                     }
+
+                    // Flag browser and browserVersion as required in output
+                    browserRequired = true;
+                    browserVersionRequired = true;
 
                     // Select all browser nodes
                     XmlNodeList browserNodes = configurationXml.SelectNodes(productPath + "/browserlist/browser");
@@ -308,7 +353,11 @@ namespace Project_Cactus
                     browser_ComboBox.ItemsSource = DropDownLists.emptyList;
 
                     // Change Browser to not mandatory
+                    browserMandatory = false;
+
+                    // Flag browser and browserVersion as not required in output
                     browserRequired = false;
+                    browserVersionRequired = false;
                 }
 
                 // Work on sqllist in the XML, if it exists for the selected product
@@ -321,12 +370,15 @@ namespace Project_Cactus
                     XmlNode sqlListNode = configurationXml.SelectSingleNode(productPath + "/sqllist");
                     if (sqlListNode.Attributes["required"].Value == "true")
                     {
-                        sqlRequired = true;
+                        sqlMandatory = true;
                     }
                     else
                     {
-                        sqlRequired = false;
+                        sqlMandatory = false;
                     }
+
+                    // Flag sql as required in output
+                    sqlRequired = true;
 
                     // Select all sql nodes
                     XmlNodeList sqlNodes = configurationXml.SelectNodes(productPath + "/sqllist/sql");
@@ -352,6 +404,9 @@ namespace Project_Cactus
                     sql_ComboBox.ItemsSource = DropDownLists.emptyList;
 
                     // Change SQL to not mandatory
+                    sqlMandatory = false;
+
+                    // Flag sql as not required in output
                     sqlRequired = false;
                 }
 
@@ -365,17 +420,20 @@ namespace Project_Cactus
                     XmlNode officeListNode = configurationXml.SelectSingleNode(productPath + "/officelist");
                     if (officeListNode.Attributes["required"].Value == "true")
                     {
-                        officeRequired = true;
+                        officeMandatory = true;
                     }
                     else
                     {
-                        officeRequired = false;
+                        officeMandatory = false;
                     }
+
+                    // Flag office as required in output
+                    officeRequired = true;
 
                     // Select all office nodes
                     XmlNodeList officeNodes = configurationXml.SelectNodes(productPath + "/officelist/office");
 
-                    // For each sql node, add to the sql list
+                    // For each office node, add to the sql list
                     DropDownLists.officeList = null;
                     List<string> tempOfficeList = new List<string>();
                     foreach (XmlNode office in officeNodes)
@@ -396,7 +454,74 @@ namespace Project_Cactus
                     office_ComboBox.ItemsSource = DropDownLists.emptyList;
 
                     // Change office to not mandatory
+                    officeMandatory = false;
+
+                    // Flag sql as not required in output
                     officeRequired = false;
+                }
+
+                // Work on productname in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/productname") != null)
+                {
+                    // Enable the product name row
+                    productName_Row.Visibility = Visibility.Visible;
+
+                    // Check if product name field is mandatory
+                    XmlNode productNameNode = configurationXml.SelectSingleNode(productPath + "/productname");
+                    if (productNameNode.Attributes["required"].Value == "true")
+                    {
+                        productNameMandatory = true;
+                    }
+                    else
+                    {
+                        productNameMandatory = false;
+                    }
+
+                    // Flag product name as required in output
+                    productNameRequired = true;
+                }
+                else
+                {
+                    // Collapse the product name row
+                    productName_Row.Visibility = Visibility.Collapsed;
+
+                    // Change product name to not mandatory
+                    productNameMandatory = false;
+
+                    // Flag product name as not required in output
+                    productNameRequired = false;
+                }
+
+                // Work on versiontext in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/versiontext") != null)
+                {
+                    // Enable the version text row
+                    versionText_Row.Visibility = Visibility.Visible;
+
+                    // Check if version text field is mandatory
+                    XmlNode versionTextNode = configurationXml.SelectSingleNode(productPath + "/versiontext");
+                    if (versionTextNode.Attributes["required"].Value == "true")
+                    {
+                        versionTextMandatory = true;
+                    }
+                    else
+                    {
+                        versionTextMandatory = false;
+                    }
+
+                    // Flag version text as required in output
+                    versionTextRequired = true;
+                }
+                else
+                {
+                    // Collapse the version text row
+                    versionText_Row.Visibility = Visibility.Collapsed;
+
+                    // Change version text to not mandatory
+                    versionTextMandatory = false;
+
+                    // Flag version text as not required in output
+                    versionTextRequired = false;
                 }
 
                 // If selected product isn't blank, enable Other row
@@ -465,6 +590,8 @@ namespace Project_Cactus
             // Reset all fields and drop-downs
             reasonForCall_TextBox.Text = null;
             product_ComboBox.SelectedIndex = -1;
+            productName_TextBox.Text = null;
+            versionText_TextBox.Text = null;
             productUpdate_TextBox.Text = null;
             os_ComboBox.SelectedIndex = -1;
             browser_ComboBox.SelectedIndex = -1;
@@ -483,51 +610,14 @@ namespace Project_Cactus
 
         private void copyToClipboard_Button_Click(object sender, RoutedEventArgs e)
         {
-            string outputString = String.Format(@"Environmental Info:
-- Act version: {0} {1}
-- Windows version: {2}
-- Office version: {3}
-- Web browser: {4}
-- SQL: {5}
-- Other: {6}
-
----
-Reason for Call:
-{7}
-
----
-Error messages:
-{8}
-
----
-Additional issue/query information:
-{9}
-
----
-Steps Taken:
-{10}
-
----
-Solution:
-{11}
-
----
-Duration: {12}",
-            product_ComboBox.Text,
-            productVersion_ComboBox.Text,
-            os_ComboBox.Text,
-            office_ComboBox.Text,
-            browser_ComboBox.Text,
-            sql_ComboBox.Text,
-            other_TextBox.Text,
-            reasonForCall_TextBox.Text,
-            errorMessages_TextBox.Text,
-            additionalInformation_TextBox.Text,
-            stepsTaken_TextBox.Text,
-            resolution_TextBox.Text,
-            calculateCallDuration());
-
-            Clipboard.SetText(outputString);
+            if (checkMandatoryCriteriaMet())
+            {
+                Clipboard.SetText(buildTicketOutput());
+            }
+            else
+            {
+                MessageBox.Show("Required fields have not been filled in. Please update highlighted fields.");
+            }
         }
 
         private void durationCounter_Tick(object sender, EventArgs e)
@@ -549,6 +639,197 @@ Duration: {12}",
             }
             TimeSpan tempCallDuration = finalCallDuration + callDuration;
             return tempCallDuration.ToString().Substring(0, 8);
+        }
+
+        private bool checkMandatoryCriteriaMet()
+        {
+            // For every field marked as mandatory, check if it's associated UI element is blank.
+            // If mandatory field is empty, make its row orange (Swiftpage Orange, hell yah) and flag failure.
+            // if all is well, remove the colour.
+            bool criteriaMet = true;
+
+            // reasonForCall
+            if (reasonForCallMandatory & reasonForCall_TextBox.Text == "")
+            {
+                reasonForCall_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                reasonForCall_Grid.ClearValue(BackgroundProperty);
+            }
+
+            // product
+            if (productMandatory & product_ComboBox.Text == "")
+            {
+                product_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254,80,0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                product_Row.ClearValue(BackgroundProperty);
+            }
+
+            // productName
+            if (productNameMandatory & productName_TextBox.Text == "")
+            {
+                productName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                productName_Row.ClearValue(BackgroundProperty);
+            }
+
+            // versionText
+            if (versionTextMandatory & versionText_TextBox.Text == "")
+            {
+                versionText_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                versionText_Row.ClearValue(BackgroundProperty);
+            }
+
+            // productVersion
+            if (productVersionMandatory & productVersion_ComboBox.Text == "")
+            {
+                productVersion_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                productVersion_Row.ClearValue(BackgroundProperty);
+            }
+
+            // productUpdate
+            if (productUpdateMandatory & productUpdate_TextBox.Text == "")
+            {
+                productUpdate_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                productUpdate_Row.ClearValue(BackgroundProperty);
+            }
+
+            // os
+            if (osMandatory & os_ComboBox.Text == "")
+            {
+                os_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                os_Row.ClearValue(BackgroundProperty);
+            }
+
+            // browser
+            if (browserMandatory & browser_ComboBox.Text == "")
+            {
+                browser_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                browser_Row.ClearValue(BackgroundProperty);
+            }
+
+            // browserVersion
+            if (browserVersionMandatory & browserVersion_TextBox.Text == "")
+            {
+                browserVersion_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                browserVersion_Row.ClearValue(BackgroundProperty);
+            }
+
+            // sql
+            if (sqlMandatory & sql_ComboBox.Text == "")
+            {
+                sql_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                sql_Row.ClearValue(BackgroundProperty);
+            }
+
+            // office
+            if (officeMandatory & office_ComboBox.Text == "")
+            {
+                office_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                office_Row.ClearValue(BackgroundProperty);
+            }
+
+            // other
+            if (otherMandatory & other_TextBox.Text == "")
+            {
+                other_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                other_Row.ClearValue(BackgroundProperty);
+            }
+
+            // errorMessages
+            if (errorMessagesMandatory & errorMessages_TextBox.Text == "")
+            {
+                errorMessages_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                errorMessages_Grid.ClearValue(BackgroundProperty);
+            }
+
+            // additionalInformation
+            if (additionalInformationMandatory & additionalInformation_TextBox.Text == "")
+            {
+                additionalInformation_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                additionalInformation_Grid.ClearValue(BackgroundProperty);
+            }
+
+            // stepsTaken
+            if (stepsTakenMandatory & stepsTaken_TextBox.Text == "")
+            {
+                stepsTaken_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                stepsTaken_Grid.ClearValue(BackgroundProperty);
+            }
+
+            // resolution
+            if (resolutionMandatory & resolution_TextBox.Text == "")
+            {
+                resolution_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                resolution_Grid.ClearValue(BackgroundProperty);
+            }
+
+            return criteriaMet;
+        }
+
+        private string buildTicketOutput()
+        {
+            return "Hello";
         }
     }
 

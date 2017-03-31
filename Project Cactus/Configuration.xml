@@ -313,88 +313,9 @@
         </browserlist>
       </product>
       <product text="Other">
-        <oslist required="true">
-          <os text="Windows 10"></os>
-          <os text="Windows 8.1"></os>
-          <os text="Windows 8"></os>
-          <os text="Windows 7"></os>
-          <os text="Windows Vista"></os>
-          <os text="Windows XP"></os>
-          <os text="Windows Server 2012"></os>
-          <os text="Windows Server 2008 R2"></os>
-          <os text="Windows Server 2008"></os>
-          <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
-          <os text="N/A"></os>
-          <os text="Other"></os>
-        </oslist>
-        <browserlist required="true">
-          <browser text="Internet Explorer"></browser>
-          <browser text="Google Chrome"></browser>
-          <browser text="Unsupported" Browser=""></browser>
-          <browser text="N/A"></browser>
-        </browserlist>
-        <sqllist required="true">
-          <sql text="SQL Server 2008 R2"></sql>
-          <sql text="SQL Server 2012"></sql>
-          <sql text="SQL Server 2014"></sql>
-          <sql text="Unsupported Version"></sql>
-          <sql text="N/A"></sql>
-        </sqllist>
-        <officelist required="true">
-          <office text="Office 2016"></office>
-          <office text="Office 2016 (Click to Run)"></office>
-          <office text="Office 2013"></office>
-          <office text="Office 2013 (Click to Run)"></office>
-          <office text="Office 2010"></office>
-          <office text="Office 2007"></office>
-          <office text="Office 2003"></office>
-          <office text="Unsupported Version"></office>
-          <office text="N/A"></office>
-        </officelist>
+        <productname required="true"/>
       </product>
       <product text="N/A">
-        <oslist required="true">
-          <os text="Windows 10"></os>
-          <os text="Windows 8.1"></os>
-          <os text="Windows 8"></os>
-          <os text="Windows 7"></os>
-          <os text="Windows Vista"></os>
-          <os text="Windows XP"></os>
-          <os text="Windows Server 2012"></os>
-          <os text="Windows Server 2008 R2"></os>
-          <os text="Windows Server 2008"></os>
-          <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
-          <os text="N/A"></os>
-          <os text="Other"></os>
-        </oslist>
-        <browserlist required="true">
-          <browser text="Internet Explorer"></browser>
-          <browser text="Google Chrome"></browser>
-          <browser text="Unsupported" Browser=""></browser>
-          <browser text="N/A"></browser>
-        </browserlist>
-        <sqllist required="true">
-          <sql text="SQL Server 2008 R2"></sql>
-          <sql text="SQL Server 2012"></sql>
-          <sql text="SQL Server 2014"></sql>
-          <sql text="Unsupported Version"></sql>
-          <sql text="N/A"></sql>
-        </sqllist>
-        <officelist required="true">
-          <office text="Office 2016"></office>
-          <office text="Office 2016 (Click to Run)"></office>
-          <office text="Office 2013"></office>
-          <office text="Office 2013 (Click to Run)"></office>
-          <office text="Office 2010"></office>
-          <office text="Office 2007"></office>
-          <office text="Office 2003"></office>
-          <office text="Unsupported Version"></office>
-          <office text="N/A"></office>
-        </officelist>
       </product>
       <product text="testBlank">
       </product>

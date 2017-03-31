@@ -44,9 +44,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Grid x:Name="reasonForCallGrid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,5,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,0" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <Grid x:Name="reasonForCall_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,26,10,7" TextWrapping="Wrap" AcceptsReturn="True"/>
                 </Grid>
 
                 <Grid x:Name="productInfoGrid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
@@ -60,75 +60,87 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Grid x:Name="product_Row" Grid.Row="0" >
-                        <Label x:Name="product_Label" Content="Product:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="26"/>
-                        <ComboBox x:Name="product_ComboBox" HorizontalAlignment="Stretch" Margin="69,7,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
+                    <Grid x:Name="product_Row" Grid.Row="0">
+                        <Label x:Name="product_Label" Content="Product:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <ComboBox x:Name="product_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
                     </Grid>
 
-                    <Grid x:Name="productVersion_Row" Grid.Row="1" Visibility="Collapsed">
+                    <Grid x:Name="productName_Row" Grid.Row="1" Visibility="Collapsed">
+                        <Label x:Name="productName_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="productName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+
+                    <Grid x:Name="versionText_Row" Grid.Row="2" Visibility="Collapsed">
+                        <Label x:Name="versionText_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="versionText_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+
+                    <Grid x:Name="productVersion_Row" Grid.Row="3" Visibility="Collapsed">
                         <Label x:Name="productVersion_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
                         <ComboBox x:Name="productVersion_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
                     </Grid>
                     
-                    <Grid x:Name="productUpdate_Row" Grid.Row="2" Visibility="Collapsed">
+                    <Grid x:Name="productUpdate_Row" Grid.Row="4" Visibility="Collapsed">
                         <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                     </Grid>
 
-                    <Grid x:Name="os_Row" Grid.Row="3" Visibility="Collapsed">
+                    <Grid x:Name="os_Row" Grid.Row="5" Visibility="Collapsed">
                         <Label x:Name="os_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <ComboBox x:Name="os_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     </Grid>
 
-                    <Grid x:Name="browser_Row" Grid.Row="4" Visibility="Collapsed">
+                    <Grid x:Name="browser_Row" Grid.Row="6" Visibility="Collapsed">
                         <Label x:Name="browser_Label" Content="Browser:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <ComboBox x:Name="browser_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     </Grid>
 
-                    <Grid x:Name="browserVersion_Row" Grid.Row="5" Visibility="Collapsed">
+                    <Grid x:Name="browserVersion_Row" Grid.Row="7" Visibility="Collapsed">
                         <Label x:Name="browserVersion_Label" Content="Version:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                     </Grid>
 
-                    <Grid x:Name="sql_Row" Grid.Row="6" Visibility="Collapsed">
+                    <Grid x:Name="sql_Row" Grid.Row="8" Visibility="Collapsed">
                         <Label x:Name="sql_Label" Content="SQL:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <ComboBox x:Name="sql_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     </Grid>
 
-                    <Grid x:Name="office_Row" Grid.Row="7" Visibility="Collapsed">
+                    <Grid x:Name="office_Row" Grid.Row="9" Visibility="Collapsed">
                         <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     </Grid>
 
-                    <Grid x:Name="other_Row" Grid.Row="8" Visibility="Collapsed">
+                    <Grid x:Name="other_Row" Grid.Row="10" Visibility="Collapsed">
                         <Label x:Name="other_Label" Content="Other:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBox x:Name="other_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                     </Grid>
                 </Grid>
 
-                <Grid x:Name="apcInfoGrid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                <Grid x:Name="apcInfo_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                 </Grid>
 
-                <Grid x:Name="errorMessagesGrid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                <Grid x:Name="errorMessages_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                     <Label x:Name="errorMessages_Label" Content="Error Messages:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                 </Grid>
 
-                <Grid x:Name="additionalInformationGrid" Grid.Row="5" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="additionalInformation_Label" Content="Additional issue/query information:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <Grid x:Name="additionalInformation_Grid" Grid.Row="5" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="additionalInformation_Label" Content="Additional issue/query information:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                 </Grid>
 
-                <Grid x:Name="stepsTakenGrid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <Grid x:Name="stepsTaken_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                 </Grid>
                 
-                <Grid x:Name="resolutionGrid" Grid.Row="7" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,31,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                <Grid x:Name="resolution_Grid" Grid.Row="7" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                 </Grid>
             </Grid>
         </ScrollViewer>
