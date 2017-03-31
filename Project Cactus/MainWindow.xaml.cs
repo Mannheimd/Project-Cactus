@@ -38,7 +38,7 @@ namespace Project_Cactus
         // XML document to contain configuration data
         XmlDocument configurationXml = new XmlDocument();
 
-        // Values for what is required when copying to clipboard
+        // Default values for what is required when copying to clipboard
         // These are altered in setRequiredRows()
         bool reasonForCallRequired = true;
         bool productRequired = false;
@@ -49,6 +49,7 @@ namespace Project_Cactus
         bool osRequired = false;
         bool browserRequired = false;
         bool browserVersionRequired = false;
+        bool accountNameRequired = false;
         bool sqlRequired = false;
         bool officeRequired = false;
         bool otherRequired = false;
@@ -56,8 +57,9 @@ namespace Project_Cactus
         bool additionalInformationRequired = true;
         bool stepsTakenRequired = true;
         bool resolutionRequired = true;
+        bool apcInfoRequired = false;
 
-        // Values for what is mandatory when copying to clipboard
+        // Default values for what must not be blank when copying to clipboard
         // These are altered in setRequiredRows()
         bool reasonForCallMandatory = true;
         bool productMandatory = true;
@@ -68,6 +70,7 @@ namespace Project_Cactus
         bool osMandatory = false;
         bool browserMandatory = false;
         bool browserVersionMandatory = false;
+        bool accountNameMandatory = false;
         bool sqlMandatory = false;
         bool officeMandatory = false;
         bool otherMandatory = false;
@@ -75,6 +78,8 @@ namespace Project_Cactus
         bool additionalInformationMandatory = false;
         bool stepsTakenMandatory = true;
         bool resolutionMandatory = true;
+        bool urlMandatory = false;
+        bool databaseNameMandatory = false;
 
         public MainWindow()
         {
@@ -161,8 +166,6 @@ namespace Project_Cactus
 
         private void productComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Populates the Version drop-down with items depending on what product was selected, and makes the Version drop-down visible. Some products don't require the Version drop-down to appear.
-            // Also sets the "Product Family" and "Integration" strings to fill in the KCS stuff.
             if (e.AddedItems.Count > 0)
             {
                 string selectedItem = (sender as ComboBox).SelectedItem.ToString();
@@ -170,27 +173,8 @@ namespace Project_Cactus
             }
             else
             {
-                
-            }
-        }
-
-        // Method setVersionDropDown is being deprecated, replaced by setRequiredRows
-        private void setVersionDropDown(bool dropdownEnable, bool textEnable, string versionList)
-        {
-            // Sets the Version dropdown and label to active or inactive and chooses a list to apply to it's item source
-            // 'textEnable' bool is to allow for future addition of a text box when "other" is selected
-
-            if (dropdownEnable) // Make visible, apply selected list
-            {
-                productVersion_Label.Visibility = Visibility.Visible;
-                productVersion_ComboBox.Visibility = Visibility.Visible;
-                productVersion_ComboBox.ItemsSource = VersionLists.listSelector(versionList);
-            }
-            else // Make invisible, apply blank list
-            {
-                productVersion_Label.Visibility = Visibility.Collapsed;
-                productVersion_ComboBox.Visibility = Visibility.Collapsed;
-                productVersion_ComboBox.ItemsSource = VersionLists.listSelector("blankList");
+                // Trigger SetRequired Rows with "nothing" selected, to get rid of all rows
+                setRequiredRows(null);
             }
         }
 
@@ -524,6 +508,81 @@ namespace Project_Cactus
                     versionTextRequired = false;
                 }
 
+                // Work on accountname in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/accountname") != null)
+                {
+                    // Enable the account name row
+                    accountName_Row.Visibility = Visibility.Visible;
+
+                    // Check if account name field is mandatory
+                    XmlNode accountNameNode = configurationXml.SelectSingleNode(productPath + "/accountname");
+                    if (accountNameNode.Attributes["required"].Value == "true")
+                    {
+                        accountNameMandatory = true;
+                    }
+                    else
+                    {
+                        accountNameMandatory = false;
+                    }
+
+                    // Flag account name as required in output
+                    accountNameRequired = true;
+                }
+                else
+                {
+                    // Collapse the account name row
+                    accountName_Row.Visibility = Visibility.Collapsed;
+
+                    // Change account name to not mandatory
+                    accountNameMandatory = false;
+
+                    // Flag account name as not required in output
+                    accountNameRequired = false;
+                }
+
+                // Work on apcinfo in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/apcinfo") != null)
+                {
+                    // Enable the APC Info grid
+                    apcInfoText_Row.Visibility = Visibility.Visible;
+                    url_Row.Visibility = Visibility.Visible;
+                    databaseName_Row.Visibility = Visibility.Visible;
+                    remoteDatabaseName_Row.Visibility = Visibility.Visible;
+
+                    // Check if APC info fields are mandatory
+                    XmlNode apcInfoNode = configurationXml.SelectSingleNode(productPath + "/apcinfo");
+                    if (apcInfoNode.Attributes["required"].Value == "true")
+                    {
+                        urlMandatory = true;
+                        databaseNameMandatory = true;
+                        // Does not set remoteDatabaseName
+                    }
+                    else
+                    {
+                        urlMandatory = false;
+                        databaseNameMandatory = false;
+                        // Does not set remoteDatabaseName
+                    }
+
+                    // Flag APC info fields as required in output
+                    apcInfoRequired = true;
+                }
+                else
+                {
+                    // Collapse the APC Info rows
+                    apcInfoText_Row.Visibility = Visibility.Collapsed;
+                    url_Row.Visibility = Visibility.Collapsed;
+                    databaseName_Row.Visibility = Visibility.Collapsed;
+                    remoteDatabaseName_Row.Visibility = Visibility.Collapsed;
+
+                    // Change APC info fields to not mandatory
+                    urlMandatory = false;
+                    databaseNameMandatory = false;
+
+                    // Flag APC info as not required in output
+                    apcInfoRequired = false;
+                }
+
                 // If selected product isn't blank, enable Other row
                 if (selectedProduct != null)
                 {
@@ -596,6 +655,7 @@ namespace Project_Cactus
             os_ComboBox.SelectedIndex = -1;
             browser_ComboBox.SelectedIndex = -1;
             browserVersion_TextBox.Text = null;
+            accountName_TextBox.Text = null;
             sql_ComboBox.SelectedIndex = -1;
             office_ComboBox.SelectedIndex = -1;
             other_TextBox.Text = null;
@@ -603,9 +663,6 @@ namespace Project_Cactus
             stepsTaken_TextBox.Text = null;
             additionalInformation_TextBox.Text = null;
             resolution_TextBox.Text = null;
-
-            // Trigger SetRequired Rows with "nothing" selected, to get rid of all rows
-            setRequiredRows(null);
         }
 
         private void copyToClipboard_Button_Click(object sender, RoutedEventArgs e)
@@ -747,6 +804,17 @@ namespace Project_Cactus
                 browserVersion_Row.ClearValue(BackgroundProperty);
             }
 
+            // accountName
+            if (accountNameMandatory & accountName_TextBox.Text == "")
+            {
+                accountName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                accountName_Row.ClearValue(BackgroundProperty);
+            }
+
             // sql
             if (sqlMandatory & sql_ComboBox.Text == "")
             {
@@ -824,6 +892,28 @@ namespace Project_Cactus
                 resolution_Grid.ClearValue(BackgroundProperty);
             }
 
+            // url
+            if (urlMandatory & url_TextBox.Text == "")
+            {
+                url_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                url_Row.ClearValue(BackgroundProperty);
+            }
+
+            // databaseName
+            if (databaseNameMandatory & url_TextBox.Text == "")
+            {
+                databaseName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                databaseName_Row.ClearValue(BackgroundProperty);
+            }
+
             return criteriaMet;
         }
 
@@ -834,7 +924,7 @@ namespace Project_Cactus
             string outputString = "";
 
             // == Environmental info heading ==
-            outputString = outputString + newLine + "Environment and Version Information:" + newLine;
+            outputString = outputString + "Environment and Version Information:" + newLine;
 
             // product
             if (productRequired)
@@ -902,6 +992,21 @@ namespace Project_Cactus
                 outputString = outputString + "Other:" + newLine + office_ComboBox.Text + newLine;
             }
 
+            // accountName
+            if (accountNameRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Account Name:" + newLine + accountName_TextBox.Text + newLine;
+            }
+
+            // apcInfo
+            if (apcInfoRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "APC Account Info:" + newLine
+                    + "URL: " + url_TextBox.Text + newLine
+                    + "Database: " + databaseName_TextBox.Text + newLine
+                    + "Remote Database: " + remoteDatabaseName_TextBox.Text + newLine;
+            }
+
             // reasonForCall
             if (reasonForCallRequired)
             {
@@ -932,96 +1037,9 @@ namespace Project_Cactus
                 outputString = outputString + newLine + "===" + newLine + "Resolution:" + newLine + resolution_TextBox.Text + newLine;
             }
 
-            outputString = outputString + newLine + "Duration: " + calculateCallDuration();
+            outputString = outputString + newLine + "===" + newLine + "Duration: " + calculateCallDuration();
 
             return outputString;
-        }
-    }
-
-    public class VersionLists // Being deprecated due to using XML for data, replacing with DropDownLists class
-    {
-        //Defines different lists for things
-        static string[] blankList = {""};
-
-        static string[] actVersions = {
-            "v19.1",
-            "v19.0",
-            "v18.2",
-            "v18.1",
-            "v18.0",
-            "v17.2",
-            "v17.1",
-            "v17.0",
-            "v16.3",
-            "v16.2",
-            "v16.1",
-            "v16.0",
-            "v15.1",
-            "v15.0",
-            "v14.2",
-            "v14.1",
-            "v14.0",
-            "v13.1",
-            "v13.0",
-            "v12.2",
-            "v12.1",
-            "v12.0",
-            "v7-v11",
-            "v6 or below",
-            "Other",
-            "N/A"
-        };
-
-        static string[] officeVersions = {
-            "Office 2016",
-            "Office 2016 (Click to Run)",
-            "Office 2013",
-            "Office 2013 (Click to Run)",
-            "Office 2010",
-            "Office 2007",
-            "Office 2003",
-            "N/A",
-            "Unsupported Version"
-        };
-
-        static string[] windowsVersions =
-        {
-            "Windows 10",
-            "Windows 8.1",
-            "Windows 8",
-            "Windows 7",
-            "Windows Vista",
-            "Windows XP",
-            "Windows Server 2012",
-            "Windows Server 2008 R2",
-            "Windows Server 2008",
-            "Windows Server 2003",
-            "Windows Home Server",
-            "Windows Home Server 2011",
-            "N/A",
-            "Other"
-        };
-
-        //Returns the selected list
-        public static string[] listSelector(string list)
-        {
-            switch (list)
-            {
-                case "blankList":
-                    return blankList;
-
-                case "actVersions":
-                    return actVersions;
-
-                case "officeVersions":
-                    return officeVersions;
-
-                case "windowsVersions":
-                    return windowsVersions;
-
-                default:
-                    return blankList;
-            };
         }
     }
 

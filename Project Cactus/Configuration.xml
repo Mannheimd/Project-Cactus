@@ -202,6 +202,7 @@
         </officelist>
       </product>
       <product text="Act! Premium Cloud">
+        <apcinfo required="true"/>
         <oslist required="true">
           <os text="Windows 10"></os>
           <os text="Windows 8.1"></os>
@@ -237,6 +238,7 @@
         </officelist>
       </product>
       <product text="Act! Emarketing">
+        <accountname required="true"/>
         <versionlist required="true">
           <version text="v19.1"></version>
           <version text="v19.0"></version>
@@ -289,6 +291,8 @@
         </browserlist>
       </product>
       <product text="Swiftpage Emarketing">
+        <versiontext required="true"/>
+        <accountname required="true"/>
         <oslist required="true">
           <os text="Windows 10"></os>
           <os text="Windows 8.1"></os>

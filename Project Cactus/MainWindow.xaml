@@ -62,6 +62,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
                     <Grid x:Name="product_Row" Grid.Row="0">
@@ -104,23 +105,53 @@
                         <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                     </Grid>
 
-                    <Grid x:Name="sql_Row" Grid.Row="8" Visibility="Collapsed">
+                    <Grid x:Name="accountName_Row" Grid.Row="8" Visibility="Collapsed">
+                        <Label x:Name="accountName_Label" Content="Account:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="accountName_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                    </Grid>
+
+                    <Grid x:Name="sql_Row" Grid.Row="9" Visibility="Collapsed">
                         <Label x:Name="sql_Label" Content="SQL:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <ComboBox x:Name="sql_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     </Grid>
 
-                    <Grid x:Name="office_Row" Grid.Row="9" Visibility="Collapsed">
+                    <Grid x:Name="office_Row" Grid.Row="10" Visibility="Collapsed">
                         <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
                     </Grid>
 
-                    <Grid x:Name="other_Row" Grid.Row="10" Visibility="Collapsed">
+                    <Grid x:Name="other_Row" Grid.Row="11" Visibility="Collapsed">
                         <Label x:Name="other_Label" Content="Other:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <TextBox x:Name="other_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                     </Grid>
                 </Grid>
 
                 <Grid x:Name="apcInfo_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="apcInfoText_Row" Visibility="Collapsed">
+                        <Label x:Name="apcInfoText_Label" Content="Act! Premium Cloud Account Info" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                    </Grid>
+
+                    <Grid x:Name="url_Row" Grid.Row="1" Visibility="Collapsed">
+                        <Label x:Name="url_Label" Content="URL:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="url_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+
+                    <Grid x:Name="databaseName_Row" Grid.Row="2" Visibility="Collapsed">
+                        <Label x:Name="databaseName_Label" Content="Database:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="databaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+
+                    <Grid x:Name="remoteDatabaseName_Row" Grid.Row="3" Visibility="Collapsed">
+                        <Label x:Name="remoteDatabaseName_Label" Content="RDB:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="remoteDatabaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
                 </Grid>
 
                 <Grid x:Name="errorMessages_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
