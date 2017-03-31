@@ -829,7 +829,112 @@ namespace Project_Cactus
 
         private string buildTicketOutput()
         {
-            return "Hello";
+            // For each required data type, add data to the output string.
+            string newLine = Environment.NewLine;
+            string outputString = "";
+
+            // == Environmental info heading ==
+            outputString = outputString + newLine + "Environment and Version Information:" + newLine;
+
+            // product
+            if (productRequired)
+            {
+                outputString = outputString + "Product: " + product_ComboBox.Text + newLine;
+            }
+
+            // productName
+            if (productNameRequired)
+            {
+                outputString = outputString + "Product Name: " + productName_TextBox.Text + newLine;
+            }
+
+            // versionText
+            if (versionTextRequired)
+            {
+                outputString = outputString + "Version: " + versionText_TextBox.Text + newLine;
+            }
+
+            // productVersion
+            if (productVersionRequired)
+            {
+                outputString = outputString + "Version: " + productVersion_ComboBox.Text + newLine;
+            }
+
+            // productUpdate
+            if (productUpdateRequired)
+            {
+                outputString = outputString + "Update: " + productUpdate_TextBox.Text + newLine;
+            }
+
+            // os
+            if (osRequired)
+            {
+                outputString = outputString + "Operating System: " + os_ComboBox.Text + newLine;
+            }
+
+            // browser
+            if (browserRequired)
+            {
+                outputString = outputString + "Browser: " + browser_ComboBox.Text + newLine;
+            }
+
+            // browserVersion
+            if (browserVersionRequired)
+            {
+                outputString = outputString + "Browser Version: " + browserVersion_TextBox.Text + newLine;
+            }
+
+            // sql
+            if (sqlRequired)
+            {
+                outputString = outputString + "SQL Version: " + sql_ComboBox.Text + newLine;
+            }
+
+            // office
+            if (officeRequired)
+            {
+                outputString = outputString + "Office Version: " + office_ComboBox.Text + newLine;
+            }
+
+            // other
+            if (otherRequired)
+            {
+                outputString = outputString + "Other:" + newLine + office_ComboBox.Text + newLine;
+            }
+
+            // reasonForCall
+            if (reasonForCallRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Reason for call:" + newLine + reasonForCall_TextBox.Text + newLine;
+            }
+
+            // errorMessages
+            if (errorMessagesRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Error messages:" + newLine + errorMessages_TextBox.Text + newLine;
+            }
+
+            // additionalInformation
+            if (additionalInformationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Additional Issue/Query Information:" + newLine + errorMessages_TextBox.Text + newLine;
+            }
+
+            // stepsTaken
+            if (stepsTakenRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Steps taken:" + newLine + stepsTaken_TextBox.Text + newLine;
+            }
+
+            // resolution
+            if (resolutionRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Resolution:" + newLine + resolution_TextBox.Text + newLine;
+            }
+
+            outputString = outputString + newLine + "Duration: " + calculateCallDuration();
+
+            return outputString;
         }
     }
 
