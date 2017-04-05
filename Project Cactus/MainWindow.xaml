@@ -86,8 +86,8 @@
                     </Grid>
                     
                     <Grid x:Name="productUpdate_Row" Grid.Row="4" Visibility="Collapsed">
-                        <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                        <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                     </Grid>
 
                     <Grid x:Name="os_Row" Grid.Row="5" Visibility="Collapsed">
@@ -101,8 +101,8 @@
                     </Grid>
 
                     <Grid x:Name="browserVersion_Row" Grid.Row="7" Visibility="Collapsed">
-                        <Label x:Name="browserVersion_Label" Content="Version:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                        <Label x:Name="browserVersion_Label" Content="Version:" Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
                     </Grid>
 
                     <Grid x:Name="accountName_Row" Grid.Row="8" Visibility="Collapsed">
