@@ -12,3 +12,5 @@ C:\Users\christopher.manders\Dropbox (Personal)\Development\Project Cactus\Proje
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project Cactus\Project Cactus\obj\Debug\Project Cactus.csproj.GenerateResource.Cache
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project Cactus\Project Cactus\obj\Debug\Project Cactus.exe
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project Cactus\Project Cactus\obj\Debug\Project Cactus.pdb
+C:\Users\christopher.manders\Dropbox (Personal)\Development\Project Cactus\Project Cactus\obj\Debug\HowTo.g.cs
+C:\Users\christopher.manders\Dropbox (Personal)\Development\Project Cactus\Project Cactus\obj\Debug\HowTo.baml

@@ -1046,6 +1046,12 @@ namespace Project_Cactus
         {
             Application.Current.Shutdown();
         }
+
+        private void openHowToWindow(object sender, RoutedEventArgs e)
+        {
+            HowTo howToWindow = new HowTo();
+            howToWindow.Show();
+        }
     }
 
     public class DropDownLists

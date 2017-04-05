@@ -28,6 +28,9 @@
                 </MenuItem>
                 <MenuItem Header="_View">
                 </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="How To" Click="openHowToWindow"/>
+                </MenuItem>
             </Menu>
         </DockPanel>
         <Grid x:Name="ticketLoggingButtonsTop" Grid.Row="1" VerticalAlignment="Top" Height="43">
