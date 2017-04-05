@@ -104,10 +104,10 @@
     <Resource Include="Information.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="swiftpage_logo.png" />
+    <EmbeddedResource Include="Configuration.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Configuration.xml" />
+    <Resource Include="swiftpage_logo_50pxhigh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
