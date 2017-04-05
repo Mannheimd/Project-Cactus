@@ -26,8 +26,6 @@
                     <MenuItem Command="Copy" />
                     <MenuItem Command="Paste" />
                 </MenuItem>
-                <MenuItem Header="_View">
-                </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="How To" Click="openHowToWindow"/>
                 </MenuItem>
