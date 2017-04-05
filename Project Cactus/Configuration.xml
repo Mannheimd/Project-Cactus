@@ -291,7 +291,34 @@
         </browserlist>
       </product>
       <product text="Swiftpage Emarketing">
-        <versiontext required="true"/>
+        <versionlist required="true">
+          <version text="v19.1"></version>
+          <version text="v19.0"></version>
+          <version text="v18.2"></version>
+          <version text="v18.1"></version>
+          <version text="v18.0"></version>
+          <version text="v17.2"></version>
+          <version text="v17.1"></version>
+          <version text="v17.0"></version>
+          <version text="v16.3"></version>
+          <version text="v16.2"></version>
+          <version text="v16.1"></version>
+          <version text="v16.0"></version>
+          <version text="v15.1"></version>
+          <version text="v15.0"></version>
+          <version text="v14.2"></version>
+          <version text="v14.1"></version>
+          <version text="v14.0"></version>
+          <version text="v13.1"></version>
+          <version text="v13.0"></version>
+          <version text="v12.2"></version>
+          <version text="v12.1"></version>
+          <version text="v12.0"></version>
+          <version text="v7-v11"></version>
+          <version text="v6 or below"></version>
+          <version text="Other"></version>
+          <version text="N/A"></version>
+        </versionlist>
         <accountname required="true"/>
         <oslist required="true">
           <os text="Windows 10"></os>
