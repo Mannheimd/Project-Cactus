@@ -145,12 +145,12 @@
 
                     <Grid x:Name="databaseName_Row" Grid.Row="2" Visibility="Collapsed">
                         <Label x:Name="databaseName_Label" Content="Database:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="databaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                        <TextBox x:Name="databaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22" AcceptsReturn="True"/>
                     </Grid>
 
                     <Grid x:Name="remoteDatabaseName_Row" Grid.Row="3" Visibility="Collapsed">
                         <Label x:Name="remoteDatabaseName_Label" Content="RDB:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="remoteDatabaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                        <TextBox x:Name="remoteDatabaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22" AcceptsReturn="True"/>
                     </Grid>
                 </Grid>
 
