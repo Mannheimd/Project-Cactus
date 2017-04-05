@@ -583,15 +583,36 @@ namespace Project_Cactus
                     apcInfoRequired = false;
                 }
 
-                // If selected product isn't blank, enable Other row
-                if (selectedProduct != null)
+                // Work on other in the XML, if it exists for the selected product
+                if (configurationXml.SelectSingleNode(productPath + "/othertext") != null)
                 {
+                    // Enable other row
                     other_Row.Visibility = Visibility.Visible;
+
+                    // Check if other field is mandatory
+                    XmlNode otherNode = configurationXml.SelectSingleNode(productPath + "/othertext");
+                    if (otherNode.Attributes["required"].Value == "true")
+                    {
+                        otherMandatory = true;
+                    }
+                    else
+                    {
+                        otherMandatory = false;
+                    }
+
+                    // Flag other field as required in output
+                    otherRequired = true;
                 }
-                // Otherwise, hide Other
                 else
                 {
+                    // Collapse the other row
                     other_Row.Visibility = Visibility.Collapsed;
+
+                    // Change other field to not mandatory
+                    otherMandatory = false;
+
+                    // Flag other as not required in output
+                    otherRequired = false;
                 }
             }
             catch(Exception error)

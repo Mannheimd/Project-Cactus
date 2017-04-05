@@ -66,6 +66,7 @@
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
+        <othertext required="false"/>
       </product>
       <product text="Act! Premium">
         <versionlist required="true">
@@ -130,6 +131,7 @@
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
+        <othertext required="false"/>
       </product>
       <product text="Act! Premium for Web">
         <versionlist required="true">
@@ -200,6 +202,7 @@
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
+        <othertext required="false"/>
       </product>
       <product text="Act! Premium Cloud">
         <apcinfo required="true"/>
@@ -236,6 +239,7 @@
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
+        <othertext required="false"/>
       </product>
       <product text="Act! Emarketing">
         <accountname required="true"/>
@@ -289,6 +293,7 @@
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
+        <othertext required="false"/>
       </product>
       <product text="Swiftpage Emarketing">
         <versionlist required="true">
@@ -342,6 +347,7 @@
           <browser text="Unsupported" Browser=""></browser>
           <browser text="N/A"></browser>
         </browserlist>
+        <othertext required="false"/>
       </product>
       <product text="Other">
         <productname required="true"/>
