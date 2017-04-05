@@ -10,16 +10,32 @@
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="43"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="ticketLoggingButtonsTop" VerticalAlignment="Top" Height="43">
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <Separator />
+                    <MenuItem Header="_Exit" Click="exit_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Command="Cut" />
+                    <MenuItem Command="Copy" />
+                    <MenuItem Command="Paste" />
+                </MenuItem>
+                <MenuItem Header="_View">
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid x:Name="ticketLoggingButtonsTop" Grid.Row="1" VerticalAlignment="Top" Height="43">
             <Button x:Name="startTimer_Button" Content="Start Timer" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
             <Button x:Name="resetForm_Button" Content="Reset Form" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="resetFormButton_Click"/>
             <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
         </Grid>
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Height="auto">
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Height="auto">
             <Grid x:Name="ticketLoggingFields">
                 <Grid.RowDefinitions>
                     <!-- Header, currently unused -->
@@ -175,7 +191,7 @@
                 </Grid>
             </Grid>
         </ScrollViewer>
-        <Grid Grid.Row="2" x:Name="ticketLoggingButtonsBottom" VerticalAlignment="Bottom" Height="43">
+        <Grid Grid.Row="3" x:Name="ticketLoggingButtonsBottom" VerticalAlignment="Bottom" Height="43">
             <Rectangle VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
             <Button x:Name="endTimer_Button" Content="End Timer" IsEnabled="False" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="70" Click="endTimerButton_Click"/>
             <Label x:Name="callDuration_Label" Content="00:00:00" Margin="85,0,0,8" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>

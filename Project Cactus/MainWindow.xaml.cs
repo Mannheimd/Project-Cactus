@@ -1041,6 +1041,11 @@ namespace Project_Cactus
 
             return outputString;
         }
+
+        private void exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 
     public class DropDownLists
