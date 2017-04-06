@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Cactus"
         mc:Ignorable="d"
-        Title="About" Height="160.227" Width="344.318">
+        Title="Project Cactus (Pre-Release) - About" Height="143" Width="330.318">
     <Grid>
-        <Label Content="XXXXXX Version 1.0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Project Cactus (Pre-Release) v1.0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Intended for Swiftpage internal use only" Margin="10,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
     </Grid>
 </Window>
