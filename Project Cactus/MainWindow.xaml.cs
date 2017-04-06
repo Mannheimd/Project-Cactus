@@ -660,30 +660,33 @@ namespace Project_Cactus
 
         private void resetFormButton_Click(object sender, RoutedEventArgs e)
         {
-            // Reset timer
-            startTime = new DateTime();
-            endTime = new DateTime();
-            callDuration = new TimeSpan();
-            finalCallDuration = new TimeSpan();
-            callDuration_Label.Content = "00:00:00";
+            if (MessageBox.Show("This cannot be undone. Are you sure you wish to proceed?", "Form reset confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                // Reset timer
+                startTime = new DateTime();
+                endTime = new DateTime();
+                callDuration = new TimeSpan();
+                finalCallDuration = new TimeSpan();
+                callDuration_Label.Content = "00:00:00";
 
-            // Reset all fields and drop-downs
-            reasonForCall_TextBox.Text = null;
-            product_ComboBox.SelectedIndex = -1;
-            productName_TextBox.Text = null;
-            versionText_TextBox.Text = null;
-            productUpdate_TextBox.Text = null;
-            os_ComboBox.SelectedIndex = -1;
-            browser_ComboBox.SelectedIndex = -1;
-            browserVersion_TextBox.Text = null;
-            accountName_TextBox.Text = null;
-            sql_ComboBox.SelectedIndex = -1;
-            office_ComboBox.SelectedIndex = -1;
-            other_TextBox.Text = null;
-            errorMessages_TextBox.Text = null;
-            stepsTaken_TextBox.Text = null;
-            additionalInformation_TextBox.Text = null;
-            resolution_TextBox.Text = null;
+                // Reset all fields and drop-downs
+                reasonForCall_TextBox.Text = null;
+                product_ComboBox.SelectedIndex = -1;
+                productName_TextBox.Text = null;
+                versionText_TextBox.Text = null;
+                productUpdate_TextBox.Text = null;
+                os_ComboBox.SelectedIndex = -1;
+                browser_ComboBox.SelectedIndex = -1;
+                browserVersion_TextBox.Text = null;
+                accountName_TextBox.Text = null;
+                sql_ComboBox.SelectedIndex = -1;
+                office_ComboBox.SelectedIndex = -1;
+                other_TextBox.Text = null;
+                errorMessages_TextBox.Text = null;
+                stepsTaken_TextBox.Text = null;
+                additionalInformation_TextBox.Text = null;
+                resolution_TextBox.Text = null;
+            }
         }
 
         private void copyToClipboard_Button_Click(object sender, RoutedEventArgs e)
