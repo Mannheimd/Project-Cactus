@@ -188,10 +188,120 @@
                     <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
                 </Grid>
-                
-                <Grid x:Name="resolution_Grid" Grid.Row="7" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
+
+                <Grid x:Name="callResultStatus_Grid" Grid.Row="7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="callResult_Grid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="callResult_Label" Content="Result:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="callResult_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <ComboBoxItem Content="Resolved"/>
+                            <ComboBoxItem Content="Next steps"/>
+                            <ComboBoxItem Content="Escalated"/>
+                            <ComboBoxItem Content="Transferred"/>
+                        </ComboBox>
+                    </Grid>
+                    
+                    <Grid x:Name="resolution_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
+                    </Grid>
+
+                    <Grid x:Name="nextSteps_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="nextSteps_Label" Content="Next Steps:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="nextSteps_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
+                    </Grid>
+
+                    <Grid x:Name="escalation_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="escalationType_Grid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Label x:Name="escalationType_Label" Content="Result:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="escalationType_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <ComboBoxItem Content="Act! Premium Cloud Operations"/>
+                                <ComboBoxItem Content="Emarketing - Technical"/>
+                                <ComboBoxItem Content="Emarketing - Billing"/>
+                                <ComboBoxItem Content="Emarketing - Cancellation"/>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid x:Name="cloudOpsEscalation_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <!--
+                            Partner Name
+                            Partner Account Number
+                            Affected Users
+                            Primary account email
+                            Contact email
+                            Symptoms
+                            How to replicate
+                            Requested action
+                            -->
+                        </Grid>
+
+                        <Grid x:Name="emarketingTechnicalEscalation_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <!--
+                            http://kb.internal.swiftpage.com/app/answers/detail/a_id/36247/
+                            Agent Name
+                            Account Name
+                            Customer Phone Number
+                            Customer Email Address
+                            User ID
+                            Server
+                            Platform (Combo - SPEM or AEM?)
+                            Version/SP
+                            Symptoms
+                            Date and time of occurrence
+                            What happened when issue occurred
+                            Replicated with: (account, user, server)
+                            How to replicate
+                            Global or account specific (combo?)
+                            -->
+                        </Grid>
+
+                        <Grid x:Name="emarketingBillingEscalation_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <!--
+                            http://kb.internal.swiftpage.com/app/answers/detail/a_id/38176
+                            Account Name
+                            Account Email
+                            Contact Email
+                            Contact Phone
+                            Platform (Combo, AEM or SPEM)
+                            Reason for escalation
+                            -->
+                        </Grid>
+
+                        <Grid x:Name="emarketingCancellationEscalation_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <!--
+                            http://kb.internal.swiftpage.com/app/answers/detail/a_id/36038
+                            Account Name
+                            Account Email
+                            Account Owner Contact Email
+                            Account Owner Contact Phone
+                            Contact Email (if different to account owner)
+                            Contact Phone (if different to account owner)
+                            Platform (Combo, AEM or SPEM)
+                            Description of issue
+                            Reason for cancellation request
+                            -->
+                        </Grid>
+                    </Grid>
+
+                    <Grid x:Name="transfer_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="transfer_Label" Content="Transferred to:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="transfer_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
+                    </Grid>
                 </Grid>
             </Grid>
         </ScrollViewer>
