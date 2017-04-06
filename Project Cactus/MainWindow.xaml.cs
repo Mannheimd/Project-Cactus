@@ -1018,7 +1018,7 @@ namespace Project_Cactus
             // other
             if (otherRequired)
             {
-                outputString = outputString + "Other:" + newLine + office_ComboBox.Text + newLine;
+                outputString = outputString + "Other:" + newLine + other_TextBox.Text + newLine;
             }
 
             // accountName
@@ -1051,7 +1051,7 @@ namespace Project_Cactus
             // additionalInformation
             if (additionalInformationRequired)
             {
-                outputString = outputString + newLine + "===" + newLine + "Additional Issue/Query Information:" + newLine + errorMessages_TextBox.Text + newLine;
+                outputString = outputString + newLine + "===" + newLine + "Additional Issue/Query Information:" + newLine + additionalInformation_TextBox.Text + newLine;
             }
 
             // stepsTaken
