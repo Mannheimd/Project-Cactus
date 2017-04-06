@@ -66,7 +66,7 @@
 
                 <Grid x:Name="reasonForCall_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                     <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,26,10,7" TextWrapping="Wrap" AcceptsReturn="True"/>
+                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,26,10,7" TextWrapping="Wrap" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
                 </Grid>
 
                 <Grid x:Name="productInfoGrid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
@@ -176,22 +176,22 @@
 
                 <Grid x:Name="errorMessages_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                     <Label x:Name="errorMessages_Label" Content="Error Messages:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                    <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
                 </Grid>
 
                 <Grid x:Name="additionalInformation_Grid" Grid.Row="5" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
                     <Label x:Name="additionalInformation_Label" Content="Additional issue/query information:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                    <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
                 </Grid>
 
                 <Grid x:Name="stepsTaken_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                     <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
                 </Grid>
                 
                 <Grid x:Name="resolution_Grid" Grid.Row="7" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
                     <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyUp="primaryFieldsEdited"/>
                 </Grid>
             </Grid>
         </ScrollViewer>

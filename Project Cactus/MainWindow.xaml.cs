@@ -171,6 +171,7 @@ namespace Project_Cactus
                 string selectedItem = (sender as ComboBox).SelectedItem.ToString();
                 setRequiredRows(selectedItem);
                 checkMandatoryCriteriaMet(true);
+                startTimer();
             }
             else
             {
@@ -624,39 +625,12 @@ namespace Project_Cactus
 
         private void startTimerButton_Click(object sender, RoutedEventArgs e)
         {
-            // Enable/disable buttons
-            endTimer_Button.IsEnabled = true;
-            startTimer_Button.IsEnabled = false;
-            resetForm_Button.IsEnabled = false;
-            copyToClipboard_Button.IsEnabled = false;
-
-            // Save current time and call duration, start counting new duration
-            startTime = DateTime.Now;
-            finalCallDuration = finalCallDuration + callDuration;
-            callDuration = new TimeSpan();
-            isTimerRunning = true;
-
-            // Start on-screen counting timer
-            durationCounter.Tick += new EventHandler(durationCounter_Tick);
-            durationCounter.Interval = new TimeSpan(0, 0, 1);
-            durationCounter.Start();
+            startTimer();
         }
 
         private void endTimerButton_Click(object sender, RoutedEventArgs e)
         {
-            // Enable/disable buttons
-            endTimer_Button.IsEnabled = false;
-            startTimer_Button.IsEnabled = true;
-            resetForm_Button.IsEnabled = true;
-            copyToClipboard_Button.IsEnabled = true;
-
-            // Save final call duration (resets when reset button is pressed)
-            endTime = DateTime.Now;
-            calculateCallDuration();
-            isTimerRunning = false;
-
-            // End on-screen counting timer
-            durationCounter.Stop();
+            endTimer();
         }
 
         private void resetFormButton_Click(object sender, RoutedEventArgs e)
@@ -1086,6 +1060,57 @@ namespace Project_Cactus
         {
             About aboutWindow = new About();
             aboutWindow.Show();
+        }
+
+        private void primaryFieldsEdited(object sender, RoutedEventArgs e)
+        {
+            startTimer();
+        }
+
+        private void startTimer()
+        {
+            if (!isTimerRunning)
+            {
+                isTimerRunning = true;
+
+                // Enable/disable buttons
+                endTimer_Button.IsEnabled = true;
+                startTimer_Button.IsEnabled = false;
+                resetForm_Button.IsEnabled = false;
+                copyToClipboard_Button.IsEnabled = false;
+
+                // Save current time and call duration, start counting new duration
+                startTime = DateTime.Now;
+                finalCallDuration = finalCallDuration + callDuration;
+                callDuration = new TimeSpan();
+
+                // Start on-screen counting timer
+                durationCounter.Tick += new EventHandler(durationCounter_Tick);
+                durationCounter.Interval = new TimeSpan(0, 0, 1);
+                durationCounter.Start();
+            }
+        }
+
+        private void endTimer()
+        {
+            if (isTimerRunning)
+            {
+                isTimerRunning = false;
+
+                // Enable/disable buttons
+                endTimer_Button.IsEnabled = false;
+                startTimer_Button.IsEnabled = true;
+                resetForm_Button.IsEnabled = true;
+                copyToClipboard_Button.IsEnabled = true;
+
+                // Save final call duration (resets when reset button is pressed)
+                endTime = DateTime.Now;
+                calculateCallDuration();
+                isTimerRunning = false;
+
+                // End on-screen counting timer
+                durationCounter.Stop();
+            }
         }
     }
 
