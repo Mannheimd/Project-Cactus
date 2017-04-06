@@ -29,6 +29,7 @@
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="How To" Click="openHowToWindow"/>
+                    <MenuItem Header="About" Click="openAboutWindow"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

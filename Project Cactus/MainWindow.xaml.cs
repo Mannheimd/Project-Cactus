@@ -1081,6 +1081,12 @@ namespace Project_Cactus
             HowTo howToWindow = new HowTo();
             howToWindow.Show();
         }
+
+        private void openAboutWindow(object sender, RoutedEventArgs e)
+        {
+            About aboutWindow = new About();
+            aboutWindow.Show();
+        }
     }
 
     public class DropDownLists
