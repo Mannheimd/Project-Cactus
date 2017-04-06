@@ -170,6 +170,7 @@ namespace Project_Cactus
             {
                 string selectedItem = (sender as ComboBox).SelectedItem.ToString();
                 setRequiredRows(selectedItem);
+                checkMandatoryCriteriaMet(true);
             }
             else
             {
@@ -686,12 +687,15 @@ namespace Project_Cactus
                 stepsTaken_TextBox.Text = null;
                 additionalInformation_TextBox.Text = null;
                 resolution_TextBox.Text = null;
+
+                // Call mandatory field updater with 'Reset' flag set true
+                checkMandatoryCriteriaMet(true);
             }
         }
 
         private void copyToClipboard_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (checkMandatoryCriteriaMet())
+            if (checkMandatoryCriteriaMet(false))
             {
                 Clipboard.SetText(buildTicketOutput());
             }
@@ -722,15 +726,16 @@ namespace Project_Cactus
             return tempCallDuration.ToString().Substring(0, 8);
         }
 
-        private bool checkMandatoryCriteriaMet()
+        private bool checkMandatoryCriteriaMet(bool reset)
         {
             // For every field marked as mandatory, check if it's associated UI element is blank.
             // If mandatory field is empty, make its row orange (Swiftpage Orange, hell yah) and flag failure.
             // if all is well, remove the colour.
+            // If statement reqires Reset bool to be false, otherwise all mantatory statuses are reset
             bool criteriaMet = true;
 
             // reasonForCall
-            if (reasonForCallMandatory & reasonForCall_TextBox.Text == "")
+            if (reasonForCallMandatory & reasonForCall_TextBox.Text == "" & !reset)
             {
                 reasonForCall_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -741,7 +746,7 @@ namespace Project_Cactus
             }
 
             // product
-            if (productMandatory & product_ComboBox.Text == "")
+            if (productMandatory & product_ComboBox.Text == "" & !reset)
             {
                 product_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254,80,0)));
                 criteriaMet = false;
@@ -752,7 +757,7 @@ namespace Project_Cactus
             }
 
             // productName
-            if (productNameMandatory & productName_TextBox.Text == "")
+            if (productNameMandatory & productName_TextBox.Text == "" & !reset)
             {
                 productName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -763,7 +768,7 @@ namespace Project_Cactus
             }
 
             // versionText
-            if (versionTextMandatory & versionText_TextBox.Text == "")
+            if (versionTextMandatory & versionText_TextBox.Text == "" & !reset)
             {
                 versionText_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -774,7 +779,7 @@ namespace Project_Cactus
             }
 
             // productVersion
-            if (productVersionMandatory & productVersion_ComboBox.Text == "")
+            if (productVersionMandatory & productVersion_ComboBox.Text == "" & !reset)
             {
                 productVersion_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -785,7 +790,7 @@ namespace Project_Cactus
             }
 
             // productUpdate
-            if (productUpdateMandatory & productUpdate_TextBox.Text == "")
+            if (productUpdateMandatory & productUpdate_TextBox.Text == "" & !reset)
             {
                 productUpdate_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -796,7 +801,7 @@ namespace Project_Cactus
             }
 
             // os
-            if (osMandatory & os_ComboBox.Text == "")
+            if (osMandatory & os_ComboBox.Text == "" & !reset)
             {
                 os_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -807,7 +812,7 @@ namespace Project_Cactus
             }
 
             // browser
-            if (browserMandatory & browser_ComboBox.Text == "")
+            if (browserMandatory & browser_ComboBox.Text == "" & !reset)
             {
                 browser_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -818,7 +823,7 @@ namespace Project_Cactus
             }
 
             // browserVersion
-            if (browserVersionMandatory & browserVersion_TextBox.Text == "")
+            if (browserVersionMandatory & browserVersion_TextBox.Text == "" & !reset)
             {
                 browserVersion_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -829,7 +834,7 @@ namespace Project_Cactus
             }
 
             // accountName
-            if (accountNameMandatory & accountName_TextBox.Text == "")
+            if (accountNameMandatory & accountName_TextBox.Text == "" & !reset)
             {
                 accountName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -840,7 +845,7 @@ namespace Project_Cactus
             }
 
             // sql
-            if (sqlMandatory & sql_ComboBox.Text == "")
+            if (sqlMandatory & sql_ComboBox.Text == "" & !reset)
             {
                 sql_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -851,7 +856,7 @@ namespace Project_Cactus
             }
 
             // office
-            if (officeMandatory & office_ComboBox.Text == "")
+            if (officeMandatory & office_ComboBox.Text == "" & !reset)
             {
                 office_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -862,7 +867,7 @@ namespace Project_Cactus
             }
 
             // other
-            if (otherMandatory & other_TextBox.Text == "")
+            if (otherMandatory & other_TextBox.Text == "" & !reset)
             {
                 other_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -873,7 +878,7 @@ namespace Project_Cactus
             }
 
             // errorMessages
-            if (errorMessagesMandatory & errorMessages_TextBox.Text == "")
+            if (errorMessagesMandatory & errorMessages_TextBox.Text == "" & !reset)
             {
                 errorMessages_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -884,7 +889,7 @@ namespace Project_Cactus
             }
 
             // additionalInformation
-            if (additionalInformationMandatory & additionalInformation_TextBox.Text == "")
+            if (additionalInformationMandatory & additionalInformation_TextBox.Text == "" & !reset)
             {
                 additionalInformation_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -895,7 +900,7 @@ namespace Project_Cactus
             }
 
             // stepsTaken
-            if (stepsTakenMandatory & stepsTaken_TextBox.Text == "")
+            if (stepsTakenMandatory & stepsTaken_TextBox.Text == "" & !reset)
             {
                 stepsTaken_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -906,7 +911,7 @@ namespace Project_Cactus
             }
 
             // resolution
-            if (resolutionMandatory & resolution_TextBox.Text == "")
+            if (resolutionMandatory & resolution_TextBox.Text == "" & !reset)
             {
                 resolution_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -917,7 +922,7 @@ namespace Project_Cactus
             }
 
             // url
-            if (urlMandatory & url_TextBox.Text == "")
+            if (urlMandatory & url_TextBox.Text == "" & !reset)
             {
                 url_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -928,7 +933,7 @@ namespace Project_Cactus
             }
 
             // databaseName
-            if (databaseNameMandatory & url_TextBox.Text == "")
+            if (databaseNameMandatory & url_TextBox.Text == "" & !reset)
             {
                 databaseName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
