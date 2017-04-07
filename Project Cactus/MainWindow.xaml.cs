@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -56,8 +57,16 @@ namespace Project_Cactus
         bool errorMessagesRequired = true;
         bool additionalInformationRequired = true;
         bool stepsTakenRequired = true;
-        bool resolutionRequired = true;
         bool apcInfoRequired = false;
+
+        // Bools for things in the Results section - for the love of God, Chris, change this shit. As in, like, yesterday. This code sucks ass. And not the Donkey kind.
+        bool transferredRequired = false;
+        bool resolutionRequired = false;
+        bool nextStepsRequired = false;
+        bool cloudOpsEscalationRequired = false;
+        bool emarketingTechnicalEscalationRequired = false;
+        bool emarketingBillingEscalationRequired = false;
+        bool emarketingCancellationEscalationRequired = false;
 
         // Default values for what must not be blank when copying to clipboard
         // These are altered in setRequiredRows()
@@ -77,7 +86,8 @@ namespace Project_Cactus
         bool errorMessagesMandatory = false;
         bool additionalInformationMandatory = false;
         bool stepsTakenMandatory = true;
-        bool resolutionMandatory = true;
+        bool resolutionMandatory = false;
+        bool resultMandatory = true;
         bool urlMandatory = false;
         bool databaseNameMandatory = false;
 
@@ -177,6 +187,33 @@ namespace Project_Cactus
             {
                 // Trigger SetRequired Rows with "nothing" selected, to get rid of all rows
                 setRequiredRows(null);
+            }
+        }
+
+        private void resultComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            escalationType_ComboBox.SelectedIndex = -1;
+            if (e.AddedItems.Count > 0)
+            {
+                string selectedItem = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
+                setRequiredResultsRows(selectedItem);
+            }
+            else
+            {
+                setRequiredResultsRows(null);
+            }
+        }
+
+        private void escalationComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                string selectedItem = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
+                setEscalationTypeRows(selectedItem);
+            }
+            else
+            {
+                setEscalationTypeRows(null);
             }
         }
 
@@ -623,6 +660,155 @@ namespace Project_Cactus
             }
         }
 
+        private void setRequiredResultsRows(string selectedResult)
+        {
+            // Crappy way to handle call result selection
+            switch (selectedResult)
+            {
+                case "Resolved":
+                    resolution_Grid.Visibility = Visibility.Visible;
+                    nextSteps_Grid.Visibility = Visibility.Collapsed;
+                    escalation_Grid.Visibility = Visibility.Collapsed;
+                    transfer_Grid.Visibility = Visibility.Collapsed;
+
+                    transferredRequired = false;
+                    resolutionRequired = true;
+                    nextStepsRequired = false;
+
+                    resolutionMandatory = true;
+
+                    break;
+
+                case "Next steps":
+                    resolution_Grid.Visibility = Visibility.Collapsed;
+                    nextSteps_Grid.Visibility = Visibility.Visible;
+                    escalation_Grid.Visibility = Visibility.Collapsed;
+                    transfer_Grid.Visibility = Visibility.Collapsed;
+
+                    transferredRequired = false;
+                    resolutionRequired = false;
+                    nextStepsRequired = true;
+
+                    resolutionMandatory = false;
+
+                    break;
+
+                case "Escalated":
+                    resolution_Grid.Visibility = Visibility.Collapsed;
+                    nextSteps_Grid.Visibility = Visibility.Collapsed;
+                    escalation_Grid.Visibility = Visibility.Visible;
+                    transfer_Grid.Visibility = Visibility.Collapsed;
+
+                    transferredRequired = false;
+                    resolutionRequired = false;
+                    nextStepsRequired = false;
+
+                    resolutionMandatory = false;
+
+                    break;
+
+                case "Transferred":
+                    resolution_Grid.Visibility = Visibility.Collapsed;
+                    nextSteps_Grid.Visibility = Visibility.Collapsed;
+                    escalation_Grid.Visibility = Visibility.Collapsed;
+                    transfer_Grid.Visibility = Visibility.Visible;
+
+                    transferredRequired = true;
+                    resolutionRequired = false;
+                    nextStepsRequired = false;
+
+                    resolutionMandatory = false;
+
+                    break;
+
+                default:
+                    resolution_Grid.Visibility = Visibility.Collapsed;
+                    nextSteps_Grid.Visibility = Visibility.Collapsed;
+                    escalation_Grid.Visibility = Visibility.Collapsed;
+                    transfer_Grid.Visibility = Visibility.Collapsed;
+
+                    transferredRequired = false;
+                    resolutionRequired = false;
+                    nextStepsRequired = false;
+
+                    resolutionMandatory = false;
+
+                    break;
+            }
+        }
+
+        private void setEscalationTypeRows(string selectedEscalationType)
+        {
+            // Crappy way to handle escalation type selection
+            switch (selectedEscalationType)
+            {
+                case "Act! Premium Cloud Operations":
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Visible;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Collapsed;
+
+                    cloudOpsEscalationRequired = true;
+                    emarketingTechnicalEscalationRequired = false;
+                    emarketingBillingEscalationRequired = false;
+                    emarketingCancellationEscalationRequired = false;
+
+                    break;
+
+                case "Emarketing - Technical":
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Visible;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Collapsed;
+
+                    cloudOpsEscalationRequired = false;
+                    emarketingTechnicalEscalationRequired = true;
+                    emarketingBillingEscalationRequired = false;
+                    emarketingCancellationEscalationRequired = false;
+
+                    break;
+
+                case "Emarketing - Billing":
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Visible;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Collapsed;
+
+                    cloudOpsEscalationRequired = false;
+                    emarketingTechnicalEscalationRequired = false;
+                    emarketingBillingEscalationRequired = true;
+                    emarketingCancellationEscalationRequired = false;
+
+                    break;
+
+                case "Emarketing - Cancellation":
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Visible;
+
+                    cloudOpsEscalationRequired = false;
+                    emarketingTechnicalEscalationRequired = false;
+                    emarketingBillingEscalationRequired = false;
+                    emarketingCancellationEscalationRequired = true;
+
+                    break;
+
+                default:
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Collapsed;
+
+                    cloudOpsEscalationRequired = false;
+                    emarketingTechnicalEscalationRequired = false;
+                    emarketingBillingEscalationRequired = false;
+                    emarketingCancellationEscalationRequired = false;
+
+                    break;
+            }
+        }
+
         private void startTimerButton_Click(object sender, RoutedEventArgs e)
         {
             startTimer();
@@ -660,7 +846,52 @@ namespace Project_Cactus
                 errorMessages_TextBox.Text = null;
                 stepsTaken_TextBox.Text = null;
                 additionalInformation_TextBox.Text = null;
+
+                // Just look at how crap this is
+                callResult_ComboBox.SelectedIndex = -1;
+                escalationType_ComboBox.SelectedIndex = -1;
+                emarketingTechnicalEscalation_Platform_ComboBox.SelectedIndex = -1;
+                emarketingBillingEscalation_Platform_ComboBox.SelectedIndex = -1;
+                emarketingCancellationEscalation_Platform_ComboBox.SelectedIndex = -1;
                 resolution_TextBox.Text = null;
+                resolution_TextBox.Text = null;
+                nextSteps_TextBox.Text = null;
+                cloudOpsEscalation_PartnerName_TextBox.Text = null;
+                cloudOpsEscalation_PartnerAccount_TextBox.Text = null;
+                cloudOpsEscalation_AffectedUsers_TextBox.Text = null;
+                cloudOpsEscalation_PrimaryAccountEmail_TextBox.Text = null;
+                cloudOpsEscalation_ContactEmail_TextBox.Text = null;
+                cloudOpsEscalation_Symptoms_TextBox.Text = null;
+                cloudOpsEscalation_HowToReplicate_TextBox.Text = null;
+                cloudOpsEscalation_RequestedAction_TextBox.Text = null;
+                emarketingTechnicalEscalation_AgentName_TextBox.Text = null;
+                emarketingTechnicalEscalation_AccountName_TextBox.Text = null;
+                emarketingTechnicalEscalation_CustomerPhoneNumber_TextBox.Text = null;
+                emarketingTechnicalEscalation_CustomerEmailAddress_TextBox.Text = null;
+                emarketingTechnicalEscalation_UserID_TextBox.Text = null;
+                emarketingTechnicalEscalation_Server_TextBox.Text = null;
+                emarketingTechnicalEscalation_Integration_TextBox.Text = null;
+                emarketingTechnicalEscalation_Symptoms_TextBox.Text = null;
+                emarketingTechnicalEscalation_DateTime_TextBox.Text = null;
+                emarketingTechnicalEscalation_ActionsAtTime_TextBox.Text = null;
+                emarketingTechnicalEscalation_ReplicatedOn_TextBox.Text = null;
+                emarketingTechnicalEscalation_HowToReplicate_TextBox.Text = null;
+                emarketingTechnicalEscalation_AccountOrGlobal_TextBox.Text = null;
+                emarketingBillingEscalation_AccountName_TextBox.Text = null;
+                emarketingBillingEscalation_AccountEmail_TextBox.Text = null;
+                emarketingBillingEscalation_ContactEmail_TextBox.Text = null;
+                emarketingBillingEscalation_ContactPhone_TextBox.Text = null;
+                emarketingBillingEscalation_ReasonForEscalation_TextBox.Text = null;
+                emarketingCancellationEscalation_AccountName_TextBox.Text = null;
+                emarketingCancellationEscalation_AccountEmail_TextBox.Text = null;
+                emarketingCancellationEscalation_AccountOwnerContactEmail_TextBox.Text = null;
+                emarketingCancellationEscalation_AccountOwnerContactPhone_TextBox.Text = null;
+                emarketingCancellationEscalation_ContactEmail_TextBox.Text = null;
+                emarketingCancellationEscalation_ContactPhone_TextBox.Text = null;
+                emarketingCancellationEscalation_Issue_TextBox.Text = null;
+                emarketingCancellationEscalation_ReasonForEscalation_TextBox.Text = null;
+                transferDepartment_TextBox.Text = null;
+                transferPerson_TextBox.Text = null;
 
                 // Call mandatory field updater with 'Reset' flag set true
                 checkMandatoryCriteriaMet(true);
@@ -917,6 +1148,17 @@ namespace Project_Cactus
                 databaseName_Row.ClearValue(BackgroundProperty);
             }
 
+            // result
+            if (resultMandatory & callResult_ComboBox.Text == "" & !reset)
+            {
+                callResult_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                callResult_Grid.ClearValue(BackgroundProperty);
+            }
+
             return criteriaMet;
         }
 
@@ -1040,6 +1282,81 @@ namespace Project_Cactus
                 outputString = outputString + newLine + "===" + newLine + "Resolution:" + newLine + resolution_TextBox.Text + newLine;
             }
 
+            // transfered
+            if (transferredRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine
+                    + "Transfer Department: " + transferDepartment_TextBox.Text + newLine
+                    + "Transfer Person: " + transferPerson_TextBox.Text + newLine;
+            }
+
+            // nextSteps
+            if (nextStepsRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Next Steps: " + newLine + nextSteps_TextBox.Text + newLine;
+            }
+
+            // cloudOpsEscalation
+            if (cloudOpsEscalationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "CloudOps Escalation: " + newLine
+                    + "Partner name: " + cloudOpsEscalation_PartnerName_TextBox.Text + newLine
+                    + "Partner account: " + cloudOpsEscalation_PartnerAccount_TextBox.Text + newLine
+                    + "Affected users: " + cloudOpsEscalation_AffectedUsers_TextBox.Text + newLine
+                    + "Primary account email: " + cloudOpsEscalation_PrimaryAccountEmail_TextBox.Text + newLine
+                    + "Contact email: " + cloudOpsEscalation_ContactEmail_TextBox.Text + newLine
+                    + "Symptoms: " + cloudOpsEscalation_Symptoms_TextBox.Text + newLine
+                    + "How to replicate: " + cloudOpsEscalation_HowToReplicate_TextBox.Text + newLine
+                    + "Requested action: " + cloudOpsEscalation_RequestedAction_TextBox.Text + newLine;
+            }
+
+            // emarketingTechnicalEscalation
+            if (emarketingTechnicalEscalationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Emarketing Technical Escalation: " + newLine
+                    + "Agent Name: " + emarketingTechnicalEscalation_AgentName_TextBox.Text + newLine
+                    + "Account name: " + emarketingTechnicalEscalation_AccountName_TextBox.Text + newLine
+                    + "Customer phone number: " + emarketingTechnicalEscalation_CustomerPhoneNumber_TextBox.Text + newLine
+                    + "Customer email address: " + emarketingTechnicalEscalation_CustomerEmailAddress_TextBox.Text + newLine
+                    + "User ID: " + emarketingTechnicalEscalation_UserID_TextBox.Text + newLine
+                    + "Server: " + emarketingTechnicalEscalation_Server_TextBox.Text + newLine
+                    + "Integration: " + emarketingTechnicalEscalation_Integration_TextBox.Text + newLine
+                    + "Platform: " + emarketingTechnicalEscalation_Platform_ComboBox.Text + newLine
+                    + "Symptoms: " + emarketingTechnicalEscalation_Symptoms_TextBox.Text + newLine
+                    + "Date and time of occurrence:" + emarketingTechnicalEscalation_DateTime_TextBox.Text + newLine
+                    + "What happened when issue occurred: " + emarketingTechnicalEscalation_ActionsAtTime_TextBox.Text + newLine
+                    + "Replicated with: " + emarketingTechnicalEscalation_ReplicatedOn_TextBox.Text + newLine
+                    + "How to reproduce: " + emarketingTechnicalEscalation_HowToReplicate_TextBox.Text + newLine
+                    + "Global or Account Specific: " + emarketingTechnicalEscalation_AccountOrGlobal_TextBox.Text + newLine;
+            }
+
+            // emarketingBillingEscalation
+            if (emarketingBillingEscalationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Emarketing Billing Escalation: " + newLine
+                    + "Account name: " + emarketingBillingEscalation_AccountName_TextBox.Text + newLine
+                    + "Account email: " + emarketingBillingEscalation_AccountEmail_TextBox.Text + newLine
+                    + "Contact email: " + emarketingBillingEscalation_ContactEmail_TextBox.Text + newLine
+                    + "Contact phone: " + emarketingBillingEscalation_ContactPhone_TextBox.Text + newLine
+                    + "Platform: " + emarketingBillingEscalation_Platform_ComboBox.Text + newLine
+                    + "Reason for escalation: " + emarketingBillingEscalation_ReasonForEscalation_TextBox.Text + newLine;
+            }
+
+            // emarketingCancellationEscalation
+            if (emarketingCancellationEscalationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Emarketing Cancellation Escalation: " + newLine
+                    + "Account name: " + emarketingCancellationEscalation_AccountName_TextBox.Text + newLine
+                    + "Account email: " + emarketingCancellationEscalation_AccountEmail_TextBox.Text + newLine
+                    + "Account owner contact email: " + emarketingCancellationEscalation_AccountOwnerContactEmail_TextBox.Text + newLine
+                    + "Contact owner contact phone: " + emarketingCancellationEscalation_AccountOwnerContactPhone_TextBox.Text + newLine
+                    + "Contact email: " + emarketingCancellationEscalation_ContactEmail_TextBox.Text + newLine
+                    + "Contact phone: " + emarketingCancellationEscalation_ContactPhone_TextBox.Text + newLine
+                    + "Platform: " + emarketingCancellationEscalation_Platform_ComboBox.Text + newLine
+                    + "Description of issue: " + emarketingCancellationEscalation_Issue_TextBox.Text + newLine
+                    + "Reason for cancellation request: " + emarketingCancellationEscalation_ReasonForEscalation_TextBox.Text + newLine;
+            }
+
             outputString = outputString + newLine + "===" + newLine + "Duration: " + calculateCallDuration();
 
             return outputString;
@@ -1111,6 +1428,12 @@ namespace Project_Cactus
                 // End on-screen counting timer
                 durationCounter.Stop();
             }
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 
