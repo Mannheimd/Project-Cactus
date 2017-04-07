@@ -4,19 +4,15 @@
 winexe
 C#
 .cs
-C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Debug\
+C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Release\
 Project_Cactus
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\App.xaml
-<<<<<<< HEAD
 3-617846493
-=======
-11151548125
->>>>>>> master
 
-11-632043621
+71398440834
 13738642453
 About.xaml;HowTo.xaml;MainWindow.xaml;
 

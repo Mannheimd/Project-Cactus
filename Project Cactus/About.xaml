@@ -1,0 +1,13 @@
+﻿<Window x:Class="Project_Cactus.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Cactus"
+        mc:Ignorable="d"
+        Title="Project Cactus (Pre-Release) - About" Height="143" Width="330.318">
+    <Grid>
+        <Label Content="Project Cactus (Pre-Release) v1.0" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Intended for Swiftpage internal use only" Margin="10,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+    </Grid>
+</Window>

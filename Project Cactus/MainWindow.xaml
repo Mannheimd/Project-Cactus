@@ -5,9 +5,542 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Cactus"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Project Cactus (Pre-Release)" Height="585" Width="387" MinWidth="290" MinHeight="250">
+    <Window.CommandBindings>
+    </Window.CommandBindings>
     <Grid>
-        <Button Content="Copy to Clipboard" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="Button_Click" VerticalAlignment="Bottom"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="43"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="43"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <Separator />
+                    <MenuItem Header="_Exit" Click="exit_Click"/>
+                </MenuItem>
+                <MenuItem Header="_Edit">
+                    <MenuItem Command="Cut" />
+                    <MenuItem Command="Copy" />
+                    <MenuItem Command="Paste" />
+                </MenuItem>
+                <MenuItem Header="_Help">
+                    <MenuItem Header="How To" Click="openHowToWindow"/>
+                    <MenuItem Header="About" Click="openAboutWindow"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Image Grid.Row="1" Margin="10,5,0,0"  Source="swiftpage_logo_50pxhigh.png" HorizontalAlignment="Left" Stretch="None"/>
+        <Grid x:Name="ticketLoggingButtonsTop" Grid.Row="2" VerticalAlignment="Top" Height="43">
+            <Button x:Name="startTimer_Button" Content="Start Timer" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
+            <Button x:Name="resetForm_Button" Content="Reset Form" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="resetFormButton_Click"/>
+            <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
+        </Grid>
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Height="auto">
+            <Grid x:Name="ticketLoggingFields">
+                <Grid.RowDefinitions>
+                    <!-- Header, currently unused -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Reason for call -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Product info -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Environment info -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Error Information -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Additional query information -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Troubleshooting steps taken -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Resolution -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Void filler -->
+                    <RowDefinition Height="*"/>
+                    <!-- Footer, currently unused -->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
+                <Grid x:Name="reasonForCall_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,26,10,7" TextWrapping="Wrap" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
+                </Grid>
+
+                <Grid x:Name="productInfoGrid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="product_Row" Grid.Row="0">
+                        <Label x:Name="product_Label" Content="Product:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <ComboBox x:Name="product_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
+                    </Grid>
+
+                    <Grid x:Name="productName_Row" Grid.Row="1" Visibility="Collapsed">
+                        <Label x:Name="productName_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="productName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+
+                    <Grid x:Name="versionText_Row" Grid.Row="2" Visibility="Collapsed">
+                        <Label x:Name="versionText_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="versionText_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+
+                    <Grid x:Name="productVersion_Row" Grid.Row="3" Visibility="Collapsed">
+                        <Label x:Name="productVersion_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <ComboBox x:Name="productVersion_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                    </Grid>
+                    
+                    <Grid x:Name="productUpdate_Row" Grid.Row="4" Visibility="Collapsed">
+                        <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                    </Grid>
+
+                    <Grid x:Name="os_Row" Grid.Row="5" Visibility="Collapsed">
+                        <Label x:Name="os_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="os_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="browser_Row" Grid.Row="6" Visibility="Collapsed">
+                        <Label x:Name="browser_Label" Content="Browser:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="browser_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="browserVersion_Row" Grid.Row="7" Visibility="Collapsed">
+                        <Label x:Name="browserVersion_Label" Content="Version:" Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                    </Grid>
+
+                    <Grid x:Name="accountName_Row" Grid.Row="8" Visibility="Collapsed">
+                        <Label x:Name="accountName_Label" Content="Account:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="accountName_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                    </Grid>
+
+                    <Grid x:Name="sql_Row" Grid.Row="9" Visibility="Collapsed">
+                        <Label x:Name="sql_Label" Content="SQL:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="sql_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="office_Row" Grid.Row="10" Visibility="Collapsed">
+                        <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid x:Name="other_Row" Grid.Row="11" Visibility="Collapsed">
+                        <Label x:Name="other_Label" Content="Other:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <TextBox x:Name="other_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="apcInfo_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="apcInfoText_Row" Visibility="Collapsed">
+                        <Label x:Name="apcInfoText_Label" Content="Act! Premium Cloud Account Info" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                    </Grid>
+
+                    <Grid x:Name="url_Row" Grid.Row="1" Visibility="Collapsed">
+                        <Label x:Name="url_Label" Content="URL:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="url_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"/>
+                    </Grid>
+
+                    <Grid x:Name="databaseName_Row" Grid.Row="2" Visibility="Collapsed">
+                        <Label x:Name="databaseName_Label" Content="Database:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="databaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"/>
+                    </Grid>
+
+                    <Grid x:Name="remoteDatabaseName_Row" Grid.Row="3" Visibility="Collapsed">
+                        <Label x:Name="remoteDatabaseName_Label" Content="RDB:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
+                        <TextBox x:Name="remoteDatabaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"/>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="errorMessages_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="errorMessages_Label" Content="Error Messages:" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="errorMessages_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,31,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
+                </Grid>
+
+                <Grid x:Name="additionalInformation_Grid" Grid.Row="5" Margin="0,0,0,0"  HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="additionalInformation_Label" Content="Additional issue/query information:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="additionalInformation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
+                </Grid>
+
+                <Grid x:Name="stepsTaken_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                    <Label x:Name="stepsTaken_Label" Content="Steps taken:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="stepsTaken_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
+                </Grid>
+
+                <Grid x:Name="callResultStatus_Grid" Grid.Row="7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid x:Name="callResult_Grid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="callResult_Label" Content="Result:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="callResult_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="resultComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Resolved"/>
+                            <ComboBoxItem Content="Next steps"/>
+                            <ComboBoxItem Content="Escalated"/>
+                            <ComboBoxItem Content="Transferred"/>
+                        </ComboBox>
+                    </Grid>
+                    
+                    <Grid x:Name="resolution_Grid" Grid.Row="1" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="resolution_Label" Content="Resolution:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="resolution_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
+
+                    <Grid x:Name="nextSteps_Grid" Grid.Row="2" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Label x:Name="nextSteps_Label" Content="Next Steps:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                        <TextBox x:Name="nextSteps_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                    </Grid>
+
+                    <Grid x:Name="escalation_Grid" Grid.Row="3" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="escalationType_Grid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Label x:Name="escalationType_Label" Content="Escalated to:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="escalationType_ComboBox" Margin="99,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="escalationComboBox_SelectionChanged">
+                                <ComboBoxItem Content="Act! Premium Cloud Operations"/>
+                                <ComboBoxItem Content="Emarketing - Technical"/>
+                                <ComboBoxItem Content="Emarketing - Billing"/>
+                                <ComboBoxItem Content="Emarketing - Cancellation"/>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid x:Name="cloudOpsEscalation_Grid" Grid.Row="1" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="20,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto" TextWrapping="Wrap">
+                                <Hyperlink NavigateUri="http://kb.internal.swiftpage.com/app/answers/detail/a_id/38247" RequestNavigate="Hyperlink_RequestNavigate">
+                                    How to escalate a ticket to Act! Premium Cloud Operations
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <Grid x:Name="cloudOpsEscalation_PartnerName_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_PartnerName_Label" Content="Partner name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_PartnerName_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_PartnerAccount_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_PartnerAccount_Label" Content="Partner account:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_PartnerAccount_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_AffectedUsers_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_AffectedUsers_Label" Content="Affected users:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_AffectedUsers_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_PrimaryAccountEmail_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_PrimaryAccountEmail_Label" Content="Primary account email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_PrimaryAccountEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_ContactEmail_Grid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_ContactEmail_Label" Content="Contact email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_ContactEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_Symptoms_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_Symptoms_Label" Content="Symptoms:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_Symptoms_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_HowToReplicate_Grid" Grid.Row="7" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_HowToReplicate_Label" Content="How to replicate:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_HowToReplicate_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_RequestedAction_Grid" Grid.Row="8" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_RequestedAction_Label" Content="Requested action:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="cloudOpsEscalation_RequestedAction_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="emarketingTechnicalEscalation_Grid" Grid.Row="2" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="20,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto" TextWrapping="Wrap">
+                                <Hyperlink NavigateUri="http://kb.internal.swiftpage.com/app/answers/detail/a_id/36247" RequestNavigate="Hyperlink_RequestNavigate">
+                                    How to escalate a ticket to Emarketing T3 Support
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_AgentName_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_AgentName_Label" Content="Agent name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_AgentName_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_AccountName_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_AccountName_Label" Content="Account name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_AccountName_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_CustomerPhoneNumber_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_CustomerPhoneNumber_Label" Content="Customer phone number:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_CustomerPhoneNumber_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_CustomerEmailAddress_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_CustomerEmailAddress_Label" Content="Customer email address:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_CustomerEmailAddress_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_UserID_Grid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_UserID_Label" Content="User ID:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_UserID_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_Server_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_Server_Label" Content="Server:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_Server_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_Integration_Grid" Grid.Row="7" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_Integration_Label" Content="Integration:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_Integration_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_Platform_Grid" Grid.Row="8" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_Platform_Label" Content="Platform:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="emarketingTechnicalEscalation_Platform_ComboBox" Margin="10,26,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                    <ComboBoxItem Content="Act! Emarketing"/>
+                                    <ComboBoxItem Content="Swiftpage Emarketing"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_Symptoms_Grid" Grid.Row="9" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_Symptoms_Label" Content="Symptoms:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_Symptoms_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_DateTime_Grid" Grid.Row="10" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_DateTime_Label" Content="Date and time of occurrence:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_DateTime_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_ActionsAtTime_Grid" Grid.Row="11" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_ActionsAtTime_Label" Content="What happened when issue occurred:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_ActionsAtTime_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_ReplicatedOn_Grid" Grid.Row="12" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_ReplicatedOn_Label" Content="Replicated with (account, user, server):" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_ReplicatedOn_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_HowToReplicate_Grid" Grid.Row="13" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_HowToReplicate_Label" Content="How to reproduce:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_HowToReplicate_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingTechnicalEscalation_AccountOrGlobal_Grid" Grid.Row="14" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingTechnicalEscalation_AccountOrGlobal_Label" Content="Global or account specific:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingTechnicalEscalation_AccountOrGlobal_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="emarketingBillingEscalation_Grid" Grid.Row="3" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Margin="20,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto" TextWrapping="Wrap">
+                                <Hyperlink NavigateUri="http://kb.internal.swiftpage.com/app/answers/detail/a_id/38176" RequestNavigate="Hyperlink_RequestNavigate">
+                                    How to submit a request to Emarketing Billing
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <Grid x:Name="emarketingBillingEscalation_AccountName_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingBillingEscalation_AccountName_Label" Content="Account name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingBillingEscalation_AccountName_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingBillingEscalation_AccountEmail_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingBillingEscalation_AccountEmail_Label" Content="Account Email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingBillingEscalation_AccountEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingBillingEscalation_ContactEmail_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingBillingEscalation_ContactEmail_Label" Content="Contact Email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingBillingEscalation_ContactEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingBillingEscalation_ContactPhone_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingBillingEscalation_ContactPhone_Label" Content="Contact Phone:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingBillingEscalation_ContactPhone_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingBillingEscalation_Platform_Grid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingBillingEscalation_Platform_Label" Content="Platform:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="emarketingBillingEscalation_Platform_ComboBox" Margin="10,26,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                    <ComboBoxItem Content="Act! Emarketing"/>
+                                    <ComboBoxItem Content="Swiftpage Emarketing"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid x:Name="emarketingBillingEscalation_ReasonForEscalation_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingBillingEscalation_ReasonForEscalation_Label" Content="Reason for escalation:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingBillingEscalation_ReasonForEscalation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="emarketingCancellationEscalation_Grid" Grid.Row="4" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Margin="20,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto" TextWrapping="Wrap">
+                                <Hyperlink NavigateUri="http://kb.internal.swiftpage.com/app/answers/detail/a_id/36038" RequestNavigate="Hyperlink_RequestNavigate">
+                                    How to cancel an Emarketing subscription
+                                </Hyperlink>
+                            </TextBlock>
+
+                            <Grid x:Name="emarketingCancellationEscalation_AccountName_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_AccountName_Label" Content="Account name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_AccountName_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_AccountEmail_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_AccountEmail_Label" Content="Account email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_AccountEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_AccountOwnerContactEmail_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_AccountOwnerContactEmail_Label" Content="Account owner contact email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_AccountOwnerContactEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_AccountOwnerContactPhone_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_AccountOwnerContactPhone_Label" Content="Account owner contact phone:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_AccountOwnerContactPhone_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_ContactEmail_Grid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_ContactEmail_Label" Content="Contact email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_ContactEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_ContactPhone_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_ContactPhone_Label" Content="Contact phone:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_ContactPhone_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_Platform_Grid" Grid.Row="7" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_Platform_Label" Content="Platform:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="emarketingCancellationEscalation_Platform_ComboBox" Margin="10,26,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                    <ComboBoxItem Content="Act! Emarketing"/>
+                                    <ComboBoxItem Content="Swiftpage Emarketing"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_Issue_Grid" Grid.Row="8" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_Issue_Label" Content="Description of issue:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_Issue_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+
+                            <Grid x:Name="emarketingCancellationEscalation_ReasonForEscalation_Grid" Grid.Row="9" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="emarketingCancellationEscalation_ReasonForEscalation_Label" Content="Reason for cancellation request:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="emarketingCancellationEscalation_ReasonForEscalation_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <Grid x:Name="transfer_Grid" Grid.Row="4" Visibility="Collapsed" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="transferDepartment_Grid" Grid.Row="0" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Label x:Name="transferDepartment_Label" Content="Department:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="transferDepartment_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </Grid>
+
+                        <Grid x:Name="transferPerson_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Label x:Name="transferPerson_Label" Content="Person:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                            <TextBox x:Name="transferPerson_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="4" x:Name="ticketLoggingButtonsBottom" VerticalAlignment="Bottom" Height="43">
+            <Rectangle VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
+            <Button x:Name="endTimer_Button" Content="End Timer" IsEnabled="False" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="70" Click="endTimerButton_Click"/>
+            <Label x:Name="callDuration_Label" Content="00:00:00" Margin="85,0,0,8" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+            <Button x:Name="copyToClipboard_Button" Content="Copy to Clipboard" HorizontalAlignment="Right" Margin="0,0,10,10" Width="115" Click="copyToClipboard_Button_Click" VerticalAlignment="Bottom" Height="22"/>
+        </Grid>
     </Grid>
 </Window>
