@@ -49,7 +49,7 @@ namespace Project_Cactus
         bool stepsTakenRequired = true;
         bool apcInfoRequired = false;
 
-        // Bools for things in the Results section - for the love of God, Chris, change this shit. As in, like, yesterday. This code sucks ass. And not the Donkey kind.
+        // Bools for things in the Results section - for the love of God, Chris, change this shit. As in, like, yesterday. This code sucks ass. And not the Donkey kind. Though that would still be pretty bad.
         bool transferredRequired = false;
         bool resolutionRequired = false;
         bool nextStepsRequired = false;
@@ -182,6 +182,7 @@ namespace Project_Cactus
 
         private void resultComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            startTimer();
             escalationType_ComboBox.SelectedIndex = -1;
             if (e.AddedItems.Count > 0)
             {
