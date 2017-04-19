@@ -5,6 +5,7 @@
     <productlist required="true">
       <product text="Act! Pro">
         <versionlist required="true">
+          <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
           <version text="v18.2"></version>
@@ -39,6 +40,7 @@
           <os text="Windows 7"></os>
           <os text="Windows Vista"></os>
           <os text="Windows XP"></os>
+          <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
@@ -70,6 +72,7 @@
       </product>
       <product text="Act! Premium">
         <versionlist required="true">
+          <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
           <version text="v18.2"></version>
@@ -104,6 +107,7 @@
           <os text="Windows 7"></os>
           <os text="Windows Vista"></os>
           <os text="Windows XP"></os>
+          <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
@@ -135,6 +139,7 @@
       </product>
       <product text="Act! Premium for Web">
         <versionlist required="true">
+          <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
           <version text="v18.2"></version>
@@ -169,6 +174,7 @@
           <os text="Windows 7"></os>
           <os text="Windows Vista"></os>
           <os text="Windows XP"></os>
+          <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
@@ -213,6 +219,7 @@
           <os text="Windows 7"></os>
           <os text="Windows Vista"></os>
           <os text="Windows XP"></os>
+          <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
@@ -244,6 +251,7 @@
       <product text="Act! Emarketing">
         <accountname required="true"/>
         <versionlist required="true">
+          <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
           <version text="v18.2"></version>
@@ -278,6 +286,7 @@
           <os text="Windows 7"></os>
           <os text="Windows Vista"></os>
           <os text="Windows XP"></os>
+          <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
@@ -297,6 +306,7 @@
       </product>
       <product text="Swiftpage Emarketing">
         <versionlist required="true">
+          <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
           <version text="v18.2"></version>
@@ -332,6 +342,7 @@
           <os text="Windows 7"></os>
           <os text="Windows Vista"></os>
           <os text="Windows XP"></os>
+          <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>

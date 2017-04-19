@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project_Cactus"
         mc:Ignorable="d"
-        Title="Project Cactus (Pre-Release)" Height="585" Width="387" MinWidth="290" MinHeight="250">
+        Title="Project Cactus (Pre-Release)" Height="585" Width="387" MinWidth="290" MinHeight="250" Closing="application_Closing">
     <Window.CommandBindings>
     </Window.CommandBindings>
     <Grid>
