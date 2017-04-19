@@ -169,9 +169,21 @@ namespace Project_Cactus
             if (e.AddedItems.Count > 0)
             {
                 string selectedItem = (sender as ComboBox).SelectedItem.ToString();
-                setRequiredRows(selectedItem);
-                checkMandatoryCriteriaMet(true);
-                startTimer();
+
+                // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
+                if (selectedItem != null)
+                {
+                    try
+                    {
+                        setRequiredRows(selectedItem);
+                        checkMandatoryCriteriaMet(true);
+                        startTimer();
+                    }
+                    catch(Exception error)
+                    {
+                        MessageBox.Show("Error occurred after changing selection on Product ComboBox:\n\n" + error.Message);
+                    }
+                }
             }
             else
             {
@@ -187,7 +199,18 @@ namespace Project_Cactus
             if (e.AddedItems.Count > 0)
             {
                 string selectedItem = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
-                setRequiredResultsRows(selectedItem);
+                // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
+                if (selectedItem != null)
+                {
+                    try
+                    {
+                        setRequiredResultsRows(selectedItem);
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show("Error occurred after changing selection on Result ComboBox:\n\n" + error.Message);
+                    }
+                }
             }
             else
             {
@@ -200,7 +223,19 @@ namespace Project_Cactus
             if (e.AddedItems.Count > 0)
             {
                 string selectedItem = (e.AddedItems[0] as ComboBoxItem).Content.ToString();
-                setEscalationTypeRows(selectedItem);
+
+                // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
+                if (selectedItem != null)
+                {
+                    try
+                    {
+                        setEscalationTypeRows(selectedItem);
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show("Error occurred after changing selection on Result ComboBox:\n\n" + error.Message);
+                    }
+                }
             }
             else
             {
