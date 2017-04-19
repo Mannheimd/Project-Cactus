@@ -893,7 +893,14 @@ namespace Project_Cactus
         {
             if (checkMandatoryCriteriaMet(false))
             {
-                Clipboard.SetText(buildTicketOutput());
+                try
+                {
+                    Clipboard.SetDataObject(buildTicketOutput());
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show("Unable to copy to clipboard. This can be caused by a an active WebEx session interfering with clipboard operations. Try again after closing your WebEx session.\n\n" + error.Message);
+                }
             }
             else
             {
