@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,7 +37,10 @@ namespace Project_Cactus
         string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Swiftpage Support\Cactus";
 
         // Bool for notes backup loop
-        bool isNotesBackupLoopRunning = false;
+        bool isNotesBackupRunning = false;
+
+        // Timer for notes backup
+        DispatcherTimer backupNotesTimer = new DispatcherTimer();
 
         // Default values for what is required when copying to clipboard
         // These are altered in setRequiredRows()
@@ -1683,9 +1685,6 @@ namespace Project_Cactus
             {
                 isTimerRunning = true;
 
-                // Start taking notes backups
-                backupNotesLoop();
-
                 // Enable/disable buttons
                 endTimer_Button.IsEnabled = true;
                 startTimer_Button.IsEnabled = false;
@@ -1701,6 +1700,16 @@ namespace Project_Cactus
                 durationCounter.Tick += new EventHandler(durationCounter_Tick);
                 durationCounter.Interval = new TimeSpan(0, 0, 1);
                 durationCounter.Start();
+
+                // Start taking notes backups
+                if (!isNotesBackupRunning)
+                {
+                    isNotesBackupRunning = true;
+
+                    backupNotesTimer.Tick += new EventHandler(backupNotes_Tick);
+                    backupNotesTimer.Interval = new TimeSpan(0, 0, 30);
+                    backupNotesTimer.Start();
+                }
             }
         }
 
@@ -1726,19 +1735,9 @@ namespace Project_Cactus
             }
         }
 
-        private async void backupNotesLoop()
+        private void backupNotes_Tick(object sender, EventArgs e)
         {
-            if (!isNotesBackupLoopRunning)
-            {
-                isNotesBackupLoopRunning = true;
-
-                while (saveNotesLog())
-                {
-                    await Task.Delay(30000);
-                }
-            }
-
-            isNotesBackupLoopRunning = false;
+            saveNotesLog();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -1749,6 +1748,8 @@ namespace Project_Cactus
 
         private void application_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            saveNotesLog();
+            backupNotesTimer.Stop();
             setRegRunningState(false);
         }
     }
