@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -29,8 +33,12 @@ namespace Project_Cactus
         // XML document to contain configuration data
         XmlDocument configurationXml = new XmlDocument();
 
+        // String for user's AppData folder
+        string appdata = Environment.SpecialFolder.ApplicationData + @"\Swiftpage Support\Cactus";
+
         // Default values for what is required when copying to clipboard
         // These are altered in setRequiredRows()
+
         bool reasonForCallRequired = true;
         bool productRequired = false;
         bool productNameRequired = false;
@@ -80,20 +88,192 @@ namespace Project_Cactus
         bool resultMandatory = true;
         bool urlMandatory = false;
         bool databaseNameMandatory = false;
+        bool nextStepsMandatory = false;
+        bool transferredMandatory = false;
 
         public MainWindow()
         {
-            if (loadConfigurationXml())
+            if (startupTasks())
             {
                 InitializeComponent();
             }
             else
             {
-                MessageBox.Show("Unable to load configuration file. Application will terminate.");
                 Application.Current.Shutdown();
             }
+        }
 
+        private bool startupTasks()
+        {
+            // Load the configuration XML
+            if (!loadConfigurationXml())
+            {
+                MessageBox.Show("Unable to load configuration file. Application will terminate.");
+                return false;
+            }
+
+            // Check that this is the only running instance
+            if (!checkSingleInstance())
+            {
+                MessageBox.Show("Another instance is already running. Application will terminate.");
+                return false;
+            }
+
+            // If application didn't close safely, offer the notes log
+            if (checkRegRunningState())
+            {
+                offerNotesLog();
+            }
+
+            // Set the running state in the registry
+            if (!setRegRunningState(true))
+            {
+                MessageBox.Show("Unable to set RunningState value in registry. Application will run, however will not auto-load notes after a crash."
+                    + "\n\n"
+                    + @"You can access the notes log from %AppData%\Swiftpage Support\Cactus\notesLog.txt");
+            }
+
+            // Load the product list from the configuration XML
             loadProductList();
+
+            return true;
+        }
+
+        private bool checkRegRunningState()
+        {
+            return getValueFromRegistry(@"Software\Swiftpage Support\Cactus", "cactusRunState");
+        }
+
+        private bool setRegRunningState(bool state)
+        {
+            if (setValueInRegistry(@"Software\Swiftpage Support\Cactus", "cactusRunState", state))
+                return true;
+            else return false;
+        }
+
+        private bool checkOrCreateRegPath()
+        {
+            // Check if SubKey HKCU\Software\Swiftpage Support\Cactus exists
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Swiftpage Support\Cactus", false);
+            if (key == null)
+            {
+                // Doesn't exist, let's see if HKCU\Software\Swiftpage Support exists
+                key = Registry.CurrentUser.OpenSubKey(@"Software\Swiftpage Support", false);
+                if (key == null)
+                {
+                    // Doesn't exist, try to create 'Swiftpage Support' SubKey
+                    key = Registry.CurrentUser.OpenSubKey(@"Software", true);
+                    try
+                    {
+                        key.CreateSubKey("Swiftpage Support");
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(@"Unable to create SubKey HKCU\Software\Swiftpage Support:\n\n" + error.Message);
+                        return false;
+                    }
+                }
+
+                // 'Swiftpage Support' subkey exists (or has just been created), try creating 'Cactus'
+                key = Registry.CurrentUser.OpenSubKey(@"Software\Swiftpage Support", true);
+                try
+                {
+                    key.CreateSubKey("Cactus");
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(@"Unable to create SubKey HKCU\Software\Swiftpage Support\Cactus:\n\n" + error.Message);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool getValueFromRegistry(string path, string valueName)
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(path, false);
+            if (key != null)
+            {
+                try
+                {
+                    return Convert.ToBoolean((string)key.GetValue(valueName));
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool setValueInRegistry(string path, string valueName, bool value)
+        {
+            if (checkOrCreateRegPath())
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(path, true);
+                if (key != null)
+                {
+                    try
+                    {
+                        key.SetValue(valueName, value.ToString());
+
+                        if ((string)key.GetValue(valueName) == value.ToString())
+                        {
+                            return true;
+                        }
+                        else return false;
+                    }
+                    catch(Exception error)
+                    {
+                        MessageBox.Show("Unable to set application run state:\n\n" + error.Message);
+                        return false;
+                    }
+                }
+                else return false;
+            }
+            else return false;
+        }
+
+        private void offerNotesLog()
+        {
+            // Offer the notes log to the user due to application not closing correctly
+            if (MessageBox.Show("It looks like the application did not close correctly last time it ran. Would you like to view the backup of your notes?", "Improper Close", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Process.Start(appdata + @"\notesLog.txt");
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show("Unable to open notes log. File may not exist, or there may be a problem opening it. You can access it manually here:\n"
+                        + @"%AppData%\Swiftpage Support\Cactus\notesLog.txt"
+                        + "\n\nError:\n" + error.Message);
+                }
+            }
+        }
+
+        private void saveNotesLog()
+        {
+            // Save a copy of the current notes state into AppData
+        }
+
+        private bool checkSingleInstance()
+        {
+            string location = Assembly.GetExecutingAssembly().Location;
+            FileSystemInfo fileInfo = new FileInfo(location);
+            string exeName = fileInfo.Name;
+            bool createdNew;
+
+            Mutex mutex = new Mutex(true, @"Global\" + exeName, out createdNew);
+            if (createdNew)
+            {
+                mutex.ReleaseMutex();
+            }
+
+            return createdNew;
         }
 
         private bool loadConfigurationXml()
@@ -702,6 +882,8 @@ namespace Project_Cactus
                     nextStepsRequired = false;
 
                     resolutionMandatory = true;
+                    nextStepsMandatory = false;
+                    transferredMandatory = false;
 
                     break;
 
@@ -716,6 +898,8 @@ namespace Project_Cactus
                     nextStepsRequired = true;
 
                     resolutionMandatory = false;
+                    nextStepsMandatory = true;
+                    transferredMandatory = false;
 
                     break;
 
@@ -730,6 +914,8 @@ namespace Project_Cactus
                     nextStepsRequired = false;
 
                     resolutionMandatory = false;
+                    nextStepsMandatory = false;
+                    transferredMandatory = false;
 
                     break;
 
@@ -744,6 +930,8 @@ namespace Project_Cactus
                     nextStepsRequired = false;
 
                     resolutionMandatory = false;
+                    nextStepsMandatory = false;
+                    transferredMandatory = true;
 
                     break;
 
@@ -758,6 +946,8 @@ namespace Project_Cactus
                     nextStepsRequired = false;
 
                     resolutionMandatory = false;
+                    nextStepsMandatory = false;
+                    transferredMandatory = false;
 
                     break;
             }
@@ -1195,6 +1385,30 @@ namespace Project_Cactus
                 callResult_Grid.ClearValue(BackgroundProperty);
             }
 
+            // nextSteps
+            if (nextStepsMandatory & nextSteps_TextBox.Text == "" & !reset)
+            {
+                nextSteps_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                nextSteps_Grid.ClearValue(BackgroundProperty);
+            }
+
+            // transferred
+            if (transferredMandatory & transferDepartment_TextBox.Text == "" & transferPerson_TextBox.Text == "" & !reset)
+            {
+                transferDepartment_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                transferPerson_Grid.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                transferDepartment_Grid.ClearValue(BackgroundProperty);
+                transferPerson_Grid.ClearValue(BackgroundProperty);
+            }
+
             return criteriaMet;
         }
 
@@ -1470,6 +1684,11 @@ namespace Project_Cactus
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
+        }
+
+        private void application_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            setRegRunningState(false);
         }
     }
 
