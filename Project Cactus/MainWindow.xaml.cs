@@ -872,6 +872,9 @@ namespace Project_Cactus
                 errorMessages_TextBox.Text = null;
                 stepsTaken_TextBox.Text = null;
                 additionalInformation_TextBox.Text = null;
+                url_TextBox.Text = null;
+                databaseName_TextBox.Text = null;
+                remoteDatabaseName_TextBox.Text = null;
 
                 // Just look at how crap this is
                 callResult_ComboBox.SelectedIndex = -1;
