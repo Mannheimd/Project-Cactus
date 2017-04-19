@@ -100,6 +100,9 @@ namespace Project_Cactus
             if (startupTasks())
             {
                 InitializeComponent();
+
+                // Load the product list from the configuration XML
+                loadProductList();
             }
             else
             {
@@ -136,9 +139,6 @@ namespace Project_Cactus
                     + "\n\n"
                     + @"You can access the notes log from %AppData%\Swiftpage Support\Cactus\notesLog.txt");
             }
-
-            // Load the product list from the configuration XML
-            loadProductList();
 
             return true;
         }
@@ -352,13 +352,13 @@ namespace Project_Cactus
             {
                 // Empty the current product list
                 DropDownLists.productList = null;
-
+                
                 // Create a temp list to store strings
                 List<string> tempList = new List<string>();
                 
                 // Get the 'productlist' XML node
                 XmlNode productListNode = configurationXml.SelectSingleNode("configuration/dropdowns/productlist");
-
+                
                 // Check if Product List is a required field
                 if (productListNode.Attributes["required"].Value == "true")
                 {
