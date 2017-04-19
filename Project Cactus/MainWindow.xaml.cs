@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -34,7 +35,10 @@ namespace Project_Cactus
         XmlDocument configurationXml = new XmlDocument();
 
         // String for user's AppData folder
-        string appdata = Environment.SpecialFolder.ApplicationData + @"\Swiftpage Support\Cactus";
+        string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Swiftpage Support\Cactus";
+
+        // Bool for notes backup loop
+        bool isNotesBackupLoopRunning = false;
 
         // Default values for what is required when copying to clipboard
         // These are altered in setRequiredRows()
@@ -255,9 +259,48 @@ namespace Project_Cactus
             }
         }
 
-        private void saveNotesLog()
+        private bool saveNotesLog()
         {
-            // Save a copy of the current notes state into AppData
+            string notesLogPath = appdata + @"\notesLog.txt";
+
+            if (!File.Exists(notesLogPath))
+            {
+                try
+                {
+                    if (!Directory.Exists(appdata))
+                    {
+                        Directory.CreateDirectory(appdata);
+                    }
+
+                    File.Create(notesLogPath).Close();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Failed to create file '" + notesLogPath + "'\n\n" + error.Message);
+                    return false;
+                }
+            }
+
+            if (File.Exists(notesLogPath))
+            {
+                try
+                {
+                    string output = "Saved at " + DateTime.Now.ToString() + Environment.NewLine +
+                        Environment.NewLine +
+                        buildTicketOutput();
+
+                    File.WriteAllText(notesLogPath, output);
+                    return true;
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show("Unable to save backup notes file.\n\n" + error.Message);
+                    return false;
+                }
+            }
+
+            MessageBox.Show("Application fell outside of expected code path whilst saving backup notes file.");
+            return false;
         }
 
         private bool checkSingleInstance()
@@ -1640,6 +1683,9 @@ namespace Project_Cactus
             {
                 isTimerRunning = true;
 
+                // Start taking notes backups
+                backupNotesLoop();
+
                 // Enable/disable buttons
                 endTimer_Button.IsEnabled = true;
                 startTimer_Button.IsEnabled = false;
@@ -1678,6 +1724,21 @@ namespace Project_Cactus
                 // End on-screen counting timer
                 durationCounter.Stop();
             }
+        }
+
+        private async void backupNotesLoop()
+        {
+            if (!isNotesBackupLoopRunning)
+            {
+                isNotesBackupLoopRunning = true;
+
+                while (saveNotesLog())
+                {
+                    await Task.Delay(30000);
+                }
+            }
+
+            isNotesBackupLoopRunning = false;
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
