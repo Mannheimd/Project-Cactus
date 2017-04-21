@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -1409,7 +1408,7 @@ namespace Project_Cactus
             }
 
             // databaseName
-            if (databaseNameMandatory & url_TextBox.Text == "" & !reset)
+            if (databaseNameMandatory & databaseName_TextBox.Text == "" & !reset)
             {
                 databaseName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
