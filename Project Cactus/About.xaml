@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Project Cactus (Pre-Release) - About" Height="143" Width="330.318">
     <Grid>
-        <Label Content="Project Cactus (Pre-Release) v1.0 RC2" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <Label Content="Intended for Swiftpage internal use only" Margin="10,36,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Project Cactus (Pre-Release)" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label Content="Intended for Swiftpage internal use only" Margin="10,62,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <Label x:Name="about_Version_TextBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Height="26"/>
     </Grid>
 </Window>

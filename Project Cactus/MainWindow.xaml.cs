@@ -16,7 +16,7 @@ namespace Project_Cactus
 {
     public partial class MainWindow : Window
     {
-        // Values used for logging KCS things
+        // Values used for logging KCS things - Not yet implemented
         public string productFamily;
 
         // Values for working out call duration
@@ -1081,6 +1081,11 @@ namespace Project_Cactus
 
         private void resetFormButton_Click(object sender, RoutedEventArgs e)
         {
+            resetForm();
+        }
+
+        private void resetForm()
+        {
             if (MessageBox.Show("This cannot be undone. Are you sure you wish to proceed?", "Form reset confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 // Reset timer
@@ -1158,6 +1163,9 @@ namespace Project_Cactus
 
                 // Call mandatory field updater with 'Reset' flag set true
                 checkMandatoryCriteriaMet(true);
+
+                // Stop backup log
+                backupNotesTimer.Stop();
             }
         }
 
