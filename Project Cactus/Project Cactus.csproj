@@ -78,10 +78,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HelpdeskChecklist.xaml.cs">
+      <DependentUpon>HelpdeskChecklist.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SixSquareGrid.xaml.cs">
       <DependentUpon>SixSquareGrid.xaml</DependentUpon>
     </Compile>
     <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HelpdeskChecklist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

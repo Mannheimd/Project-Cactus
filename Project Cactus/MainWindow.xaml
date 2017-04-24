@@ -28,7 +28,8 @@
                     <MenuItem Command="Paste" />
                 </MenuItem>
                 <MenuItem Header="_Tools">
-                    <MenuItem Header="Six Square Grid" Click="openSixSquareGridWindow"/>
+                    <MenuItem Header="_Helpdesk Checklist" Click="openHelpdeskChecklistWindow"/>
+                    <MenuItem Header="_Six Square Grid" Click="openSixSquareGridWindow"/>
                 </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="How To" Click="openHowToWindow"/>
@@ -240,6 +241,7 @@
                                 <ComboBoxItem Content="Emarketing - Technical"/>
                                 <ComboBoxItem Content="Emarketing - Billing"/>
                                 <ComboBoxItem Content="Emarketing - Cancellation"/>
+                                <ComboBoxItem Content="Act! - Technical"/>
                             </ComboBox>
                         </Grid>
 

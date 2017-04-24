@@ -2,13 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
@@ -75,6 +73,7 @@ namespace Project_Cactus
         bool emarketingTechnicalEscalationRequired = false;
         bool emarketingBillingEscalationRequired = false;
         bool emarketingCancellationEscalationRequired = false;
+        bool actTechnicalEscalationRequired = false;
 
         // Default values for what must not be blank when copying to clipboard
         // These are altered in setRequiredRows()
@@ -1031,6 +1030,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
 
@@ -1044,6 +1044,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = true;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
 
@@ -1057,6 +1058,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = true;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
 
@@ -1070,6 +1072,21 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = true;
+                    actTechnicalEscalationRequired = false;
+
+                    break;
+
+                case "Act! - Technical":
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Collapsed;
+
+                    cloudOpsEscalationRequired = false;
+                    emarketingTechnicalEscalationRequired = false;
+                    emarketingBillingEscalationRequired = false;
+                    emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = true;
 
                     break;
 
@@ -1083,6 +1100,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
             }
@@ -1681,6 +1699,12 @@ namespace Project_Cactus
                     + "Reason for cancellation request: " + emarketingCancellationEscalation_ReasonForEscalation_TextBox.Text + newLine;
             }
 
+            // actTechnicalEscalation
+            if (actTechnicalEscalationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Escalated as Act! Technical Escalation" + newLine;
+            }
+
             outputString = outputString + newLine + "===" + newLine + "Duration: " + calculateCallDuration();
 
             return outputString;
@@ -1706,6 +1730,12 @@ namespace Project_Cactus
         private void openSixSquareGridWindow(object sender, RoutedEventArgs e)
         {
             SixSquareGrid window = new SixSquareGrid();
+            window.Show();
+        }
+
+        private void openHelpdeskChecklistWindow(object sender, RoutedEventArgs e)
+        {
+            HelpdeskChecklist window = new HelpdeskChecklist();
             window.Show();
         }
 
