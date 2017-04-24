@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
@@ -37,6 +39,9 @@ namespace Project_Cactus
 
         // Bool for notes backup loop
         bool isNotesBackupRunning = false;
+
+        // Strings for radio buttons
+        string officeArchitecture_Radio_Text = null;
 
         // Timer for notes backup
         DispatcherTimer backupNotesTimer = new DispatcherTimer();
@@ -1107,6 +1112,9 @@ namespace Project_Cactus
                 accountName_TextBox.Text = null;
                 sql_ComboBox.SelectedIndex = -1;
                 office_ComboBox.SelectedIndex = -1;
+                officeArchitecture_RadioButton_32bit.IsChecked = false;
+                officeArchitecture_RadioButton_64bit.IsChecked = false;
+                officeArchitecture_Radio_Text = null;
                 other_TextBox.Text = null;
                 errorMessages_TextBox.Text = null;
                 stepsTaken_TextBox.Text = null;
@@ -1339,7 +1347,7 @@ namespace Project_Cactus
             }
 
             // office
-            if (officeMandatory & office_ComboBox.Text == "" & !reset)
+            if (officeMandatory & (office_ComboBox.Text == "" || officeArchitecture_Radio_Text == null) & !reset)
             {
                 office_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -1530,7 +1538,7 @@ namespace Project_Cactus
             // office
             if (officeRequired)
             {
-                outputString = outputString + "Office Version: " + office_ComboBox.Text + newLine;
+                outputString = outputString + "Office Version: " + office_ComboBox.Text + " " + officeArchitecture_Radio_Text + newLine;
             }
 
             // other
@@ -1758,6 +1766,14 @@ namespace Project_Cactus
             saveNotesLog();
             backupNotesTimer.Stop();
             setRegRunningState(false);
+        }
+
+        private void officeArchitecture_RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).IsChecked == true)
+            {
+                officeArchitecture_Radio_Text = (sender as RadioButton).Content.ToString();
+            }
         }
     }
 
