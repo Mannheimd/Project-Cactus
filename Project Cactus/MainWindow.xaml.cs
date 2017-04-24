@@ -265,6 +265,20 @@ namespace Project_Cactus
             }
         }
 
+        private void openNotesLog(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(appdata + @"\notesLog.txt");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Unable to open notes log. File may not exist, or there may be a problem opening it. You can access it manually here:\n"
+                    + @"%AppData%\Swiftpage Support\Cactus\notesLog.txt"
+                    + "\n\nError:\n" + error.Message);
+            }
+        }
+
         private bool saveNotesLog()
         {
             string notesLogPath = appdata + @"\notesLog.txt";
