@@ -27,6 +27,9 @@
                     <MenuItem Command="Copy" />
                     <MenuItem Command="Paste" />
                 </MenuItem>
+                <MenuItem Header="_Tools">
+                    <MenuItem Header="Six Square Grid" Click="openSixSquareGridWindow"/>
+                </MenuItem>
                 <MenuItem Header="_Help">
                     <MenuItem Header="How To" Click="openHowToWindow"/>
                     <MenuItem Header="View notes backup" Click="openNotesLog"/>

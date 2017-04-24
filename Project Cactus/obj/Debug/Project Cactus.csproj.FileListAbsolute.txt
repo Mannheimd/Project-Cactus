@@ -51,3 +51,5 @@ C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\P
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.exe
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.pdb
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\SixSquareGrid.g.cs
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\SixSquareGrid.baml

@@ -1703,6 +1703,12 @@ namespace Project_Cactus
             aboutWindow.Show();
         }
 
+        private void openSixSquareGridWindow(object sender, RoutedEventArgs e)
+        {
+            SixSquareGrid window = new SixSquareGrid();
+            window.Show();
+        }
+
         private void primaryFieldsEdited(object sender, RoutedEventArgs e)
         {
             startTimer();
