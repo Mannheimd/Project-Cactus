@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,7 +16,7 @@ namespace Project_Cactus
 {
     public partial class MainWindow : Window
     {
-        // Values used for logging KCS things
+        // Values used for logging KCS things - Not yet implemented
         public string productFamily;
 
         // Values for working out call duration
@@ -38,6 +37,9 @@ namespace Project_Cactus
 
         // Bool for notes backup loop
         bool isNotesBackupRunning = false;
+
+        // Strings for radio buttons
+        string officeArchitecture_Radio_Text = null;
 
         // Timer for notes backup
         DispatcherTimer backupNotesTimer = new DispatcherTimer();
@@ -71,6 +73,7 @@ namespace Project_Cactus
         bool emarketingTechnicalEscalationRequired = false;
         bool emarketingBillingEscalationRequired = false;
         bool emarketingCancellationEscalationRequired = false;
+        bool actTechnicalEscalationRequired = false;
 
         // Default values for what must not be blank when copying to clipboard
         // These are altered in setRequiredRows()
@@ -258,6 +261,20 @@ namespace Project_Cactus
                         + @"%AppData%\Swiftpage Support\Cactus\notesLog.txt"
                         + "\n\nError:\n" + error.Message);
                 }
+            }
+        }
+
+        private void openNotesLog(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Process.Start(appdata + @"\notesLog.txt");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Unable to open notes log. File may not exist, or there may be a problem opening it. You can access it manually here:\n"
+                    + @"%AppData%\Swiftpage Support\Cactus\notesLog.txt"
+                    + "\n\nError:\n" + error.Message);
             }
         }
 
@@ -1013,6 +1030,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
 
@@ -1026,6 +1044,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = true;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
 
@@ -1039,6 +1058,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = true;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
 
@@ -1052,6 +1072,21 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = true;
+                    actTechnicalEscalationRequired = false;
+
+                    break;
+
+                case "Act! - Technical":
+                    cloudOpsEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingTechnicalEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingBillingEscalation_Grid.Visibility = Visibility.Collapsed;
+                    emarketingCancellationEscalation_Grid.Visibility = Visibility.Collapsed;
+
+                    cloudOpsEscalationRequired = false;
+                    emarketingTechnicalEscalationRequired = false;
+                    emarketingBillingEscalationRequired = false;
+                    emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = true;
 
                     break;
 
@@ -1065,6 +1100,7 @@ namespace Project_Cactus
                     emarketingTechnicalEscalationRequired = false;
                     emarketingBillingEscalationRequired = false;
                     emarketingCancellationEscalationRequired = false;
+                    actTechnicalEscalationRequired = false;
 
                     break;
             }
@@ -1081,6 +1117,11 @@ namespace Project_Cactus
         }
 
         private void resetFormButton_Click(object sender, RoutedEventArgs e)
+        {
+            resetForm();
+        }
+
+        private void resetForm()
         {
             if (MessageBox.Show("This cannot be undone. Are you sure you wish to proceed?", "Form reset confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
@@ -1103,6 +1144,9 @@ namespace Project_Cactus
                 accountName_TextBox.Text = null;
                 sql_ComboBox.SelectedIndex = -1;
                 office_ComboBox.SelectedIndex = -1;
+                officeArchitecture_RadioButton_32bit.IsChecked = false;
+                officeArchitecture_RadioButton_64bit.IsChecked = false;
+                officeArchitecture_Radio_Text = null;
                 other_TextBox.Text = null;
                 errorMessages_TextBox.Text = null;
                 stepsTaken_TextBox.Text = null;
@@ -1159,6 +1203,9 @@ namespace Project_Cactus
 
                 // Call mandatory field updater with 'Reset' flag set true
                 checkMandatoryCriteriaMet(true);
+
+                // Stop backup log
+                backupNotesTimer.Stop();
             }
         }
 
@@ -1332,7 +1379,7 @@ namespace Project_Cactus
             }
 
             // office
-            if (officeMandatory & office_ComboBox.Text == "" & !reset)
+            if (officeMandatory & (office_ComboBox.Text == "" || officeArchitecture_Radio_Text == null) & !reset)
             {
                 office_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -1409,7 +1456,7 @@ namespace Project_Cactus
             }
 
             // databaseName
-            if (databaseNameMandatory & url_TextBox.Text == "" & !reset)
+            if (databaseNameMandatory & databaseName_TextBox.Text == "" & !reset)
             {
                 databaseName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -1523,7 +1570,7 @@ namespace Project_Cactus
             // office
             if (officeRequired)
             {
-                outputString = outputString + "Office Version: " + office_ComboBox.Text + newLine;
+                outputString = outputString + "Office Version: " + office_ComboBox.Text + " " + officeArchitecture_Radio_Text + newLine;
             }
 
             // other
@@ -1652,6 +1699,12 @@ namespace Project_Cactus
                     + "Reason for cancellation request: " + emarketingCancellationEscalation_ReasonForEscalation_TextBox.Text + newLine;
             }
 
+            // actTechnicalEscalation
+            if (actTechnicalEscalationRequired)
+            {
+                outputString = outputString + newLine + "===" + newLine + "Escalated as Act! Technical Escalation" + newLine;
+            }
+
             outputString = outputString + newLine + "===" + newLine + "Duration: " + calculateCallDuration();
 
             return outputString;
@@ -1672,6 +1725,18 @@ namespace Project_Cactus
         {
             About aboutWindow = new About();
             aboutWindow.Show();
+        }
+
+        private void openSixSquareGridWindow(object sender, RoutedEventArgs e)
+        {
+            SixSquareGrid window = new SixSquareGrid();
+            window.Show();
+        }
+
+        private void openHelpdeskChecklistWindow(object sender, RoutedEventArgs e)
+        {
+            HelpdeskChecklist window = new HelpdeskChecklist();
+            window.Show();
         }
 
         private void primaryFieldsEdited(object sender, RoutedEventArgs e)
@@ -1751,6 +1816,14 @@ namespace Project_Cactus
             saveNotesLog();
             backupNotesTimer.Stop();
             setRegRunningState(false);
+        }
+
+        private void officeArchitecture_RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as RadioButton).IsChecked == true)
+            {
+                officeArchitecture_Radio_Text = (sender as RadioButton).Content.ToString();
+            }
         }
     }
 

@@ -1,0 +1,22 @@
+﻿<Window x:Class="Project_Cactus.HelpdeskChecklist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Cactus"
+        mc:Ignorable="d"
+        Title="Helpdesk Checklist" Height="585" Width="540">
+    <Grid>
+        <ScrollViewer>
+            <TextBlock Margin="10,10,10,10" TextAlignment="Center" TextWrapping="Wrap" FontSize="20">
+                <Run TextDecorations="Underline" FontWeight="Bold">Helpdesk Consultation Checklist</Run><LineBreak/><LineBreak/>
+                <Run>Use this as a guide to ensure you have gathered all required information before consulting Helpdesk with an issue.</Run><LineBreak/><LineBreak/><LineBreak/>
+                <Run TextDecorations="Underline" FontWeight="Bold">Have you:</Run><LineBreak/><LineBreak/>
+                <Run>Gathered exact details of the problem and how to replicate it, including error messages?</Run><LineBreak/><LineBreak/>
+                <Run>Checked versions of all software related to the issue?</Run><LineBreak/><LineBreak/>
+                <Run>Searched in the Knowledgebase for this problem?</Run><LineBreak/><LineBreak/>
+                <Run>Run through the steps listed in the Six Square Grid?</Run>
+            </TextBlock>
+        </ScrollViewer>
+    </Grid>
+</Window>
