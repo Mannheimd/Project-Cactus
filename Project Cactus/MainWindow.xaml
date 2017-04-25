@@ -141,10 +141,20 @@
                     </Grid>
 
                     <Grid x:Name="office_Row" Grid.Row="10" Visibility="Collapsed">
-                        <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
-                        <RadioButton x:Name="officeArchitecture_RadioButton_32bit" GroupName="officeArchitecture" Content="32-bit" Margin="40,30,0,0" Checked="officeArchitecture_RadioButton_CheckedChanged"/>
-                        <RadioButton x:Name="officeArchitecture_RadioButton_64bit" GroupName="officeArchitecture" Content="64-bit" Margin="100,30,0,0" Checked="officeArchitecture_RadioButton_CheckedChanged"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid Grid.Row="0">
+                            <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="officeComboBox_SelectionChanged"/>
+                        </Grid>
+
+                        <Grid x:Name="officeArchitecture_Row" Grid.Row="1" Visibility="Collapsed">
+                            <RadioButton x:Name="officeArchitecture_RadioButton_32bit" GroupName="officeArchitecture" Content="32-bit" Margin="40,4,0,4" HorizontalAlignment="Left" Checked="officeArchitecture_RadioButton_CheckedChanged"/>
+                            <RadioButton x:Name="officeArchitecture_RadioButton_64bit" GroupName="officeArchitecture" Content="64-bit" Margin="100,4,0,4" HorizontalAlignment="Left" Checked="officeArchitecture_RadioButton_CheckedChanged"/>
+                        </Grid>
                     </Grid>
 
                     <Grid x:Name="other_Row" Grid.Row="11" Visibility="Collapsed">

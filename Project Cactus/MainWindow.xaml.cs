@@ -59,6 +59,7 @@ namespace Project_Cactus
         bool accountNameRequired = false;
         bool sqlRequired = false;
         bool officeRequired = false;
+        bool officeArchitectureRequired = false;
         bool otherRequired = false;
         bool errorMessagesRequired = true;
         bool additionalInformationRequired = true;
@@ -89,6 +90,7 @@ namespace Project_Cactus
         bool accountNameMandatory = false;
         bool sqlMandatory = false;
         bool officeMandatory = false;
+        bool officeArchitectureMandatory = false;
         bool otherMandatory = false;
         bool errorMessagesMandatory = false;
         bool additionalInformationMandatory = false;
@@ -482,6 +484,42 @@ namespace Project_Cactus
             else
             {
                 setEscalationTypeRows(null);
+            }
+        }
+
+        private void officeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                string selectedItem = (sender as ComboBox).SelectedItem.ToString();
+
+                // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
+                if (selectedItem != null)
+                {
+                    switch (selectedItem)
+                    {
+                        case "N/A":
+                        case "Unsupported Version":
+                            officeArchitecture_Row.Visibility = Visibility.Collapsed;
+                            officeArchitectureRequired = false;
+                            officeArchitectureMandatory = false;
+
+                            break;
+
+                        default:
+                            officeArchitecture_Row.Visibility = Visibility.Visible;
+                            officeArchitectureRequired = true;
+                            officeArchitectureMandatory = true;
+
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                officeArchitecture_Row.Visibility = Visibility.Collapsed;
+                officeArchitectureRequired = false;
+                officeArchitectureMandatory = false;
             }
         }
 
@@ -1379,7 +1417,7 @@ namespace Project_Cactus
             }
 
             // office
-            if (officeMandatory & (office_ComboBox.Text == "" || officeArchitecture_Radio_Text == null) & !reset)
+            if (officeMandatory & office_ComboBox.Text == "" & !reset)
             {
                 office_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -1387,6 +1425,17 @@ namespace Project_Cactus
             else
             {
                 office_Row.ClearValue(BackgroundProperty);
+            }
+
+            // officeArchitecture
+            if (officeArchitectureMandatory & officeArchitecture_Radio_Text == null & !reset)
+            {
+                officeArchitecture_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                officeArchitecture_Row.ClearValue(BackgroundProperty);
             }
 
             // other
@@ -1570,7 +1619,12 @@ namespace Project_Cactus
             // office
             if (officeRequired)
             {
-                outputString = outputString + "Office Version: " + office_ComboBox.Text + " " + officeArchitecture_Radio_Text + newLine;
+                outputString = outputString + "Office Version: " + office_ComboBox.Text;
+                if (officeArchitectureRequired)
+                {
+                    outputString = outputString + " " + officeArchitecture_Radio_Text;
+                }
+                outputString = outputString + newLine;
             }
 
             // other
