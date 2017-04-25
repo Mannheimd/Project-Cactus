@@ -1797,6 +1797,7 @@ namespace Project_Cactus
 
                 // End on-screen counting timer
                 durationCounter.Stop();
+                isNotesBackupRunning = false;
             }
         }
 
@@ -1815,6 +1816,7 @@ namespace Project_Cactus
         {
             saveNotesLog();
             backupNotesTimer.Stop();
+            isNotesBackupRunning = false;
             setRegRunningState(false);
         }
 
