@@ -16,8 +16,12 @@ namespace Project_Cactus
 {
     public partial class MainWindow : Window
     {
-        // Values used for logging KCS things - Not yet implemented
-        public string productFamily;
+        // Application ID
+        private const string applicationId = "8d378bfa-ad9a-4613-9b3d-d86c7b404c6c";
+
+        // Values for ensuring only one application can run at a time
+        private readonly Semaphore instancesAllowedSemaphore = new Semaphore(1, 1, applicationId);
+        private bool isApplicationRunning { get; set; }
 
         // Values for working out call duration
         public DateTime startTime;
@@ -326,18 +330,12 @@ namespace Project_Cactus
 
         private bool checkSingleInstance()
         {
-            string location = Assembly.GetExecutingAssembly().Location;
-            FileSystemInfo fileInfo = new FileInfo(location);
-            string exeName = fileInfo.Name;
-            bool createdNew;
-
-            Mutex mutex = new Mutex(true, @"Global\" + exeName, out createdNew);
-            if (createdNew)
+            if (instancesAllowedSemaphore.WaitOne(TimeSpan.Zero))
             {
-                mutex.ReleaseMutex();
+                isApplicationRunning = true;
+                return true;
             }
-
-            return createdNew;
+            else return false;
         }
 
         private bool loadConfigurationXml()
@@ -1872,6 +1870,10 @@ namespace Project_Cactus
             backupNotesTimer.Stop();
             isNotesBackupRunning = false;
             setRegRunningState(false);
+            if (isApplicationRunning)
+            {
+                instancesAllowedSemaphore.Release();
+            }
         }
 
         private void officeArchitecture_RadioButton_CheckedChanged(object sender, EventArgs e)
