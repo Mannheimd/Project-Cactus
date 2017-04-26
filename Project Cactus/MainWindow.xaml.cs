@@ -436,7 +436,6 @@ namespace Project_Cactus
 
         private void resultComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            startTimer();
             escalationType_ComboBox.SelectedIndex = -1;
             if (e.AddedItems.Count > 0)
             {
@@ -444,6 +443,7 @@ namespace Project_Cactus
                 // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
                 if (selectedItem != null)
                 {
+                    startTimer();
                     try
                     {
                         setRequiredResultsRows(selectedItem);
