@@ -16,8 +16,12 @@ namespace Project_Cactus
 {
     public partial class MainWindow : Window
     {
-        // Values used for logging KCS things - Not yet implemented
-        public string productFamily;
+        // Application ID
+        private const string applicationId = "8d378bfa-ad9a-4613-9b3d-d86c7b404c6c";
+
+        // Values for ensuring only one application can run at a time
+        private readonly Semaphore instancesAllowedSemaphore = new Semaphore(1, 1, applicationId);
+        private bool isApplicationRunning { get; set; }
 
         // Values for working out call duration
         public DateTime startTime;
@@ -59,6 +63,7 @@ namespace Project_Cactus
         bool accountNameRequired = false;
         bool sqlRequired = false;
         bool officeRequired = false;
+        bool officeArchitectureRequired = false;
         bool otherRequired = false;
         bool errorMessagesRequired = true;
         bool additionalInformationRequired = true;
@@ -89,6 +94,7 @@ namespace Project_Cactus
         bool accountNameMandatory = false;
         bool sqlMandatory = false;
         bool officeMandatory = false;
+        bool officeArchitectureMandatory = false;
         bool otherMandatory = false;
         bool errorMessagesMandatory = false;
         bool additionalInformationMandatory = false;
@@ -324,18 +330,12 @@ namespace Project_Cactus
 
         private bool checkSingleInstance()
         {
-            string location = Assembly.GetExecutingAssembly().Location;
-            FileSystemInfo fileInfo = new FileInfo(location);
-            string exeName = fileInfo.Name;
-            bool createdNew;
-
-            Mutex mutex = new Mutex(true, @"Global\" + exeName, out createdNew);
-            if (createdNew)
+            if (instancesAllowedSemaphore.WaitOne(TimeSpan.Zero))
             {
-                mutex.ReleaseMutex();
+                isApplicationRunning = true;
+                return true;
             }
-
-            return createdNew;
+            else return false;
         }
 
         private bool loadConfigurationXml()
@@ -436,7 +436,6 @@ namespace Project_Cactus
 
         private void resultComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            startTimer();
             escalationType_ComboBox.SelectedIndex = -1;
             if (e.AddedItems.Count > 0)
             {
@@ -444,6 +443,7 @@ namespace Project_Cactus
                 // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
                 if (selectedItem != null)
                 {
+                    startTimer();
                     try
                     {
                         setRequiredResultsRows(selectedItem);
@@ -482,6 +482,42 @@ namespace Project_Cactus
             else
             {
                 setEscalationTypeRows(null);
+            }
+        }
+
+        private void officeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                string selectedItem = (sender as ComboBox).SelectedItem.ToString();
+
+                // Checking if SelectedItem is null - this is to combat occasional Object Reference errors when changing drop-down boxes
+                if (selectedItem != null)
+                {
+                    switch (selectedItem)
+                    {
+                        case "N/A":
+                        case "Unsupported Version":
+                            officeArchitecture_Row.Visibility = Visibility.Collapsed;
+                            officeArchitectureRequired = false;
+                            officeArchitectureMandatory = false;
+
+                            break;
+
+                        default:
+                            officeArchitecture_Row.Visibility = Visibility.Visible;
+                            officeArchitectureRequired = true;
+                            officeArchitectureMandatory = true;
+
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                officeArchitecture_Row.Visibility = Visibility.Collapsed;
+                officeArchitectureRequired = false;
+                officeArchitectureMandatory = false;
             }
         }
 
@@ -1379,7 +1415,7 @@ namespace Project_Cactus
             }
 
             // office
-            if (officeMandatory & (office_ComboBox.Text == "" || officeArchitecture_Radio_Text == null) & !reset)
+            if (officeMandatory & office_ComboBox.Text == "" & !reset)
             {
                 office_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
                 criteriaMet = false;
@@ -1387,6 +1423,17 @@ namespace Project_Cactus
             else
             {
                 office_Row.ClearValue(BackgroundProperty);
+            }
+
+            // officeArchitecture
+            if (officeArchitectureMandatory & officeArchitecture_Radio_Text == null & !reset)
+            {
+                officeArchitecture_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                criteriaMet = false;
+            }
+            else
+            {
+                officeArchitecture_Row.ClearValue(BackgroundProperty);
             }
 
             // other
@@ -1570,7 +1617,12 @@ namespace Project_Cactus
             // office
             if (officeRequired)
             {
-                outputString = outputString + "Office Version: " + office_ComboBox.Text + " " + officeArchitecture_Radio_Text + newLine;
+                outputString = outputString + "Office Version: " + office_ComboBox.Text;
+                if (officeArchitectureRequired)
+                {
+                    outputString = outputString + " " + officeArchitecture_Radio_Text;
+                }
+                outputString = outputString + newLine;
             }
 
             // other
@@ -1797,6 +1849,7 @@ namespace Project_Cactus
 
                 // End on-screen counting timer
                 durationCounter.Stop();
+                isNotesBackupRunning = false;
             }
         }
 
@@ -1815,7 +1868,12 @@ namespace Project_Cactus
         {
             saveNotesLog();
             backupNotesTimer.Stop();
+            isNotesBackupRunning = false;
             setRegRunningState(false);
+            if (isApplicationRunning)
+            {
+                instancesAllowedSemaphore.Release();
+            }
         }
 
         private void officeArchitecture_RadioButton_CheckedChanged(object sender, EventArgs e)
