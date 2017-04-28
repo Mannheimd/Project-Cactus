@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Project_Cactus
+namespace Cactus
 {
     /// <summary>
     /// Interaction logic for SixSquareGrid.xaml

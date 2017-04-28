@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +11,7 @@ using System.Windows.Navigation;
 using System.Windows.Threading;
 using System.Xml;
 
-namespace Project_Cactus
+namespace Cactus
 {
     public partial class MainWindow : Window
     {
@@ -345,7 +344,7 @@ namespace Project_Cactus
             {
                 string tempXml;
 
-                using (Stream stream = this.GetType().Assembly.GetManifestResourceStream("Project_Cactus.Configuration.xml"))
+                using (Stream stream = this.GetType().Assembly.GetManifestResourceStream("Cactus.Configuration.xml"))
                 {
                     using (StreamReader sr = new StreamReader(stream))
                     {

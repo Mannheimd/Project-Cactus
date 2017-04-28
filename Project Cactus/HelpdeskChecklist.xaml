@@ -1,9 +1,9 @@
-﻿<Window x:Class="Project_Cactus.HelpdeskChecklist"
+﻿<Window x:Class="Cactus.HelpdeskChecklist"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Project_Cactus"
+        xmlns:local="clr-namespace:Cactus"
         mc:Ignorable="d"
         Title="Helpdesk Checklist" Height="585" Width="540">
     <Grid>

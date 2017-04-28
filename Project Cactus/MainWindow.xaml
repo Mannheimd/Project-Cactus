@@ -1,13 +1,20 @@
-﻿<Window x:Class="Project_Cactus.MainWindow"
+﻿<Window x:Class="Cactus.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Project_Cactus"
+        xmlns:local="clr-namespace:Cactus"
         mc:Ignorable="d"
-        Title="Project Cactus (Pre-Release)" Height="585" Width="387" MinWidth="290" MinHeight="250" Closing="application_Closing">
+        Title="Cactus" Height="585" Width="387" MinWidth="290" MinHeight="250" Closing="application_Closing">
     <Window.CommandBindings>
     </Window.CommandBindings>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="WatermarkResource.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -40,8 +47,8 @@
         </DockPanel>
         <Image Grid.Row="1" Margin="10,5,0,0"  Source="swiftpage_logo_50pxhigh.png" HorizontalAlignment="Left" Stretch="None"/>
         <Grid x:Name="ticketLoggingButtonsTop" Grid.Row="2" VerticalAlignment="Top" Height="43">
-            <Button x:Name="startTimer_Button" Content="Start Timer" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
-            <Button x:Name="resetForm_Button" Content="Reset Form" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="resetFormButton_Click"/>
+            <Button x:Name="startTimer_Button" Content="Start Timer" ToolTip="Starts the interaction duration timer" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Click="startTimerButton_Click"/>
+            <Button x:Name="resetForm_Button" Content="Reset Form" ToolTip="Resets the form to default - you cannot undo this" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="76" Click="resetFormButton_Click"/>
             <Rectangle VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="1" Fill="#FFFE5000"/>
         </Grid>
         <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0" Height="auto">
@@ -70,8 +77,17 @@
                 </Grid.RowDefinitions>
 
                 <Grid x:Name="reasonForCall_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                    <Label x:Name="reasonForCall_Label" Content="Reason for call:" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="reasonForCall_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="10,26,10,7" TextWrapping="Wrap" AcceptsReturn="True" KeyUp="primaryFieldsEdited"/>
+                    <Label x:Name="reasonForCall_Label" Content="Reason for call:" ToolTip="Provide a short summary of why the customer is calling" HorizontalAlignment="Left" Margin="10,0,10,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="reasonForCall_TextBox"
+                             ToolTip="Provide a short summary of why the customer is calling"
+                             Style="{StaticResource WatermarkedTextBox}"
+                             Tag="Why is the customer calling?"
+                             HorizontalAlignment="stretch"
+                             Height="Auto"
+                             Margin="10,26,10,7"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             KeyUp="primaryFieldsEdited"/>
                 </Grid>
 
                 <Grid x:Name="productInfoGrid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
@@ -91,53 +107,83 @@
                     </Grid.RowDefinitions>
 
                     <Grid x:Name="product_Row" Grid.Row="0">
-                        <Label x:Name="product_Label" Content="Product:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <ComboBox x:Name="product_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"/>
+                        <Label x:Name="product_Label" Content="Product:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
+                                ToolTip="Select the product the customer is calling regarding"/>
+                        <ComboBox x:Name="product_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22" SelectionChanged="productComboBox_SelectionChanged"
+                                   ToolTip="Select the product the customer is calling regarding"/>
                     </Grid>
 
                     <Grid x:Name="productName_Row" Grid.Row="1" Visibility="Collapsed">
-                        <Label x:Name="productName_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="productName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                        <Label x:Name="productName_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
+                                ToolTip="Enter the name of the product the customer is calling regarding"/>
+                        <TextBox x:Name="productName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="Auto"
+                                 ToolTip="Enter the name of the product the customer is calling regarding"
+                                 Style="{StaticResource WatermarkedTextBox}"
+                                 Tag="What product is the call about?"/>
                     </Grid>
 
                     <Grid x:Name="versionText_Row" Grid.Row="2" Visibility="Collapsed">
-                        <Label x:Name="versionText_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="versionText_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                        <Label x:Name="versionText_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
+                               ToolTip="Enter the product version"/>
+                        <TextBox x:Name="versionText_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="auto"
+                                 ToolTip="Enter the product version"
+                                 Style="{StaticResource WatermarkedTextBox}"
+                                 Tag="What version is the product?"/>
                     </Grid>
 
                     <Grid x:Name="productVersion_Row" Grid.Row="3" Visibility="Collapsed">
-                        <Label x:Name="productVersion_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <ComboBox x:Name="productVersion_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"/>
+                        <Label x:Name="productVersion_Label" Content="Version:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
+                               ToolTip="Select the product version"/>
+                        <ComboBox x:Name="productVersion_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"
+                                  ToolTip="Select the product version"/>
                     </Grid>
                     
                     <Grid x:Name="productUpdate_Row" Grid.Row="4" Visibility="Collapsed">
-                        <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Height="26"/>
-                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                        <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Height="26"
+                               ToolTip="Enter the Update or HotFix number of the product"/>
+                        <TextBox x:Name="productUpdate_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"
+                                 ToolTip="Enter the Update or HotFix number of the product"
+                                 Style="{StaticResource WatermarkedTextBox}"
+                                 Tag="Update or Hotfix number"/>
                     </Grid>
 
                     <Grid x:Name="os_Row" Grid.Row="5" Visibility="Collapsed">
-                        <Label x:Name="os_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="os_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <Label x:Name="os_Label" Content="OS:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               ToolTip="Select the customer's Operating System"/>
+                        <ComboBox x:Name="os_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                  ToolTip="Select the customer's Operating System"/>
                     </Grid>
 
                     <Grid x:Name="browser_Row" Grid.Row="6" Visibility="Collapsed">
-                        <Label x:Name="browser_Label" Content="Browser:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="browser_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <Label x:Name="browser_Label" Content="Browser:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               ToolTip="Select the customer's Web browser"/>
+                        <ComboBox x:Name="browser_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                  ToolTip="Select the customer's Web browser"/>
                     </Grid>
 
                     <Grid x:Name="browserVersion_Row" Grid.Row="7" Visibility="Collapsed">
-                        <Label x:Name="browserVersion_Label" Content="Version:" Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                        <Label x:Name="browserVersion_Label" Content="Version:" Margin="40,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               ToolTip="Enter the web browser's version number"/>
+                        <TextBox x:Name="browserVersion_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="99,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"
+                                 ToolTip="Enter the web browser's version number"
+                                 Style="{StaticResource WatermarkedTextBox}"
+                                 Tag="Browser version number"/>
                     </Grid>
 
                     <Grid x:Name="accountName_Row" Grid.Row="8" Visibility="Collapsed">
-                        <Label x:Name="accountName_Label" Content="Account:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <TextBox x:Name="accountName_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"/>
+                        <Label x:Name="accountName_Label" Content="Account:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               ToolTip="Enter the customer's EMarketing account name"/>
+                        <TextBox x:Name="accountName_TextBox" HorizontalAlignment="stretch" Height="Auto" Margin="69,2,10,0" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True"
+                                 ToolTip="Enter the customer's EMarketing account name"
+                                 Style="{StaticResource WatermarkedTextBox}"
+                                 Tag="EMarketing Account Name"/>
                     </Grid>
 
                     <Grid x:Name="sql_Row" Grid.Row="9" Visibility="Collapsed">
-                        <Label x:Name="sql_Label" Content="SQL:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                        <ComboBox x:Name="sql_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                        <Label x:Name="sql_Label" Content="SQL:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                               ToolTip="Select the customer's SQL Server Version"/>
+                        <ComboBox x:Name="sql_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                  ToolTip="Select the customer's SQL Server Version"/>
                     </Grid>
 
                     <Grid x:Name="office_Row" Grid.Row="10" Visibility="Collapsed">
@@ -147,8 +193,10 @@
                         </Grid.RowDefinitions>
                         
                         <Grid Grid.Row="0">
-                            <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="officeComboBox_SelectionChanged"/>
+                            <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                   ToolTip="Select the version of Office that the customer is using"/>
+                            <ComboBox x:Name="office_ComboBox" Margin="69,2,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" SelectionChanged="officeComboBox_SelectionChanged"
+                                      ToolTip="Select the version of Office that the customer is using"/>
                         </Grid>
 
                         <Grid x:Name="officeArchitecture_Row" Grid.Row="1" Visibility="Collapsed">
