@@ -67,7 +67,7 @@ namespace Cactus
         bool errorMessagesRequired = true;
         bool additionalInformationRequired = true;
         bool stepsTakenRequired = true;
-        bool apcInfoRequired = false;
+        // bool apcInfoRequired = false; - Deprecated in 1.0.10.0, APC info moved to Escalations section
 
         // Bools for things in the Results section - for the love of God, Chris, change this shit. As in, like, yesterday. This code sucks ass. And not the Donkey kind. Though that would still be pretty bad.
         bool transferredRequired = false;
@@ -100,8 +100,8 @@ namespace Cactus
         bool stepsTakenMandatory = true;
         bool resolutionMandatory = false;
         bool resultMandatory = true;
-        bool urlMandatory = false;
-        bool databaseNameMandatory = false;
+        // bool urlMandatory = false; - Deprecated in 1.0.10.0, APC info moved to Escalations section
+        // bool databaseNameMandatory = false; - Deprecated in 1.0.10.0, APC info moved to Escalations section
         bool nextStepsMandatory = false;
         bool transferredMandatory = false;
 
@@ -526,7 +526,7 @@ namespace Cactus
             {
                 // Set the XML path of the selected product from configuration
                 string productPath = @"configuration/dropdowns/productlist/product[@text='" + selectedProduct + "']";
-                
+
                 // Work on versionlist in the XML, if it exists for the selected product
                 if (configurationXml.SelectSingleNode(productPath + "/versionlist") != null)
                 {
@@ -882,47 +882,52 @@ namespace Cactus
                     accountNameRequired = false;
                 }
 
-                // Work on apcinfo in the XML, if it exists for the selected product
-                if (configurationXml.SelectSingleNode(productPath + "/apcinfo") != null)
+                /// Deprecated in 1.0.10.0 - APC info moved to Escalation section
                 {
-                    // Enable the APC Info grid
-                    apcInfoText_Row.Visibility = Visibility.Visible;
-                    url_Row.Visibility = Visibility.Visible;
-                    databaseName_Row.Visibility = Visibility.Visible;
-                    remoteDatabaseName_Row.Visibility = Visibility.Visible;
-
-                    // Check if APC info fields are mandatory
-                    XmlNode apcInfoNode = configurationXml.SelectSingleNode(productPath + "/apcinfo");
-                    if (apcInfoNode.Attributes["required"].Value == "true")
+                    /*
+                    // Work on apcinfo in the XML, if it exists for the selected product
+                    if (configurationXml.SelectSingleNode(productPath + "/apcinfo") != null)
                     {
-                        urlMandatory = true;
-                        databaseNameMandatory = true;
-                        // Does not set remoteDatabaseName
+                        // Enable the APC Info grid
+                        apcInfoText_Row.Visibility = Visibility.Visible;
+                        url_Row.Visibility = Visibility.Visible;
+                        databaseName_Row.Visibility = Visibility.Visible;
+                        remoteDatabaseName_Row.Visibility = Visibility.Visible;
+
+                        // Check if APC info fields are mandatory
+                        XmlNode apcInfoNode = configurationXml.SelectSingleNode(productPath + "/apcinfo");
+                        if (apcInfoNode.Attributes["required"].Value == "true")
+                        {
+                            urlMandatory = true;
+                            databaseNameMandatory = true;
+                            // Does not set remoteDatabaseName
+                        }
+                        else
+                        {
+                            urlMandatory = false;
+                            databaseNameMandatory = false;
+                            // Does not set remoteDatabaseName
+                        }
+
+                        // Flag APC info fields as required in output
+                        apcInfoRequired = true;
                     }
                     else
                     {
+                        // Collapse the APC Info rows
+                        apcInfoText_Row.Visibility = Visibility.Collapsed;
+                        url_Row.Visibility = Visibility.Collapsed;
+                        databaseName_Row.Visibility = Visibility.Collapsed;
+                        remoteDatabaseName_Row.Visibility = Visibility.Collapsed;
+
+                        // Change APC info fields to not mandatory
                         urlMandatory = false;
                         databaseNameMandatory = false;
-                        // Does not set remoteDatabaseName
+
+                        // Flag APC info as not required in output
+                        apcInfoRequired = false;
                     }
-
-                    // Flag APC info fields as required in output
-                    apcInfoRequired = true;
-                }
-                else
-                {
-                    // Collapse the APC Info rows
-                    apcInfoText_Row.Visibility = Visibility.Collapsed;
-                    url_Row.Visibility = Visibility.Collapsed;
-                    databaseName_Row.Visibility = Visibility.Collapsed;
-                    remoteDatabaseName_Row.Visibility = Visibility.Collapsed;
-
-                    // Change APC info fields to not mandatory
-                    urlMandatory = false;
-                    databaseNameMandatory = false;
-
-                    // Flag APC info as not required in output
-                    apcInfoRequired = false;
+                    */
                 }
 
                 // Work on other in the XML, if it exists for the selected product
@@ -1186,9 +1191,9 @@ namespace Cactus
                 errorMessages_TextBox.Text = null;
                 stepsTaken_TextBox.Text = null;
                 additionalInformation_TextBox.Text = null;
-                url_TextBox.Text = null;
-                databaseName_TextBox.Text = null;
-                remoteDatabaseName_TextBox.Text = null;
+                cloudOpsEscalation_url_TextBox.Text = null;
+                cloudOpsEscalation_databaseName_TextBox.Text = null;
+                cloudOpsEscalation_remoteDatabaseName_TextBox.Text = null;
 
                 // Just look at how crap this is
                 callResult_ComboBox.SelectedIndex = -1;
@@ -1490,26 +1495,31 @@ namespace Cactus
                 resolution_Grid.ClearValue(BackgroundProperty);
             }
 
-            // url
-            if (urlMandatory & url_TextBox.Text == "" & !reset)
+            /// Deprecated in 1.0.10.0, APC info moved to Escalations section
             {
-                url_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
-                criteriaMet = false;
-            }
-            else
-            {
-                url_Row.ClearValue(BackgroundProperty);
-            }
+                /*
+                // url
+                if (urlMandatory & url_TextBox.Text == "" & !reset)
+                {
+                    url_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                    criteriaMet = false;
+                }
+                else
+                {
+                    url_Row.ClearValue(BackgroundProperty);
+                }
 
-            // databaseName
-            if (databaseNameMandatory & databaseName_TextBox.Text == "" & !reset)
-            {
-                databaseName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
-                criteriaMet = false;
-            }
-            else
-            {
-                databaseName_Row.ClearValue(BackgroundProperty);
+                // databaseName
+                if (databaseNameMandatory & databaseName_TextBox.Text == "" & !reset)
+                {
+                    databaseName_Row.SetValue(BackgroundProperty, new SolidColorBrush(Color.FromRgb(254, 80, 0)));
+                    criteriaMet = false;
+                }
+                else
+                {
+                    databaseName_Row.ClearValue(BackgroundProperty);
+                }
+                */
             }
 
             // result
@@ -1636,13 +1646,18 @@ namespace Cactus
                 outputString = outputString + newLine + "===" + newLine + "Account Name:" + newLine + accountName_TextBox.Text + newLine;
             }
 
-            // apcInfo
-            if (apcInfoRequired)
+            /// Deprecated in 1.0.10.0, APC info moved to Escalations section
             {
-                outputString = outputString + newLine + "===" + newLine + "APC Account Info:" + newLine
-                    + "URL: " + url_TextBox.Text + newLine
-                    + "Database: " + databaseName_TextBox.Text + newLine
-                    + "Remote Database: " + remoteDatabaseName_TextBox.Text + newLine;
+                /*
+                // apcInfo
+                if (apcInfoRequired)
+                {
+                    outputString = outputString + newLine + "===" + newLine + "APC Account Info:" + newLine
+                        + "URL: " + url_TextBox.Text + newLine
+                        + "Database: " + databaseName_TextBox.Text + newLine
+                        + "Remote Database: " + remoteDatabaseName_TextBox.Text + newLine;
+                }
+                */
             }
 
             // reasonForCall
@@ -1694,6 +1709,9 @@ namespace Cactus
             {
                 outputString = outputString + newLine + "===" + newLine + "Escalation:" + newLine
                     + "Type: CloudOps" + newLine
+                    + "Login URL: " + cloudOpsEscalation_url_TextBox.Text + newLine
+                    + "Database: " + cloudOpsEscalation_databaseName_TextBox.Text + newLine
+                    + "Remote Database: " + cloudOpsEscalation_remoteDatabaseName_TextBox.Text + newLine
                     + "Partner name: " + cloudOpsEscalation_PartnerName_TextBox.Text + newLine
                     + "Partner account: " + cloudOpsEscalation_PartnerAccount_TextBox.Text + newLine
                     + "Affected users: " + cloudOpsEscalation_AffectedUsers_TextBox.Text + newLine

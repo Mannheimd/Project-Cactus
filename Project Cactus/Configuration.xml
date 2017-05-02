@@ -211,7 +211,6 @@
         <othertext required="false"/>
       </product>
       <product text="Act! Premium Cloud">
-        <apcinfo required="true"/>
         <oslist required="true">
           <os text="Windows 10"></os>
           <os text="Windows 8.1"></os>

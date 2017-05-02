@@ -139,7 +139,7 @@
                         <ComboBox x:Name="productVersion_ComboBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="22"
                                   ToolTip="Select the product version"/>
                     </Grid>
-                    
+
                     <Grid x:Name="productUpdate_Row" Grid.Row="4" Visibility="Collapsed">
                         <Label x:Name="productUpdate_Label" Content="Update:" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Top" Height="26"
                                ToolTip="Enter the Update or HotFix number of the product"/>
@@ -193,7 +193,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <Grid Grid.Row="0">
                             <Label x:Name="office_Label" Content="Office:" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"
                                    ToolTip="Select the version of Office that the customer is using"/>
@@ -214,46 +214,6 @@
                                  ToolTip="Enter any other version information, such as for any software that the customer is using in conjunction with Swiftpage products. Antivirus and Firewall information should be entered here too."
                                  Style="{StaticResource WatermarkedTextBox}"
                                  Tag="Enter any other environmental information"/>
-                    </Grid>
-                </Grid>
-
-                <Grid x:Name="apcInfo_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid x:Name="apcInfoText_Row" Visibility="Collapsed">
-                        <Label x:Name="apcInfoText_Label" Content="Act! Premium Cloud Account Info" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"/>
-                    </Grid>
-
-                    <Grid x:Name="url_Row" Grid.Row="1" Visibility="Collapsed">
-                        <Label x:Name="url_Label" Content="URL:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
-                               ToolTip="Enter the affected Act! Premium Cloud Login URL"/>
-                        <TextBox x:Name="url_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"
-                                 ToolTip="Enter the affected Act! Premium Cloud Login URL"
-                                 Style="{StaticResource WatermarkedTextBox}"
-                                 Tag="APC Login URL"/>
-                    </Grid>
-
-                    <Grid x:Name="databaseName_Row" Grid.Row="2" Visibility="Collapsed">
-                        <Label x:Name="databaseName_Label" Content="Database:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
-                               ToolTip="Enter the database(s) affected by this issue"/>
-                        <TextBox x:Name="databaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"
-                                 ToolTip="Enter the database(s) affected by this issue"
-                                 Style="{StaticResource WatermarkedTextBox}"
-                                 Tag="Affected databases"/>
-                    </Grid>
-
-                    <Grid x:Name="remoteDatabaseName_Row" Grid.Row="3" Visibility="Collapsed">
-                        <Label x:Name="remoteDatabaseName_Label" Content="RDB:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
-                               ToolTip="Enter the names of any affected remote databases"/>
-                        <TextBox x:Name="remoteDatabaseName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"
-                                 ToolTip="Enter the names of any affected remote databases"
-                                 Style="{StaticResource WatermarkedTextBox}"
-                                 Tag="Affected remote databases"/>
                     </Grid>
                 </Grid>
 
@@ -356,6 +316,9 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Grid.Row="0" Margin="20,0,10,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="auto" TextWrapping="Wrap">
@@ -364,7 +327,34 @@
                                 </Hyperlink>
                             </TextBlock>
 
-                            <Grid x:Name="cloudOpsEscalation_PartnerName_Grid" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_url_Row" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_url_Label" Content="URL:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
+                                       ToolTip="Enter the affected Act! Premium Cloud Login URL"/>
+                                <TextBox x:Name="cloudOpsEscalation_url_TextBox" HorizontalAlignment="Stretch" Margin="10,26,10,5" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"
+                                         ToolTip="Enter the affected Act! Premium Cloud Login URL"
+                                         Style="{StaticResource WatermarkedTextBox}"
+                                         Tag="APC Login URL"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_databaseName_Row" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_databaseName_Label" Content="Database:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
+                                       ToolTip="Enter the database(s) affected by this issue"/>
+                                <TextBox x:Name="cloudOpsEscalation_databaseName_TextBox" HorizontalAlignment="Stretch" Margin="10,26,10,5" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"
+                                         ToolTip="Enter the database(s) affected by this issue"
+                                         Style="{StaticResource WatermarkedTextBox}"
+                                         Tag="Affected databases"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_remoteDatabaseName_Row" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                                <Label x:Name="cloudOpsEscalation_remoteDatabaseName_Label" Content="RDB:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
+                                       ToolTip="Enter the names of any affected remote databases"/>
+                                <TextBox x:Name="cloudOpsEscalation_remoteDatabaseName_TextBox" HorizontalAlignment="Stretch" Margin="10,26,10,5" VerticalAlignment="Top" Width="auto" AcceptsReturn="True"
+                                         ToolTip="Enter the names of any affected remote databases"
+                                         Style="{StaticResource WatermarkedTextBox}"
+                                         Tag="Affected remote databases"/>
+                            </Grid>
+
+                            <Grid x:Name="cloudOpsEscalation_PartnerName_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_PartnerName_Label" Content="Partner name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="If the APC subscription is paid for through a business partner, enter the partner name here"/>
                                 <TextBox x:Name="cloudOpsEscalation_PartnerName_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -373,7 +363,7 @@
                                          Tag="Business Partner name (if applicable)"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_PartnerAccount_Grid" Grid.Row="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_PartnerAccount_Grid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_PartnerAccount_Label" Content="Partner account:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="If the APC subscription is paid for through a business partner, enter the partner's account number here"/>
                                 <TextBox x:Name="cloudOpsEscalation_PartnerAccount_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -382,7 +372,7 @@
                                          Tag="Business Partner account number (if applicable)"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_AffectedUsers_Grid" Grid.Row="3" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_AffectedUsers_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_AffectedUsers_Label" Content="Affected users:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="Enter all database users that are affected by this problem"/>
                                 <TextBox x:Name="cloudOpsEscalation_AffectedUsers_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -391,7 +381,7 @@
                                          Tag="Affected database users"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_PrimaryAccountEmail_Grid" Grid.Row="4" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_PrimaryAccountEmail_Grid" Grid.Row="7" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_PrimaryAccountEmail_Label" Content="Primary account email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="Email address that the account was created with"/>
                                 <TextBox x:Name="cloudOpsEscalation_PrimaryAccountEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -400,7 +390,7 @@
                                          Tag="Primary account email address"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_ContactEmail_Grid" Grid.Row="5" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_ContactEmail_Grid" Grid.Row="8" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_ContactEmail_Label" Content="Contact email:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="Email address CloudOps should use to contact the customer relating to this escalation"/>
                                 <TextBox x:Name="cloudOpsEscalation_ContactEmail_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -409,7 +399,7 @@
                                          Tag="Customer's contact email address"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_Symptoms_Grid" Grid.Row="6" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_Symptoms_Grid" Grid.Row="9" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_Symptoms_Label" Content="Symptoms:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="Detail the symptoms that the customer is seeing, including any error messages"/>
                                 <TextBox x:Name="cloudOpsEscalation_Symptoms_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -418,7 +408,7 @@
                                          Tag="What are the symptoms of the issue?"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_HowToReplicate_Grid" Grid.Row="7" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_HowToReplicate_Grid" Grid.Row="10" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_HowToReplicate_Label" Content="How to replicate:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="If this is a recurring problem, enter some steps CloudOps can follow to reliably replicate the problem"/>
                                 <TextBox x:Name="cloudOpsEscalation_HowToReplicate_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -427,7 +417,7 @@
                                          Tag="How do CloudOps replicate the problem?"/>
                             </Grid>
 
-                            <Grid x:Name="cloudOpsEscalation_RequestedAction_Grid" Grid.Row="8" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
+                            <Grid x:Name="cloudOpsEscalation_RequestedAction_Grid" Grid.Row="11" Margin="0,0,0,0" HorizontalAlignment="Stretch" Height="auto">
                                 <Label x:Name="cloudOpsEscalation_RequestedAction_Label" Content="Requested action:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"
                                        ToolTip="Specify what action you need CloudOps to take, for example 'Investigate universal search issue' or 'Restore database with name: ...'"/>
                                 <TextBox x:Name="cloudOpsEscalation_RequestedAction_TextBox" HorizontalAlignment="stretch" Height="auto" Margin="10,26,10,5" TextWrapping="Wrap" VerticalAlignment="Top" AcceptsReturn="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
