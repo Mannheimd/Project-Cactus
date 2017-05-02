@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Cactus.exe" size="209936">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Cactus.exe" size="222736">
       <assemblyIdentity name="Cactus" version="1.0.10.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>7jT2XFGK0mo1DPMyq+/PAtxo08OCoK6lMDZk4qqS3uM=</dsig:DigestValue>
+        <dsig:DigestValue>rD524Q7gsFknHXVNmEPD3wiXwO2DOSB2bWP5z70UyQs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
