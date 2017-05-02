@@ -1692,7 +1692,8 @@ namespace Cactus
             // cloudOpsEscalation
             if (cloudOpsEscalationRequired)
             {
-                outputString = outputString + newLine + "===" + newLine + "CloudOps Escalation: " + newLine
+                outputString = outputString + newLine + "===" + newLine + "Escalation:" + newLine
+                    + "Type: CloudOps" + newLine
                     + "Partner name: " + cloudOpsEscalation_PartnerName_TextBox.Text + newLine
                     + "Partner account: " + cloudOpsEscalation_PartnerAccount_TextBox.Text + newLine
                     + "Affected users: " + cloudOpsEscalation_AffectedUsers_TextBox.Text + newLine
@@ -1706,7 +1707,8 @@ namespace Cactus
             // emarketingTechnicalEscalation
             if (emarketingTechnicalEscalationRequired)
             {
-                outputString = outputString + newLine + "===" + newLine + "Emarketing Technical Escalation: " + newLine
+                outputString = outputString + newLine + "===" + newLine + "Escalation:" + newLine
+                    + "Type: Emarketing Technical" + newLine
                     + "Agent Name: " + emarketingTechnicalEscalation_AgentName_TextBox.Text + newLine
                     + "Account name: " + emarketingTechnicalEscalation_AccountName_TextBox.Text + newLine
                     + "Customer phone number: " + emarketingTechnicalEscalation_CustomerPhoneNumber_TextBox.Text + newLine
@@ -1726,7 +1728,8 @@ namespace Cactus
             // emarketingBillingEscalation
             if (emarketingBillingEscalationRequired)
             {
-                outputString = outputString + newLine + "===" + newLine + "Emarketing Billing Escalation: " + newLine
+                outputString = outputString + newLine + "===" + newLine + "Escalation:" + newLine
+                    + "Type: Emarketing Billing" + newLine
                     + "Account name: " + emarketingBillingEscalation_AccountName_TextBox.Text + newLine
                     + "Account email: " + emarketingBillingEscalation_AccountEmail_TextBox.Text + newLine
                     + "Contact email: " + emarketingBillingEscalation_ContactEmail_TextBox.Text + newLine
@@ -1738,7 +1741,8 @@ namespace Cactus
             // emarketingCancellationEscalation
             if (emarketingCancellationEscalationRequired)
             {
-                outputString = outputString + newLine + "===" + newLine + "Emarketing Cancellation Escalation: " + newLine
+                outputString = outputString + newLine + "===" + newLine + "Escalation:" + newLine
+                    + "Type: Emarketing Cancellation" + newLine
                     + "Account name: " + emarketingCancellationEscalation_AccountName_TextBox.Text + newLine
                     + "Account email: " + emarketingCancellationEscalation_AccountEmail_TextBox.Text + newLine
                     + "Account owner contact email: " + emarketingCancellationEscalation_AccountOwnerContactEmail_TextBox.Text + newLine
@@ -1753,7 +1757,8 @@ namespace Cactus
             // actTechnicalEscalation
             if (actTechnicalEscalationRequired)
             {
-                outputString = outputString + newLine + "===" + newLine + "Escalated as Act! Technical Escalation" + newLine;
+                outputString = outputString + newLine + "===" + newLine + "Escalation:" + newLine
+                    + "Type: Act! Technical" + newLine;
             }
 
             outputString = outputString + newLine + "===" + newLine + "Duration: " + calculateCallDuration();
