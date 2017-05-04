@@ -24,9 +24,8 @@
             <RowDefinition Height="43"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <Menu DockPanel.Dock="Top">
+            <Menu DockPanel.Dock="Top" Background="{x:Null}">
                 <MenuItem Header="_File">
-                    <Separator />
                     <MenuItem Header="_Exit" Click="exit_Click"/>
                 </MenuItem>
                 <MenuItem Header="_Edit">
@@ -118,7 +117,7 @@
                     <Grid x:Name="productName_Row" Grid.Row="1" Visibility="Collapsed">
                         <Label x:Name="productName_Label" Content="Name:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="26"
                                 ToolTip="Enter the name of the product the customer is calling regarding"/>
-                        <TextBox x:Name="productName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="Auto"
+                        <TextBox x:Name="productName_TextBox" HorizontalAlignment="Stretch" Margin="69,2,10,0" VerticalAlignment="Top" Width="auto" Height="Auto" AcceptsReturn="True"
                                  ToolTip="Enter the name of the product the customer is calling regarding"
                                  Style="{StaticResource WatermarkedTextBox}"
                                  Tag="What product is the call about?"/>
