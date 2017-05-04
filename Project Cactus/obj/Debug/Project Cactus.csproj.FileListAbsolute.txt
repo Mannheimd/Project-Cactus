@@ -32,26 +32,31 @@ C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Proje
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.pdb
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Debug\About.g.cs
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Debug\About.baml
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Project Cactus.exe.config
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Project Cactus.exe
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Project Cactus.pdb
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.csprojResolveAssemblyReference.cache
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\About.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\HowTo.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\MainWindow.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\App.g.cs
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus_MarkupCompile.cache
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus_MarkupCompile.lref
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\About.baml
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\HowTo.baml
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\MainWindow.baml
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.g.resources
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project_Cactus.Properties.Resources.resources
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.csproj.GenerateResource.Cache
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.exe
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.pdb
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\SixSquareGrid.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\SixSquareGrid.baml
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\HelpdeskChecklist.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\HelpdeskChecklist.baml
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Cactus.exe.config
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Cactus.exe.manifest
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Cactus.application
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Cactus.exe
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Debug\Cactus.pdb
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus_MarkupCompile.cache
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus_MarkupCompile.lref
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.g.resources
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.Properties.Resources.resources
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.TrustInfo.xml
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.exe.manifest
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.application
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.exe
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.pdb
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\WatermarkResource.baml

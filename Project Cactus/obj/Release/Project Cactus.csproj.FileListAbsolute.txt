@@ -15,24 +15,30 @@ C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Proje
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Release\Project Cactus.csproj.GenerateResource.Cache
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Release\Project Cactus.exe
 C:\Users\christopher.manders\Dropbox (Personal)\Development\Project-Cactus\Project Cactus\obj\Release\Project Cactus.pdb
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Project Cactus.exe.config
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Project Cactus.exe
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Project Cactus.pdb
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\About.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\HowTo.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\MainWindow.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\App.g.cs
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project Cactus_MarkupCompile.cache
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project Cactus_MarkupCompile.lref
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\About.baml
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\HowTo.baml
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\MainWindow.baml
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project Cactus.g.resources
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project_Cactus.Properties.Resources.resources
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project Cactus.csproj.GenerateResource.Cache
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project Cactus.exe
-C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Project Cactus.pdb
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\HelpdeskChecklist.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\SixSquareGrid.g.cs
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\HelpdeskChecklist.baml
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\SixSquareGrid.baml
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Cactus.exe.config
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Cactus.exe.manifest
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Cactus.application
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Cactus.exe
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\bin\Release\Cactus.pdb
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus_MarkupCompile.cache
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus_MarkupCompile.lref
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\WatermarkResource.baml
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.g.resources
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.Properties.Resources.resources
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.TrustInfo.xml
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.exe.manifest
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.application
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.exe
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Release\Cactus.pdb

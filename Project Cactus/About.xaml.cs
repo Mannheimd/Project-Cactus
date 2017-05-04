@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows;
 
-namespace Project_Cactus
+namespace Cactus
 {
     /// <summary>
     /// Interaction logic for About.xaml
