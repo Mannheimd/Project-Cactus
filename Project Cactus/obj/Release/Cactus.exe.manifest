@@ -4,7 +4,7 @@
   <description asmv2:iconFile="cactus.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Cactus" version="1.0.10.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Cactus" version="1.0.11.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="Cactus.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Cactus.exe" size="193552">
-      <assemblyIdentity name="Cactus" version="1.0.10.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Cactus.exe" size="189968">
+      <assemblyIdentity name="Cactus" version="1.0.11.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Ywfad679so9Ai787j0RTEFNmX1epc7hBsyQ23SKlo8o=</dsig:DigestValue>
+        <dsig:DigestValue>LY0/UZJ0PyKwUIyfeqBmQIB2Vx2hMcfVoG2B5g+H2zA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
