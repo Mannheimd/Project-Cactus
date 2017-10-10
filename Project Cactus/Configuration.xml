@@ -5,6 +5,7 @@
     <productlist required="true">
       <product text="Act! Pro">
         <versionlist required="true">
+          <version text="v20.0"></version>
           <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
@@ -14,20 +15,7 @@
           <version text="v17.2"></version>
           <version text="v17.1"></version>
           <version text="v17.0"></version>
-          <version text="v16.3"></version>
-          <version text="v16.2"></version>
-          <version text="v16.1"></version>
-          <version text="v16.0"></version>
-          <version text="v15.1"></version>
-          <version text="v15.0"></version>
-          <version text="v14.2"></version>
-          <version text="v14.1"></version>
-          <version text="v14.0"></version>
-          <version text="v13.1"></version>
-          <version text="v13.0"></version>
-          <version text="v12.2"></version>
-          <version text="v12.1"></version>
-          <version text="v12.0"></version>
+          <version text="v12-v16"></version>
           <version text="v7-v11"></version>
           <version text="v6 or below"></version>
           <version text="Other"></version>
@@ -42,11 +30,10 @@
           <os text="Windows XP"></os>
           <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
+          <os text="Windows Server 2011 SBS"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
           <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
           <os text="N/A"></os>
           <os text="Other"></os>
         </oslist>
@@ -54,14 +41,13 @@
           <sql text="SQL Server 2008 R2"></sql>
           <sql text="SQL Server 2012"></sql>
           <sql text="SQL Server 2014"></sql>
+          <sql text="SQL Server 2016"></sql>
           <sql text="Unsupported Version"></sql>
           <sql text="N/A"></sql>
         </sqllist>
         <officelist required="true">
           <office text="Office 2016"></office>
-          <office text="Office 2016 (Click to Run)"></office>
           <office text="Office 2013"></office>
-          <office text="Office 2013 (Click to Run)"></office>
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
@@ -72,6 +58,7 @@
       </product>
       <product text="Act! Premium">
         <versionlist required="true">
+          <version text="v20.0"></version>
           <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
@@ -81,20 +68,7 @@
           <version text="v17.2"></version>
           <version text="v17.1"></version>
           <version text="v17.0"></version>
-          <version text="v16.3"></version>
-          <version text="v16.2"></version>
-          <version text="v16.1"></version>
-          <version text="v16.0"></version>
-          <version text="v15.1"></version>
-          <version text="v15.0"></version>
-          <version text="v14.2"></version>
-          <version text="v14.1"></version>
-          <version text="v14.0"></version>
-          <version text="v13.1"></version>
-          <version text="v13.0"></version>
-          <version text="v12.2"></version>
-          <version text="v12.1"></version>
-          <version text="v12.0"></version>
+          <version text="v12-v16"></version>
           <version text="v7-v11"></version>
           <version text="v6 or below"></version>
           <version text="Other"></version>
@@ -109,11 +83,10 @@
           <os text="Windows XP"></os>
           <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
+          <os text="Windows Server 2011 SBS"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
           <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
           <os text="N/A"></os>
           <os text="Other"></os>
         </oslist>
@@ -121,14 +94,13 @@
           <sql text="SQL Server 2008 R2"></sql>
           <sql text="SQL Server 2012"></sql>
           <sql text="SQL Server 2014"></sql>
+          <sql text="SQL Server 2016"></sql>
           <sql text="Unsupported Version"></sql>
           <sql text="N/A"></sql>
         </sqllist>
         <officelist required="true">
           <office text="Office 2016"></office>
-          <office text="Office 2016 (Click to Run)"></office>
           <office text="Office 2013"></office>
-          <office text="Office 2013 (Click to Run)"></office>
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
@@ -139,6 +111,7 @@
       </product>
       <product text="Act! Premium for Web">
         <versionlist required="true">
+          <version text="v20.0"></version>
           <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
@@ -148,20 +121,7 @@
           <version text="v17.2"></version>
           <version text="v17.1"></version>
           <version text="v17.0"></version>
-          <version text="v16.3"></version>
-          <version text="v16.2"></version>
-          <version text="v16.1"></version>
-          <version text="v16.0"></version>
-          <version text="v15.1"></version>
-          <version text="v15.0"></version>
-          <version text="v14.2"></version>
-          <version text="v14.1"></version>
-          <version text="v14.0"></version>
-          <version text="v13.1"></version>
-          <version text="v13.0"></version>
-          <version text="v12.2"></version>
-          <version text="v12.1"></version>
-          <version text="v12.0"></version>
+          <version text="v12-v16"></version>
           <version text="v7-v11"></version>
           <version text="v6 or below"></version>
           <version text="Other"></version>
@@ -176,11 +136,10 @@
           <os text="Windows XP"></os>
           <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
+          <os text="Windows Server 2011 SBS"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
           <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
           <os text="N/A"></os>
           <os text="Other"></os>
         </oslist>
@@ -194,14 +153,13 @@
           <sql text="SQL Server 2008 R2"></sql>
           <sql text="SQL Server 2012"></sql>
           <sql text="SQL Server 2014"></sql>
+          <sql text="SQL Server 2016"></sql>
           <sql text="Unsupported Version"></sql>
           <sql text="N/A"></sql>
         </sqllist>
         <officelist required="true">
           <office text="Office 2016"></office>
-          <office text="Office 2016 (Click to Run)"></office>
           <office text="Office 2013"></office>
-          <office text="Office 2013 (Click to Run)"></office>
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
@@ -220,11 +178,10 @@
           <os text="Windows XP"></os>
           <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
+          <os text="Windows Server 2011 SBS"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
           <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
           <os text="N/A"></os>
           <os text="Other"></os>
         </oslist>
@@ -236,9 +193,7 @@
         </browserlist>
         <officelist required="true">
           <office text="Office 2016"></office>
-          <office text="Office 2016 (Click to Run)"></office>
           <office text="Office 2013"></office>
-          <office text="Office 2013 (Click to Run)"></office>
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
@@ -250,6 +205,7 @@
       <product text="Act! Emarketing">
         <accountname required="true"/>
         <versionlist required="true">
+          <version text="v20.0"></version>
           <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
@@ -259,20 +215,7 @@
           <version text="v17.2"></version>
           <version text="v17.1"></version>
           <version text="v17.0"></version>
-          <version text="v16.3"></version>
-          <version text="v16.2"></version>
-          <version text="v16.1"></version>
-          <version text="v16.0"></version>
-          <version text="v15.1"></version>
-          <version text="v15.0"></version>
-          <version text="v14.2"></version>
-          <version text="v14.1"></version>
-          <version text="v14.0"></version>
-          <version text="v13.1"></version>
-          <version text="v13.0"></version>
-          <version text="v12.2"></version>
-          <version text="v12.1"></version>
-          <version text="v12.0"></version>
+          <version text="v12-v16"></version>
           <version text="v7-v11"></version>
           <version text="v6 or below"></version>
           <version text="Other"></version>
@@ -287,11 +230,10 @@
           <os text="Windows XP"></os>
           <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
+          <os text="Windows Server 2011 SBS"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
           <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
           <os text="N/A"></os>
           <os text="Other"></os>
         </oslist>
@@ -305,6 +247,7 @@
       </product>
       <product text="Swiftpage Emarketing">
         <versionlist required="true">
+          <version text="v20.0"></version>
           <version text="v19.2"></version>
           <version text="v19.1"></version>
           <version text="v19.0"></version>
@@ -314,20 +257,7 @@
           <version text="v17.2"></version>
           <version text="v17.1"></version>
           <version text="v17.0"></version>
-          <version text="v16.3"></version>
-          <version text="v16.2"></version>
-          <version text="v16.1"></version>
-          <version text="v16.0"></version>
-          <version text="v15.1"></version>
-          <version text="v15.0"></version>
-          <version text="v14.2"></version>
-          <version text="v14.1"></version>
-          <version text="v14.0"></version>
-          <version text="v13.1"></version>
-          <version text="v13.0"></version>
-          <version text="v12.2"></version>
-          <version text="v12.1"></version>
-          <version text="v12.0"></version>
+          <version text="v12-v16"></version>
           <version text="v7-v11"></version>
           <version text="v6 or below"></version>
           <version text="Other"></version>
@@ -343,11 +273,10 @@
           <os text="Windows XP"></os>
           <os text="Windows Server 2016"></os>
           <os text="Windows Server 2012"></os>
+          <os text="Windows Server 2011 SBS"></os>
           <os text="Windows Server 2008 R2"></os>
           <os text="Windows Server 2008"></os>
           <os text="Windows Server 2003"></os>
-          <os text="Windows Home Server"></os>
-          <os text="Windows Home Server 2011"></os>
           <os text="N/A"></os>
           <os text="Other"></os>
         </oslist>

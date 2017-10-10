@@ -60,3 +60,4 @@ C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\P
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.exe
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Cactus.pdb
 C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\WatermarkResource.baml
+C:\Users\christopher.manders\Documents\Development\Github Repos\Project-Cactus\Project Cactus\obj\Debug\Project Cactus.csproj.CoreCompileInputs.cache
