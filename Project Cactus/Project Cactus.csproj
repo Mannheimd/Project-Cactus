@@ -186,5 +186,10 @@
   <ItemGroup>
     <Resource Include="cactus.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConfigurationV2.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

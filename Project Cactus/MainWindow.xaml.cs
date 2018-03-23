@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -113,6 +114,18 @@ namespace Cactus
 
                 // Load the product list from the configuration XML
                 loadProductList();
+
+                List<ProceduralUIItem> fields = new List<ProceduralUIItem>();
+
+                XmlDocument config = new XmlDocument();
+                config.LoadXml(loadTextFileFromAssemly("Cactus.ConfigurationV2.xml").Result);
+                XmlNode fieldsNode = config.SelectSingleNode("configuration/fields");
+                foreach (XmlNode node in fieldsNode)
+                {
+                    fields.Add(new ProceduralUIItem(node));
+                }
+
+                MessageBox.Show(fields.Count.ToString());
             }
             else
             {
@@ -1907,6 +1920,28 @@ namespace Cactus
         }
     }
 
+    public class Utils
+    {
+        private async Task<string> loadTextFileFromAssemly(string name)
+        {
+            try
+            {
+                using (Stream stream = GetType().Assembly.GetManifestResourceStream(name))
+                {
+                    using (StreamReader sr = new StreamReader(stream))
+                    {
+                        return await sr.ReadToEndAsync();
+                    }
+                }
+            }
+            catch
+            {
+                //TODO: Add error handling
+                return null;
+            }
+        }
+    }
+
     public class DropDownLists
     {
         public static string[] emptyList { get; set; }
@@ -1918,23 +1953,31 @@ namespace Cactus
         public static string[] officeList { get; set; }
     }
 
-    public class Field
+    public class ProceduralUIBuilder
     {
-        private FieldType _fieldType;
-        public FieldType fieldType
+        static object BuildElementFromXmlNode(XmlNode node)
+        {
+
+        }
+    }
+
+    abstract class ProceduralUIItem
+    {
+        private List<object> _children = new List<object>();
+        public List<object> children
         {
             get
             {
-                return _fieldType;
+                return _children;
             }
         }
 
-        private List<object> _options;
-        public List<object> options
+        private string _heading;
+        public string heading
         {
             get
             {
-                return _options;
+                return _text;
             }
         }
 
@@ -1947,6 +1990,39 @@ namespace Cactus
             }
         }
 
+        public ProceduralUIItem(XmlNode node)
+        {
+            BuildFromXml(node);
+        }
+
+        private void BuildFromXml(XmlNode node)
+        {
+            if (node.Attributes["heading"] != null)
+            {
+                _heading = node.Attributes["heading"].Value;
+            }
+
+            if (node.Attributes["required"] != null)
+            {
+                bool.TryParse(node.Attributes["required"].Value, out bool _required);
+            }
+            else
+            {
+                _required = false;
+            }
+
+            if (node.HasChildNodes)
+            {
+                foreach (XmlNode child in node.ChildNodes)
+                {
+                    _children.Add(new ProceduralUIItem(child));
+                }
+            }
+        }
+    }
+
+    class ProceduralUITextField : ProceduralUIItem
+    {
         private string _previewText;
         public string previewText
         {
@@ -1955,12 +2031,51 @@ namespace Cactus
                 return _previewText;
             }
         }
+
+        public ProceduralUITextField(XmlNode node) : base(node)
+        {
+            BuildFromXml(node);
+        }
+
+        private void BuildFromXml(XmlNode node)
+        {
+
+            if (node.Attributes["previewtext"] != null)
+            {
+                _previewText = node.Attributes["previewtext"].Value;
+            }
+        }
     }
 
-    public enum FieldType
+    class ProceduralUIPicklist : ProceduralUIItem
     {
-        Dropdown,
-        Text,
-        Radio
+        public ProceduralUIPicklist(XmlNode node) : base(node)
+        {
+            
+        }
+    }
+
+    class ProceduralUIPicklistItem : ProceduralUIItem
+    {
+        public ProceduralUIPicklistItem(XmlNode node) : base(node)
+        {
+
+        }
+    }
+
+    class ProceduralUIRadioButton : ProceduralUIItem
+    {
+        public ProceduralUIRadioButton(XmlNode node) : base(node)
+        {
+
+        }
+    }
+
+    class ProceduralUILabel : ProceduralUIItem
+    {
+        public ProceduralUILabel(XmlNode node) : base(node)
+        {
+
+        }
     }
 }
