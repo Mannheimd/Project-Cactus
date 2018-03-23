@@ -1917,4 +1917,50 @@ namespace Cactus
         public static string[] sqlList { get; set; }
         public static string[] officeList { get; set; }
     }
+
+    public class Field
+    {
+        private FieldType _fieldType;
+        public FieldType fieldType
+        {
+            get
+            {
+                return _fieldType;
+            }
+        }
+
+        private List<object> _options;
+        public List<object> options
+        {
+            get
+            {
+                return _options;
+            }
+        }
+
+        private bool _required;
+        public bool required
+        {
+            get
+            {
+                return _required;
+            }
+        }
+
+        private string _previewText;
+        public string previewText
+        {
+            get
+            {
+                return _previewText;
+            }
+        }
+    }
+
+    public enum FieldType
+    {
+        Dropdown,
+        Text,
+        Radio
+    }
 }
