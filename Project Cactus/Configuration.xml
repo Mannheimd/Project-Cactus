@@ -52,6 +52,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
@@ -106,6 +108,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
@@ -160,6 +164,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
@@ -194,6 +200,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
@@ -254,6 +262,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
@@ -308,6 +318,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
@@ -342,6 +354,8 @@
           <office text="Office 2010"></office>
           <office text="Office 2007"></office>
           <office text="Office 2003"></office>
+          <office text="Office 365 (ISPA)"></office>
+          <office text="Exchange (ISPA)"></office>
           <office text="Unsupported Version"></office>
           <office text="N/A"></office>
         </officelist>
